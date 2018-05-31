@@ -12,17 +12,17 @@
 
 #include "RTv1.h"
 
-double	multy_vec(t_vector a1, t_vector a2)
+double		multy_vec(t_vector a1, t_vector a2)
 {
 	return (a1.x * a2.x + a1.y * a2.y + a1.z * a2.z);
 }
 
-double	find_len(t_vector a)
+double		find_len(t_vector a)
 {
 	return (sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2)));
 }
 
-t_vector normalise(t_vector a)
+t_vector	normalise(t_vector a)
 {
 	double	len;
 

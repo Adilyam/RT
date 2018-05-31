@@ -12,66 +12,69 @@
 
 #include "RTv1.h"
 
-t_vector	define_vector(double x, double y, double z)
+t_vector		define_vector(double x, double y, double z)
 {
-	t_vector	A;
+	t_vector	a;
 
-	A.x = x;
-	A.y = y;
-	A.z = z;
-	return (A);
+	a.x = x;
+	a.y = y;
+	a.z = z;
+	return (a);
 }
 
-void	define_light(t_all *ev)
+static double	specular(t_all *ev, int j, double i, int c)
 {
-	ev->light[0].type = 'a';
-	ev->light[0].intensity = 0.2;
-	ft_bzero(&ev->light[0].position, sizeof(t_vector));
+	double		r_dot_v;
+	t_vector	d_n;
+	double		n_l;
 
-	ev->light[1].type = 'p';
-	ev->light[1].intensity = 0.6;
-	ev->light[1].position = define_vector(2, 1, 0);
-
-	ev->light[2].type = 'd';
-	ev->light[2].intensity = 0.2;
-	ev->light[2].position = define_vector(1, 4, 4);
-}
-
-double	compute_lighting(t_all *ev)
-{
-	double	i;
-	int		j;
-	double	n_l;
-
-	i = 0.0;
-	j = 0;
-	while(j < 3)
+	n_l = multy_vec(ev->n, ev->l);
+	d_n = vector_multy_const(ev->n, (2 * n_l));
+	ev->r = vector_minus_vector(d_n, ev->l);
+	ev->r = normalise(ev->r);
+	r_dot_v = multy_vec(ev->r, ev->v);
+	if (r_dot_v > 0)
 	{
-		if (ev->light[j].type == 'a')
-			i += ev->light[j].intensity;
-		else
-			if (ev->light[j].type == 'p')
-				ev->L = vector_minus_vector(ev->light[j].position, ev->P);
-			else
-				ev->L = ev->light[j].position;
-		if ((n_l = multy_vec(ev->N, ev->L)) > 0)
-			i += ev->light[j].intensity * n_l / (find_len(ev->N) * find_len(ev->L));
-		j++;
+		i += (ev->light[j].intensity *
+			(pow((r_dot_v / (find_len(ev->r) *
+				find_len(ev->v))), ev->sphere[c].specular)));
 	}
 	return (i);
 }
 
-// int	solve_quadr_equat(double a, double b, double c, t_all *ev)
-// {
-// 	double	d;
+double			compute_lighting(t_all *ev, int c)
+{
+	double	i;
+	int		j;
+	double	n_l;
+	double	shadow_t;
 
-// 	d = pow(b, 2) - 4 * a * c;
-// 	// printf("d = %f\n", d);
-// 	if (d >= 0)
-// 	{
-// 		ev->x1 = (-b + sqrt(d)) / (2 * a);
-// 		ev->x2 =  (-b - sqrt(d)) / (2 * a);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+	i = 0.0;
+	j = 0;
+	while (j < 3)
+	{
+		if (ev->light[j].type == 'a')
+			i += ev->light[j].intensity;
+		if (ev->light[j].type == 'p')
+			ev->l = vector_minus_vector(ev->light[j].position, ev->p);
+		if (ev->light[j].type == 'd')
+			ev->l = ev->light[j].position;
+
+		//shadow
+		shadow_t = closet_interesection(ev, 0.001, ev->p, ev->l);
+		if (ev->id_sph == -1)
+		{
+
+		//difuznost	
+		n_l = multy_vec(ev->n, ev->l);
+		if (n_l > 0)
+			i += (ev->light[j].intensity * n_l 
+				/ (find_len(ev->n) * find_len(ev->l)));
+		//zerkaln
+		if (ev->sphere[c].specular > 0)
+			i = specular(ev, j, i, c);
+	}
+		j++;
+	}
+	return (i);
+}
