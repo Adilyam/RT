@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 static void	ft_create_img(t_all *ev)
 {
@@ -22,7 +22,7 @@ static void	ft_create_img(t_all *ev)
 		&(ev->mlx.size), &(ev->mlx.end));
 }
 
-void	ft_create(t_all *ev)
+void		ft_create(t_all *ev)
 {
 	ev->mlx.mlx = mlx_init();
 	ev->mlx.win = mlx_new_window(ev->mlx.mlx, SIZE_X, SIZE_Y, "RTv1");

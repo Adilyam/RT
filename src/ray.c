@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 t_vector	reflect_ray(t_vector r, t_vector n)
 {
@@ -25,74 +25,68 @@ t_vector	reflect_ray(t_vector r, t_vector n)
 	return (k);
 }
 
-static void	intersect_ray_sphere(t_all *ev, int i, t_vector o, t_vector d)
+static void	figure_type(int i, t_all *ev)
 {
-	t_vector	oc;
-	double		k1;
-	double		k2;
-	double		k3;
-	double		discriminant;
-
-	oc = vector_minus_vector(o, ev->sphere[i].centre);
-	k1 = multy_vec(d, d);
-	k2 = 2 * multy_vec(oc, d);
-	k3 = (multy_vec(oc, oc)) - (pow(ev->sphere[i].radius, 2));
-	discriminant = (pow(k2, 2)) - (4 * k1 * k3);
-	if (discriminant < 0)
-	{
-		ev->x1 = MAX;
-		ev->x2 = MAX;
-		return ;
-	}
-	ev->x1 = (-k2 + sqrt(discriminant)) / (2 * k1);
-	ev->x2 = (-k2 - sqrt(discriminant)) / (2 * k1);
+	if (i == 0)
+		ev->func2 = &intersect_ray_sphere;
+	if (i == 1)
+		ev->func2 = &intersect_ray_plane;
+	if (i == 2)
+		ev->func2 = &intersect_ray_cylinder;
+	if (i == 3)
+		ev->func2 = &intersect_ray_cone;
 }
 
-// static void	intersect_ray_plane(t_all *ev, int i, t_vector O, t_vector D)
-// {
-// 	t_vector	oc;
-// 	double		k1;
-// 	double		k2;
-// 	double		k3;
-// 	double		discriminant;
-
-// 	oc = vector_minus_vector(O, ev->sphere[i].centre);
-// 	k1 = multy_vec(D, D);
-// 	k2 = 2 * multy_vec(oc, D);
-// 	k3 = (multy_vec(oc, oc)) - (pow(ev->sphere[i].radius, 2));
-// 	discriminant = (pow(k2, 2)) - (4 * k1 * k3);
-// 	if (discriminant < 0)
-// 	{
-// 		ev->x1 = MAX;
-// 		ev->x2 = MAX;
-// 		return ;
-// 	}
-// 	ev->x1 = (-k2 + sqrt(discriminant)) / (2 * k1);
-// 	ev->x2 = (-k2 - sqrt(discriminant)) / (2 * k1);
-// }
-
-double		closet_interesection(t_all *ev, double t_min, t_vector o, t_vector d)
+double		closet_interesection(t_all *ev, double *t, t_vector o, t_vector d)
 {
 	int		i;
 	double	closet_t;
 
-	closet_t = MAX;
-	ev->id_sph = -1;
+	closet_t = t[1];
+	ev->id = -1;
 	i = 0;
-	while (i < 4)
+	while (i < ev->num_f)
 	{
-		intersect_ray_sphere(ev, i, o, d);
-		if (ev->x1 >= t_min && ev->x1 <= MAX && ev->x1 < closet_t)
+		figure_type(ev->figure[i].id_figure, ev);
+		(ev->func2)(ev, i, o, d);
+		if (ev->x1 >= t[0] && ev->x1 <= t[1] && ev->x1 < closet_t)
 		{
-			ev->id_sph = i;
+			ev->id = i;
 			closet_t = ev->x1;
 		}
-		if (ev->x2 >= t_min && ev->x2 <= MAX && ev->x2 < closet_t)
+		if (ev->x2 >= t[0] && ev->x2 <= t[1] && ev->x2 < closet_t)
 		{
-			ev->id_sph = i;
+			ev->id = i;
 			closet_t = ev->x2;
 		}
 		i++;
 	}
 	return (closet_t);
+}
+
+void		rot_figure(t_all *ev)
+{
+	double			mat[3][3];
+	t_vector		ret;
+
+	mat[0][0] = cos(ev->o_rot.z) * cos(ev->o_rot.z);
+	mat[1][0] = cos(ev->o_rot.z) * sin(ev->o_rot.x) *
+	sin(ev->o_rot.y) - cos(ev->o_rot.x) * sin(ev->o_rot.z);
+	mat[2][0] = cos(ev->o_rot.x) * cos(ev->o_rot.z) *
+	sin(ev->o_rot.y) + sin(ev->o_rot.x) * sin(ev->o_rot.z);
+	mat[0][1] = cos(ev->o_rot.y) * sin(ev->o_rot.z);
+	mat[1][1] = cos(ev->o_rot.x) * cos(ev->o_rot.z) +
+	sin(ev->o_rot.x) * sin(ev->o_rot.y) * sin(ev->o_rot.z);
+	mat[2][1] = -cos(ev->o_rot.z) * sin(ev->o_rot.x) +
+	cos(ev->o_rot.x) * sin(ev->o_rot.y) * sin(ev->o_rot.z);
+	mat[0][2] = -sin(ev->o_rot.y);
+	mat[1][2] = cos(ev->o_rot.y) * sin(ev->o_rot.x);
+	mat[2][2] = cos(ev->o_rot.x) * cos(ev->o_rot.y);
+	ret.x = (mat[0][0] * ev->d.x) + (mat[1][0] * ev->d.y)
+	+ (mat[2][0] * ev->d.z);
+	ret.y = (mat[0][1] * ev->d.x) + (mat[1][1] * ev->d.y)
+	+ (mat[2][1] * ev->d.z);
+	ret.z = (mat[0][2] * ev->d.x) + (mat[1][2] * ev->d.y)
+	+ (mat[2][2] * ev->d.z);
+	ev->d = ret;
 }

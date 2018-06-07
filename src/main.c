@@ -10,28 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "rtv1.h"
 
 static int	exit_x(void)
 {
 	exit(0);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_all	ev;
+	t_all		ev;
 
 	if (ac != 2)
 	{
-		ft_putstr_fd("usage:\t./RTv1 scene\n", 2);
-		av[1] = "fuck";
-		return (0);
+		ft_putstr_fd("usage:\t./RTv1 scene_number\n", 2);
+		return (1);
 	}
-	// open_read(&ev, av[1]);
 	ft_create(&ev);
-	define(&ev);
-	define_light(&ev);
+	parsing(av[1], &ev);
+	(ev.func1)(&ev);
 	draw_scene(&ev);
+	mlx_hook(ev.mlx.win, 4, 1L << 2, mouse_zoom, &ev);
 	mlx_hook(ev.mlx.win, 2, 5, ft_key, &ev);
 	mlx_hook(ev.mlx.win, 17, 1L << 17, exit_x, &ev);
 	mlx_loop(ev.mlx.mlx);
