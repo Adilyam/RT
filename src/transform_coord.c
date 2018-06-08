@@ -44,7 +44,7 @@ static void	figure_type(int i, t_all *ev, double closet_t)
 		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
 	if (ev->figure[i].id_figure == 1)
 	{
-		if (multy_vec(ev->d, ev->figure[i].centre) > 0)
+		if (multy_vec(ev->d, ev->figure[i].point) > 0)
 			ev->n = define_vector(-ev->figure[i].centre.x,
 				-ev->figure[i].centre.y, -ev->figure[i].centre.z);
 		else

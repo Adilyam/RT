@@ -46,7 +46,7 @@ static double	which_light(double *t_max, double i, int j, t_all *ev)
 	if (ev->light[j].type == 'p')
 	{
 		ev->l = vector_minus_vector(ev->light[j].position, ev->p);
-		*t_max = 0.99;
+		*t_max = 0.99f;
 	}
 	if (ev->light[j].type == 'd')
 	{

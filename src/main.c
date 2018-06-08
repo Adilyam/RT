@@ -17,6 +17,34 @@ static int	exit_x(void)
 	exit(0);
 }
 
+static void	parsing(char *str, t_all *ev)
+{
+	ev->vw = 1;
+	ev->vh = 1;
+	ev->d_d = 1;
+	ev->func1 = NULL;
+	if (!(ft_strcmp(str, "scene1")))
+		ev->func1 = &define_scene1;
+	if (!(ft_strcmp(str, "scene2")))
+		ev->func1 = &define_scene2;
+	if (!(ft_strcmp(str, "scene3")))
+		ev->func1 = &define_scene3;
+	if (!(ft_strcmp(str, "scene4")))
+		ev->func1 = &define_scene4;
+	if (!(ft_strcmp(str, "scene5")))
+		ev->func1 = &define_scene5;
+	if (!(ft_strcmp(str, "scene6")))
+		ev->func1 = &define_scene6;
+	if (!ev->func1)
+	{
+		ft_putstr_fd("usage:\t./RTv1 scene1\n", 2);
+		ft_putstr_fd("\t./RTv1 scene2\n", 2);
+		ft_putstr_fd("\t./RTv1 scene3\n\t./RTv1 scene4\n", 2);
+		ft_putstr_fd("\t./RTv1 scene5\n\t./RTv1 scene6\n", 2);
+		exit(1);
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_all		ev;

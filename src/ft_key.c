@@ -44,12 +44,12 @@ int			mouse_zoom(int keycode, int x, int y, t_all *ev)
 	y = 0;
 	if (keycode == 4)
 	{
-		ev->o.z += 0.4;
+		ev->o.z += 1;
 		draw_scene(ev);
 	}
 	if (keycode == 5)
 	{
-		ev->o.z -= 0.4;
+		ev->o.z -= 1;
 		draw_scene(ev);
 	}
 	return (0);

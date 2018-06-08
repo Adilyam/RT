@@ -108,6 +108,7 @@ typedef struct		s_all
 	void			(*func2)(struct s_all *, int, t_vector, t_vector);
 }					t_all;
 
+void				define_scene6(t_all *ev);
 void				rot_figure(t_all *ev);
 void				ft_create(t_all *ev);
 t_vector			vector_plus_vector(t_vector a, t_vector b);
@@ -126,7 +127,6 @@ t_vector			vector_minus_const(t_vector a, double b);
 double				closet_interesection(t_all *ev, double *t,
 	t_vector o, t_vector d);
 uint32_t			multy_col(t_color col, double j);
-void				parsing(char *str, t_all *ev);
 void				intersect_ray_plane(t_all *ev, int i,
 	t_vector o, t_vector d);
 void				intersect_ray_sphere(t_all *ev, int i,

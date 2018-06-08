@@ -12,30 +12,28 @@
 
 #include "rtv1.h"
 
-void	parsing(char *str, t_all *ev)
+void	define_scene6(t_all *ev)
 {
-	ev->vw = 1;
-	ev->vh = 1;
-	ev->d_d = 1;
-	ev->func1 = NULL;
-	if (!(ft_strcmp(str, "scene1")))
-		ev->func1 = &define_scene1;
-	if (!(ft_strcmp(str, "scene2")))
-		ev->func1 = &define_scene2;
-	if (!(ft_strcmp(str, "scene3")))
-		ev->func1 = &define_scene3;
-	if (!(ft_strcmp(str, "scene4")))
-		ev->func1 = &define_scene4;
-	if (!(ft_strcmp(str, "scene5")))
-		ev->func1 = &define_scene5;
-	if (!ev->func1)
-	{
-		ft_putstr_fd("usage:\t./RTv1 scene1\n", 2);
-		ft_putstr_fd("\t./RTv1 scene2\n", 2);
-		ft_putstr_fd("\t./RTv1 scene3\n\t", 2);
-		ft_putstr_fd("./RTv1 scene4\n\t./RTv1 scene5\n", 2);
-		exit(1);
-	}
+	ev->o = define_vector(0, 0, -1);
+	ev->o_rot = define_vector(0, 0, 0);
+	allocate_mem(ev, 4, 3);
+	ev->figure[0].centre = define_vector(0, -1, 3);
+	define_color(&ev->figure[0], 0, 0, 255);
+	define_sph_cyl(&ev->figure[0], 1, 500, 0);
+	ev->figure[1].centre = define_vector(2, 0, 4);
+	define_color(&ev->figure[1], 255, 0, 0);
+	define_sph_cyl(&ev->figure[1], 1, 500, 0);
+	ev->figure[2].centre = define_vector(-2, 0, 4);
+	define_color(&ev->figure[2], 0, 255, 0);
+	define_sph_cyl(&ev->figure[2], 1, 10, 0);
+	ev->figure[3].centre = define_vector(0, -5001, 0);
+	define_color(&ev->figure[3], 0, 255, 255);
+	define_sph_cyl(&ev->figure[3], 5000, 1000, 0);
+	define_type_intens(&ev->light[0], 'p', 0.6);
+	ev->light[0].position = define_vector(2, 1, 0);
+	define_type_intens(&ev->light[1], 'd', 0.2);
+	ev->light[1].position = define_vector(1, 4, 4);
+	define_type_intens(&ev->light[2], 'a', 0.2);
 }
 
 void	define_scene1(t_all *ev)
@@ -65,19 +63,20 @@ void	define_scene2(t_all *ev)
 
 void	define_scene3(t_all *ev)
 {
-	ev->o = define_vector(0, 0, 0);
+	ev->o = define_vector(0, 0, -10);
 	ev->o_rot = define_vector(0, 0, 0);
-	allocate_mem(ev, 2, 1);
+	allocate_mem(ev, 2, 2);
 	ev->figure[1].point = define_vector(0, -1, 0);
 	ev->figure[1].centre = define_vector(0, 1, 0);
 	define_color(&ev->figure[1], 255, 0, 0);
 	define_sph_cyl(&ev->figure[1], 0, 10, 1);
 	ev->figure[0].point = define_vector(0, 1, 0);
-	ev->figure[0].centre = define_vector(0, 0, 13);
+	ev->figure[0].centre = define_vector(0, 0, 30);
 	define_color(&ev->figure[0], 0, 255, 255);
 	define_sph_cyl(&ev->figure[0], 0.8, -1, 3);
-	define_type_intens(&ev->light[0], 'p', 0.5);
-	ev->light[0].position = define_vector(0, 0, -4);
+	define_type_intens(&ev->light[0], 'p', 0.4);
+	ev->light[0].position = define_vector(0, 0, -3);
+	define_type_intens(&ev->light[1], 'a', 0.2);
 }
 
 void	define_scene4(t_all *ev)

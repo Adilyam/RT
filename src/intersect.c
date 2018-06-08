@@ -37,22 +37,26 @@ void	intersect_ray_sphere(t_all *ev, int i, t_vector o, t_vector d)
 
 void	intersect_ray_plane(t_all *ev, int i, t_vector o, t_vector d)
 {
-	double		a;
-	t_vector	oc;
-	double		b;
-	t_vector	x;
+	t_vectorr	x;
+	t_vector	c;
+	t_vector	n;
+	float		k[2];
 
-	b = multy_vec(d, ev->figure[i].centre);
-	if (b != 0)
+	c = ev->figure[i].point;
+	n = ev->figure[i].centre;
+	x = vector_minus_vector(o, c);
+	k[0] = multy_vec(d, n);
+	k[1] = multy_vec(x, n);
+	if (k[0])
 	{
-		oc = vector_minus_vector(o, ev->figure[i].point);
-		x = define_vector(-oc.x, -oc.y, -oc.z);
-		a = multy_vec(x, ev->figure[i].centre);
-		ev->x1 = a / b;
-		if (ev->x1 < 0.001f)
-			ev->x1 = MAX;
+		ev->x1 = -k[1] / k[0];
+		ev->x2 = MAX;
 	}
-	ev->x2 = MAX;
+	else
+	{
+		ev->x1 = MAX;
+		ev->x2 = MAX;
+	}
 }
 
 void	intersect_ray_cylinder(t_all *ev, int i, t_vector o, t_vector d)
