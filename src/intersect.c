@@ -42,11 +42,16 @@ void	intersect_ray_plane(t_all *ev, int i, t_vector o, t_vector d)
 	double		b;
 	t_vector	x;
 
-	oc = vector_minus_vector(o, ev->figure[i].point);
-	x = define_vector(-oc.x, -oc.y, -oc.z);
-	a = multy_vec(x, ev->figure[i].centre);
 	b = multy_vec(d, ev->figure[i].centre);
-	ev->x1 = a / b;
+	if (b != 0)
+	{
+		oc = vector_minus_vector(o, ev->figure[i].point);
+		x = define_vector(-oc.x, -oc.y, -oc.z);
+		a = multy_vec(x, ev->figure[i].centre);
+		ev->x1 = a / b;
+		if (ev->x1 < 0.001f)
+			ev->x1 = MAX;
+	}
 	ev->x2 = MAX;
 }
 

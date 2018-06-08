@@ -45,7 +45,7 @@ void	define_scene1(t_all *ev)
 	allocate_mem(ev, 1, 1);
 	ev->figure[0].centre = define_vector(0, 0, 7);
 	define_color(&ev->figure[0], 0, 0, 255);
-	define_sph_cyl(&ev->figure[0], 1, 1, 0);
+	define_sph_cyl(&ev->figure[0], 1, 10, 0);
 	define_type_intens(&ev->light[0], 'p', 0.4);
 	ev->light[0].position = define_vector(1.5, 0, 5);
 }

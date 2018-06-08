@@ -72,7 +72,7 @@ static void	trace_ray(t_all *ev)
 	double	closet_t;
 	double	t[2];
 
-	t[0] = 1;
+	t[0] = 0.01f;
 	t[1] = MAX;
 	closet_t = closet_interesection(ev, t, ev->o, ev->d);
 	if (ev->id == -1)
