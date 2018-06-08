@@ -37,7 +37,7 @@ void	intersect_ray_sphere(t_all *ev, int i, t_vector o, t_vector d)
 
 void	intersect_ray_plane(t_all *ev, int i, t_vector o, t_vector d)
 {
-	t_vectorr	x;
+	t_vector	x;
 	t_vector	c;
 	t_vector	n;
 	float		k[2];
