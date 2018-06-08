@@ -23,11 +23,14 @@ int			main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_putstr_fd("usage:\t./RTv1 scene_number\n", 2);
+		ft_putstr_fd("usage:\t./RTv1 scene1\n", 2);
+		ft_putstr_fd("\t./RTv1 scene2\n", 2);
+		ft_putstr_fd("\t./RTv1 scene3\n\t", 2);
+		ft_putstr_fd("./RTv1 scene4\n\t./RTv1 scene5\n", 2);
 		return (1);
 	}
-	ft_create(&ev);
 	parsing(av[1], &ev);
+	ft_create(&ev);
 	(ev.func1)(&ev);
 	draw_scene(&ev);
 	mlx_hook(ev.mlx.win, 4, 1L << 2, mouse_zoom, &ev);
