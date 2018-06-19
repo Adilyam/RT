@@ -1,0 +1,32 @@
+Scene:
+	objects = 1
+	lights = 3
+	FOV = 60.0
+
+objects {
+#id = 0
+	type = cylinder
+	position = 0, 0, 0
+	radius = 100
+	color = 30, 20, 50
+	direction = 0, 1, 0
+    spec = 0.9
+	max = 200
+	min = 0
+   
+lights {
+#id = 0
+Light:
+	position = 0, 4, -1000
+
+#id = 1
+Light:
+	position = 0, 4, -1000
+
+#id = 2
+Light:
+	position = 0, 4, -1000
+}
+Camera {
+	position = 0, 0, -1500
+	rotation = 0, 0, 0

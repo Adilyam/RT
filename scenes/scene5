@@ -1,0 +1,78 @@
+Scene:
+	objects = 8
+	lights = 4
+	FOV = 60.0
+	filter = none
+objects {
+#id = 0
+	type = plane
+	position = 0, -5, 0
+	size = 200
+	color = 0.255, 0.127, 0.80
+	rotation = 0, 0, 0
+
+#id = 1
+	type = cone
+	position = 20, 0, 100
+	size = 0.3
+	direction = 0, 1, 0
+	color = 0.1, 0.4, 0.2
+	spec = 0.3
+	max = 100
+	min = 0
+#id = 2
+	type = cylinder
+	position = -7, 0, 100
+	direction = 0, 1, 0
+	size = 10
+	color = 0.3, 0.1, 0.6
+	spec = 0.9
+	max = 100
+	min = 0
+#id = 3
+	type = plane
+	position = 0, 9, 0
+	size = 200
+	color = 0.255, 0.127, 0.8
+#id = 4
+	type = plane
+	position = -4, 0, 0
+	size = 200
+	color = 1, 1.2, 1
+#id = 5
+	type = sphere
+	position = -30, -10, 100
+	size = 100
+	color = 0.2, 0.4, 0.2
+	spec = 0.8
+#id = 6
+	type = plane
+	position = 3, 0, 0
+	size = 200
+	color = 1, 1.2, 1
+#id = 7
+	type = plane
+	position = 0, 0, -1
+	size = 150
+	color = 1, 1.2, 1
+}
+lights {
+#id = 0
+Light:
+	position = -100.0,380.0,300.0
+
+#id = 1
+Light:
+	position = 102.0,768.0, -100.0
+
+#id = 2
+Light:
+	position = 200, 0, 100
+
+#id = 3
+Light:
+	position = 0, 0, 0
+}
+Camera {
+	position = 0, 0, -80
+	rotation = 0, 0, 0

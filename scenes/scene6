@@ -1,0 +1,63 @@
+Scene:
+	objects = 5
+	lights = 6
+	FOV = 60.0
+	filter = none
+objects {
+#id = 0
+	type = sphere
+	position = 15, 15, 70
+	size = 50
+	color = 80, 20, 0
+	spec = 1
+
+#id = 1
+	type = sphere
+	position = 40, 20, 50
+	size = 100
+	color = 20, 10, 70
+	spec = 0.9
+#id = 2
+	type = sphere
+	position = -15, 32, 100
+	size = 200
+	color = 10, 30, 50
+	spec = 0.9
+#id = 3
+	type = plane
+	position = 6, 6, 0
+	size = 40
+	color = 10, 120 , 10
+	spec = 0.9
+
+#id = 4
+	type = plane
+	position = 0, -6, 0
+	size = 40
+	color = 100, 100, 0
+	spec = 0.9
+}
+lights {
+#id = 0
+Light:
+	position = -1000.0,380.0,300.0
+#id = 1
+Light:
+	position = -140.0, 7.0, 100
+#id = 2
+Light:
+	position = 1024.0,768.0,-100.0
+#id = 3
+Light:
+	position = 0, 0, -100
+#id = 4
+Light:
+	position = 1024.0,768.0, 100.0
+#id = 5
+Light:
+	position = 0, 300, -100
+}
+Camera {
+	position = 30, 30, -100
+	rotation = 0, 0, 0
+}

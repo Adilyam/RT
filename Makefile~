@@ -6,7 +6,7 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/19 15:40:02 by atilegen         ###   ########.fr        #
+#    Updated: 2018/06/18 21:15:55 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,10 +31,8 @@ SRCS =	src/main/main.c \
 		src/vectors/vector_1.c			\
 		src/vectors/vector.c			\
 		src/parse/parsing.c 			\
-		src/parse/parse5.c				\
-		src/parse/parse4.c				\
-		src/parse/parse3.c              \
-        src/parse/parse2.c              \
+		src/parse/parse3.c				\
+		src/parse/parse2.c				\
 		src/parse/parse1.c			
 
 OBJ = $(SRCS:.c=.o)

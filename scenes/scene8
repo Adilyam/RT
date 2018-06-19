@@ -1,0 +1,37 @@
+Scene:
+	objects = 2
+	lights = 2
+	FOV = 60.0
+	filter = cartoon
+objects {
+#id = 0
+	type = plane
+	position = 0, 1, 0
+	size = 50
+	color = 1, 1.2, 1
+	spec = 0
+
+#id = 1
+		type = par
+		position = 0, 0, 0
+		size = 2
+		max = 80
+		min = 0
+		direction = 0, 1, 0
+		color = 0.855, 0.123, 0.255
+		spec = 0.9
+
+lights {
+#id = 0
+Light:
+	position = 0, 0, 900
+	type = 1
+
+#id = 1
+Light:
+	type = 0
+	intensity = 0.1
+}
+Camera {
+	position = 0, 0, -200
+	rotation = 0, 0, 0
