@@ -61,8 +61,9 @@ int check_exact_light(char *str, int i, t_all *ev)
 		if (str[i] == ',') //все обнулять типа или обджект ++
 		{
 			i++;
+			ev->index++;
 			spaces(str, &i);
-			if (str[i++] == '{')
+			if (str[i++] == '{' && ev->index <= ev->num_l)
 				i = check_exact_light(str, i, ev);
 		}
 		else if (check_if_end(str, &i))

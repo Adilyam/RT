@@ -96,7 +96,7 @@ int check_exact_object(char *str, int i, t_all *ev)
 		{
 			i++;
 			spaces(str, &i);
-			if (str[i++] == '{')
+			if (str[i++] == '{' && ev->index <= ev->num_f)
 				i = check_exact_object(str, i, ev);
 		}
 		else if (check_if_end(str, &i))

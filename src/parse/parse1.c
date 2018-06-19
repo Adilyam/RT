@@ -24,6 +24,7 @@ int		check_objects_part(char *str, int i, t_all *ev)
 	spaces(str, &i);
 	check_symbol(str, &i, '{');
 	spaces(str, &i);
+	ev->index = 0;
 	i = check_exact_object(str, i, ev);
 	return (i);
 }
@@ -40,6 +41,7 @@ int		check_lights_part(char *str, int i, t_all *ev)
 	spaces(str, &i);
 	check_symbol(str, &i, '{');
 	spaces(str, &i);
+	ev->index = 0;
 	i = check_exact_light(str, i, ev);
 	return (i);
 }
@@ -103,7 +105,6 @@ int     parse_check(t_all *ev)
 			str[j++] = buf[0];
 		str[j] = '\0';
 		close(ev->fd);
-		ev->index = -1;
 		if (!(check2(str)))
 			error_end("nepravil'nye brackets brataaaaaahn");
 	}
