@@ -6,7 +6,7 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/19 17:09:15 by atilegen         ###   ########.fr        #
+#    Updated: 2018/06/19 17:06:10 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,6 +34,7 @@ SRCS =	src/main/main.c \
 		src/parse/parse5.c				\
 		src/parse/parse4.c				\
 		src/parse/parse3.c              \
+        src/parse/parse2.c              \
  		src/parse/parse_cam.c           \
         src/parse/parse_lgt.c           \
 		src/parse/parse_obj.c           \

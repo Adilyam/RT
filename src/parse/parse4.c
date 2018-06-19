@@ -35,7 +35,6 @@ int     check2(char *str)
 int		check_if_end(char *str, int *i)
 {
 	spaces(str, i);
-	// printf("%s", str + *i);
 	check_symbol(str, i, ']');
 	spaces(str, i);
 	if (str[(*i)++] != ',')
