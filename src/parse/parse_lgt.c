@@ -18,7 +18,7 @@ void		check_exact_lights_helper(char *str, int *i, t_all *ev)
 	if ((ft_strnequ(str + (*i), "\"position\"", 10)))
 	{
 		(*i) += 10;
-		res = parse_position_color(str, i);
+		res = parse_3_input(str, i);
 		ev->light[ev->index].position.x = res[0];
 		ev->light[ev->index].position.y = res[1];
 		ev->light[ev->index].position.z = res[2];

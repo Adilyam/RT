@@ -19,12 +19,12 @@ void		check_exact_camera_helper(char *str, int *i, t_all *ev)
 	if (ft_strnequ(str + (*i), "\"direction\"", 11))
 	{
 		(*i) += 11;
-		res = parse_position_color(str, i);
+		res = parse_3_input(str, i);
 	}
 	else if ((ft_strnequ(str + (*i), "\"position\"", 10)))
 	{
 		(*i) += 10;
-		res = parse_position_color(str, i);
+		res = parse_3_input(str, i);
 	}
 	spaces(str, i);
 }

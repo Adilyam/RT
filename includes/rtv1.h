@@ -184,7 +184,7 @@ void				check_light_string(char *str, int *i);
 int 				check_exact_object(char *str, int i, t_all *ev);
 int 				check_exact_camera(char *str, int i, t_all *ev);
 int 				check_exact_light(char *str, int i, t_all *ev);
-int					*parse_position_color(char *str, int *i);
+int					*parse_3_input(char *str, int *i);
 int					match(char a, char b);
 int					check_scene(char *str, int i, t_all *ev);
 int					check2(char *str);

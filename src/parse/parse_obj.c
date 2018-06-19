@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-int		*parse_position_color(char *str, int *i)
+int		*parse_3_input(char *str, int *i)
 {
 	int		*res;
 
@@ -43,7 +43,7 @@ void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 	if ((ft_strnequ(str + (*i), "\"position\"", 10)))
 	{
 		(*i) += 10;
-		res = parse_position_color(str, i);
+		res = parse_3_input(str, i);
 		ev->figure[ev->index].centre.x = res[0];
 		ev->figure[ev->index].centre.y = res[1];
 		ev->figure[ev->index].centre.z = res[2];
@@ -57,7 +57,7 @@ void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 	else if ((ft_strnequ(str + (*i), "\"color\"", 7)))
 	{
 		(*i) += 7;
-		res = parse_position_color(str, i);
+		res = parse_3_input(str, i);
 		ev->figure[ev->index].color.chanels.r = res[0];
 		ev->figure[ev->index].color.chanels.g = res[1];
 		ev->figure[ev->index].color.chanels.b = res[2];
