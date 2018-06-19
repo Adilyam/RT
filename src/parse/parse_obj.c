@@ -32,7 +32,7 @@ void		object_string_validate(char *str, int i)
 			ft_strnequ(str + i, "\"specularity\"", 13) || 
 			ft_strnequ(str + i, "\"tan\"", 5) || 
 			ft_strnequ(str + i, "\"direction\"", 11)))
-		error_end("Wrong input");
+		error_end("Wrong object input");
 }
 
 
@@ -100,9 +100,9 @@ int check_exact_object(char *str, int i, t_all *ev)
 				i = check_exact_object(str, i, ev);
 		}
 		else if (check_if_end(str, &i))
-			error_end("seems to be no lights in your scene");
+			error_end("Seems to be no lights in your scene");
 	}
 	else
-		error_end("chto-to levoe obj");
+		error_end("Chto-to levoe posle objects");
 	return (i);
 }

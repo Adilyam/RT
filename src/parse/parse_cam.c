@@ -53,10 +53,10 @@ int check_exact_camera(char *str, int i, t_all *ev)
 			i++;
 			spaces(str, &i);
 			if (str[i] != '\0')
-				printf("Ty chudak");
+				error_end("Vse ok, tol'ko v konce zatupil posle cams");
 		}
 	}
 	else
-		error_end("chto-to levoe_cam");
+		error_end("Chto-to levoe posle cams");
 	return (i);
 }

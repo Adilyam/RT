@@ -70,6 +70,6 @@ int check_exact_light(char *str, int i, t_all *ev)
 			error_end("seems to be no camera in your scene");
 	}
 	else
-		error_end("chto-to levoe_lgt");
+		error_end("Chto-to levoe posle lights");
 	return (i);
 }
