@@ -143,6 +143,7 @@ typedef struct		s_all
 	int				filter;
 	double			a;
  	double			b;
+	unsigned char	*screen;
 }					t_all;
 
 void				define_scene6(t_all *ev);

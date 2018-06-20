@@ -26,5 +26,6 @@ void		ft_create(t_all *ev)
 {
 	ev->mlx.mlx = mlx_init();
 	ev->mlx.win = mlx_new_window(ev->mlx.mlx, SIZE_X, SIZE_Y_WIN, "RT");
+	ev->screen = malloc(sizeof(unsigned char) * 3 * SIZE_X * SIZE_Y);
 	ft_create_img(ev);
 }

@@ -12,6 +12,16 @@
 
 #include "rt.h"
 
+void saveppm(char *filename, unsigned char *img, int width, int height){
+
+	FILE *f;
+	
+	f = fopen(filename, "wb");
+	fprintf(f, "P6 %d %d %d\n", width, height, 255);
+	fwrite(img, 3, width*height, f);
+	fclose(f);
+}
+
 static void changes(t_all *ev, double *o, int m)
 {
 	if (m)
@@ -53,7 +63,7 @@ int   mouse_zoom(int keycode, int x, int y, t_all *ev)
 	if (keycode == 1)
 	if ((x > 310 && x < 490 && y > 835 && y < 965)
 		|| (x > 465 && x < 475 && y > 815 && y < 835))
-		printf("camera!\n");
+		saveppm("YO.jpg", ev->screen, SIZE_X, SIZE_Y);
 	if (x > 10 && x < 150 && y > 805 && y < 835)
 		re_draw_effect(ev, 0);
 	if (x > 10 && x < 150 && y > 845 && y < 875)

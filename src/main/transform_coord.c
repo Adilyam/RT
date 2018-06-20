@@ -145,6 +145,36 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 	return (color_ret(local_color, reflected_color, r));
 }
 
+void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
+{
+	int		i;
+
+	i = (x * 4) + (y * ev->mlx.size);
+	ev->mlx.str[i] =  c->chanels.b;
+	ev->mlx.str[++i] = c->chanels.g;
+	ev->mlx.str[++i] = c->chanels.r;
+	ev->mlx.str[++i] = 1;
+
+	ev->screen[(x + y * SIZE_Y) * 3 + 0] = c->chanels.r;
+	ev->screen[(x + y * SIZE_Y) * 3 + 1] = c->chanels.g;
+	ev->screen[(x + y * SIZE_Y) * 3 + 2] = c->chanels.b;
+}
+
+void		set_vector_dir(t_all *ev)
+{
+	ev->d.x = ((ev->x - SIZE_X / 2) * (ev->vw / SIZE_X / 2));
+	ev->d.y = (-(ev->y - SIZE_Y / 2) * (ev->vh / SIZE_Y / 2));
+	ev->d.z = ev->d_d;
+	ev->d = normalise(ev->d);
+}
+
+void		define_filter(t_color *color, t_all *ev)
+{
+	(ev->filter == CARTOON) ? make_cartoon(color) : 0;
+	(ev->filter == SEPIA) ? make_sepia(color) : 0;
+	(ev->filter == BLACK_WHITE) ? make_black_white(color) : 0;
+}
+
 void		*draw_scene(void *data)
 {
 	t_color	color;
@@ -159,17 +189,11 @@ void		*draw_scene(void *data)
 		ev->y = tmp;
 		while (ev->y < ev->limit)
 		{
-			ev->d.x = ((ev->x - SIZE_X / 2) * (ev->vw / SIZE_X / 2));
-			ev->d.y = (-(ev->y - SIZE_Y / 2) * (ev->vh / SIZE_Y / 2));
-			ev->d.z = ev->d_d;
-			ev->d = normalise(ev->d);
+			set_vector_dir(ev);
 			rot_figure(ev);
 			color = trace_ray(ev, ev->o, ev->d, 5, 1);
-			// (ev->filter == CARTOON) ? make_cartoon(&color) : 0;
-			// (ev->filter == SEPIA) ? make_sepia(&color) : 0;
-			// (ev->filter == BLACK_WHITE) ? make_black_white(&color) : 0;
-			*(unsigned int *)(ev->mlx.str + (((ev->x)
-			+ (ev->y) * SIZE_Y) * 4)) = color.color;
+			define_filter(&color, ev);
+			ft_put_pxl(ev, ev->x, ev->y, &color);
 			ev->y++;
 		}
 		ev->x++;
@@ -182,7 +206,6 @@ void	thread(t_all *e)
 	pthread_t	tid[20];
 	t_all		env_arr[20];
 	int i;
-
 	i = 0;
 	while (i < 20)
 	{
