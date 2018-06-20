@@ -43,12 +43,23 @@ int		check_if_end(char *str, int *i)
 		return (0);
 }
 
-void		check_light_string(char *str, int *i)
+void		check_light_string(char *str, int *i, t_light *lgt)
 {
 	if (ft_strnequ(str + *i, "\"ambiant\"", 9))
+	{
 		(*i) += 9;
+		lgt->type = AMBIANT;
+	}
 	else if (ft_strnequ(str + *i, "\"directional\"", 13))
+	{
 		(*i) += 13;
+		lgt->type = DIRECTION;
+	}
+	else if (ft_strnequ(str + *i, "\"point\"", 7))
+	{
+		(*i) += 7;
+		lgt->type = POINT;
+	}
 	else
 		error_end("Wrong object");
 }

@@ -27,13 +27,13 @@ void		check_exact_lights_helper(char *str, int *i, t_all *ev)
 	{
 		(*i) += 11;
 		universal_check(str, i);
-		check_if_input_float(i, str);
+		ev->light[ev->index].intensity = check_if_input_float(i, str);
 	}
 	else if ((ft_strnequ(str + (*i), "\"type\"", 6)))
 	{
 		(*i) += 6;
 		universal_check(str, i);
-		check_light_string(str, i);
+		check_light_string(str, i, &ev->light[ev->index]);
 	}
 	spaces(str, i);
 }
@@ -52,6 +52,7 @@ int check_exact_light(char *str, int i, t_all *ev)
 
 	spaces(str, &i);
 	lights_string_validate(str, i);
+	// printf("HI");
 	check_exact_lights_helper(str, &i, ev);
 	if (str[i] == ',')
 		i = check_exact_light(str, i + 1, ev);

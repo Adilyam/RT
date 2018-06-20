@@ -35,23 +35,22 @@ void	intersect_ray_sphere(t_all *ev, int i, t_vector o, t_vector d)
 	ev->x2 = (-k2 - sqrt(discriminant)) / (2 * k1);
 }
 
-void	intersect_ray_plane(t_all *ev, int i, t_vector o, t_vector d)
+void intersect_ray_plane(t_all *ev, int i, t_vector o, t_vector d)
 {
-	t_vector	x;
-	t_vector	c;
-	t_vector	n;
-	float		k[2];
+	t_vector x;
+	t_vector c;
+	t_vector n;
+	float  k[2];
 
 	c = ev->figure[i].point;
 	n = ev->figure[i].centre;
+	n = normalise(n);
 	x = vector_minus_vector(o, c);
 	k[0] = multy_vec(d, n);
 	k[1] = multy_vec(x, n);
-	if (k[0])
-	{
-		ev->x1 = -k[1] / k[0];
+	ev->x1 = -k[1] / k[0];
+	if (ev->x1 > 0.01)
 		ev->x2 = MAX;
-	}
 	else
 	{
 		ev->x1 = MAX;

@@ -6,7 +6,7 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/19 17:26:15 by atilegen         ###   ########.fr        #
+#    Updated: 2018/06/20 12:36:58 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -37,7 +37,12 @@ SRCS =	src/main/main.c \
  		src/parse/parse_cam.c           \
         src/parse/parse_lgt.c           \
 		src/parse/parse_obj.c           \
-		src/parse/parse1.c			
+		src/parse/parse1.c				\
+		src/define/color_filters.c      \
+ 		src/define/ua_1.c           \
+        src/define/ua.c           \
+		src/math/figure_cut.c
+		
 
 OBJ = $(SRCS:.c=.o)
 

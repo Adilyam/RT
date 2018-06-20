@@ -21,15 +21,15 @@ void	allocate_mem(t_all *ev)
 void	define_sph_cyl(t_figure *figure, double radius, int specular, int id)
 {
 	figure->id_figure = id;
-	if (id == 1)
+	if (id == PLANE)
 		figure->centre = normalise(figure->centre);
 	figure->radius = radius;
 	figure->specular = specular;
-	if (id == 2 || id == 3)
+	if (id == CYLINDRE || id == CONE)
 		figure->point = normalise(figure->point);
 }
 
-void	define_type_intens(t_light *l, char c, double i)
+void	define_type_intens(t_light *l, int c, double i)
 {
 	l->type = c;
 	l->intensity = i;

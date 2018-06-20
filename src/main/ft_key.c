@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-static void	changes(t_all *ev, double *o, int m)
+static void changes(t_all *ev, double *o, int m)
 {
 	if (m)
 		*o += 0.08;
@@ -21,7 +21,7 @@ static void	changes(t_all *ev, double *o, int m)
 	thread(ev);
 }
 
-int			ft_key(int keycode, t_all *ev)
+int   ft_key(int keycode, t_all *ev)
 {
 	if (keycode == 53)
 		exit(0);
@@ -38,10 +38,8 @@ int			ft_key(int keycode, t_all *ev)
 	return (0);
 }
 
-int			mouse_zoom(int keycode, int x, int y, t_all *ev)
+int   mouse_zoom(int keycode, int x, int y, t_all *ev)
 {
-	x = 0;
-	y = 0;
 	if (keycode == 4)
 	{
 		ev->o.z += 1;
@@ -52,5 +50,19 @@ int			mouse_zoom(int keycode, int x, int y, t_all *ev)
 		ev->o.z -= 1;
 		thread(ev);
 	}
+	if (keycode == 1)
+	if ((x > 310 && x < 490 && y > 835 && y < 965)
+		|| (x > 465 && x < 475 && y > 815 && y < 835))
+		printf("camera!\n");
+	if (x > 10 && x < 150 && y > 805 && y < 835)
+		re_draw_effect(ev, 0);
+	if (x > 10 && x < 150 && y > 845 && y < 875)
+		re_draw_effect(ev, 1);
+	if (x > 10 && x < 150 && y > 885 && y < 920)
+		re_draw_effect(ev, 2);
+	if (x > 10 && x < 150 && y > 930 && y < 960)
+		re_draw_effect(ev, 3);
 	return (0);
 }
+ 
+

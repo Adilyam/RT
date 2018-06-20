@@ -17,15 +17,26 @@
 # define MIN 1
 # define MAX 2147483647
 # define BUF_SIZE	4096
-# define SPHERE			1
-# define PLANE			2
-# define CYLINDRE		3
-# define CONE			4
-# define CYLINDRE_CUT	5
-# define CONE_CUT		6
+# define SPHERE			0
+# define PLANE			1
+# define CYLINDRE		2
+# define CONE			3
+// # define CYLINDRE_CUT	6
+// # define CONE_CUT		7
 
-# define ELLIPSOID		7
-# define PARABOLOID		8
+# define ELLIPSOID		4
+# define PARABOLOID		5
+
+# define POINT			9
+# define DIRECTION		10
+# define AMBIANT		11
+
+# define NORMAL 		0
+# define CARTOON 		1
+# define SEPIA 			2
+# define BLACK_WHITE 	3
+# define SIZE_Y_WIN 	1000
+
 
 # include "mlx.h"
 # include "../libft/libft.h"
@@ -78,7 +89,7 @@ typedef struct		s_ray
 
 typedef struct		s_light
 {
-	char			type;
+	int				type;
 	double			intensity;
 	t_vector		position;
 }					t_light;
@@ -92,6 +103,10 @@ typedef struct		s_figure
 	double			specular;
 	t_color			color;
 	double			reflect;
+	double			transp; 
+	double			k;
+	int				max;
+	int				min;
 }					t_figure;
 
 typedef struct		s_all
@@ -125,6 +140,9 @@ typedef struct		s_all
 	int				limit;
 	int				fd;
 	int				index;
+	int				filter;
+	double			a;
+ 	double			b;
 }					t_all;
 
 void				define_scene6(t_all *ev);
@@ -162,7 +180,7 @@ void				define_scene2(t_all *ev);
 void				define_color(t_figure *figure, unsigned int b,
 									unsigned int g, unsigned int r);
 void				allocate_mem(t_all *ev);
-void				define_type_intens(t_light *l, char c, double i);
+void				define_type_intens(t_light *l, int c, double i);
 void				define_sph_cyl(t_figure *figure, double radius,
 									int specular, int id);
 void				define_scene3(t_all *ev);
@@ -180,7 +198,7 @@ int					check_if_end(char *str, int *i);
 float         		check_if_input_float(int *i, char *str);
 void				check_objects_string(char *str, int *i,  t_figure *obj);
 void        		check_symbol(char *str, int *i, char c);
-void				check_light_string(char *str, int *i);
+void				check_light_string(char *str, int *i, t_light *lgt);
 int 				check_exact_object(char *str, int i, t_all *ev);
 int 				check_exact_camera(char *str, int i, t_all *ev);
 int 				check_exact_light(char *str, int i, t_all *ev);
@@ -188,5 +206,18 @@ int					*parse_3_input(char *str, int *i);
 int					match(char a, char b);
 int					check_scene(char *str, int i, t_all *ev);
 int					check2(char *str);
+t_color				color_ret(t_color local_color, t_color reflected_color, double r);
+t_vector			reflect_ray(t_vector r, t_vector n);
+void 				make_screenshot(t_all *ev);
+void 				make_sepia(t_color *color);
+void 				make_cartoon(t_color *color);
+void 				make_black_white(t_color *color);
+void 				change_effect(t_all *ev);
+void 				re_draw_effect(t_all *ev, int i);
+void 				thread(t_all *e);
+void 				cut_cylinder(t_all *ev, int i, t_vector d, t_vector oc);
+
+void 				intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d);
+void 				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
 
 #endif

@@ -43,13 +43,13 @@ static double	specular(t_all *ev, int j, int c, double i)
 
 static double	which_light(double *t_max, double i, int j, t_all *ev)
 {
-	(ev->light[j].type == 'a') ? i += ev->light[j].intensity : 0;
-	if (ev->light[j].type == 'p')
+	(ev->light[j].type == AMBIANT) ? i += ev->light[j].intensity : 0;
+	if (ev->light[j].type == POINT)
 	{
 		ev->l = vector_minus_vector(ev->light[j].position, ev->p);
 		*t_max = 1.0;
 	}
-	if (ev->light[j].type == 'd')
+	if (ev->light[j].type == DIRECTION)
 	{
 		ev->light[j].position = normalise(ev->light[j].position);
 		ev->l = ev->light[j].position;

@@ -63,8 +63,9 @@ int			main(int ac, char **av)
 		error_end("smth went wrong");
 	// parsing(av[1], &ev);
 	ft_create(&ev);
+	make_screenshot(&ev);
 	// (ev.func1)(&ev);
-	// thread(&ev);
+	thread(&ev);
 	mlx_hook(ev.mlx.win, 4, 1L << 2, mouse_zoom, &ev);
 	mlx_hook(ev.mlx.win, 2, 5, ft_key, &ev);
 	mlx_hook(ev.mlx.win, 17, 1L << 17, exit_x, &ev);

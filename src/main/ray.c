@@ -12,16 +12,20 @@
 
 #include "rtv1.h"
 
-static void	figure_type(int i, t_all *ev)
+static void figure_type(int i, t_all *ev)
 {
-	if (i == 0)
+	if (i == SPHERE)
 		ev->inter = &intersect_ray_sphere;
-	if (i == 1)
+	if (i == PLANE)
 		ev->inter = &intersect_ray_plane;
-	if (i == 2)
+	if (i == CYLINDRE)
 		ev->inter = &intersect_ray_cylinder;
-	if (i == 3)
+	if (i == CONE)
 		ev->inter = &intersect_ray_cone;
+	if (i == ELLIPSOID)
+		ev->inter = &intersect_ray_elips;
+	if (i == PARABOLOID)
+		ev->inter = &intersect_ray_par;
 }
 
 double		closet_interesection(t_all *ev, double *t, t_vector o, t_vector d)
@@ -31,8 +35,8 @@ double		closet_interesection(t_all *ev, double *t, t_vector o, t_vector d)
 
 	closet_t = t[1];
 	ev->id = -1;
-	i = 0;
-	while (i < ev->num_f)
+	i = -1;
+	while (++i < ev->num_f)
 	{
 		figure_type(ev->figure[i].id_figure, ev);
 		(ev->inter)(ev, i, o, d);
@@ -46,8 +50,9 @@ double		closet_interesection(t_all *ev, double *t, t_vector o, t_vector d)
 			ev->id = i;
 			closet_t = ev->x2;
 		}
-		i++;
 	}
+	// if (!(ev->id == -1))
+	// 	printf("%d\n", ev->figure[0].id_figure);
 	return (closet_t);
 }
 
@@ -77,3 +82,4 @@ void		rot_figure(t_all *ev)
 	+ (mat[2][2] * ev->d.z);
 	ev->d = ret;
 }
+

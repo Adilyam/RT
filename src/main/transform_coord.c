@@ -12,12 +12,40 @@
 
 #include "rtv1.h"
 
+static void figure_type_2(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
+{
+	double  m;
+	t_vector oc;
+	t_vector	cmid;
+	t_vector	r;
+
+	if (ev->figure[i].id_figure == PARABOLOID)
+	{
+		oc = vector_minus_vector(o, ev->figure[i].centre);
+		m = multy_vec(vector_minus_vector(ev->p, ev->figure[i].centre), ev->figure[i].point);
+		// m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
+		// m += multy_vec(oc, ev->figure[i].point);
+		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
+		ev->n = vector_minus_vector(ev->n,
+		vector_multy_const(ev->figure[i].point, (m + ev->figure[i].k)));
+	}
+	if (ev->figure[i].id_figure == ELLIPSOID)
+	{
+		ev->figure[i].point = normalise(ev->figure[i].point);
+		oc = vector_minus_vector(o, ev->figure[i].centre);
+		cmid = vector_plus_vector(ev->figure[i].centre, vector_multy_const(ev->figure[i].point, ev->figure[i].k / 2));
+		r = vector_minus_vector(ev->p, cmid);
+		ev->n = vector_minus_vector(r, vector_multy_const(ev->figure[i].point, (1 - (pow(ev->a, 2) / pow(ev->b, 2))) * multy_vec(r, ev->figure[i].point)));
+		ev->n = normalise(ev->n);
+	}
+}
+
 static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
 {
 	double		m;
 	t_vector	oc;
 
-	if (ev->figure[i].id_figure == 2)
+	if (ev->figure[i].id_figure == CYLINDRE)
 	{
 		oc = vector_minus_vector(o, ev->figure[i].centre);
 		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
@@ -26,7 +54,7 @@ static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 		ev->n = vector_minus_vector(ev->n,
 			vector_multy_const(ev->figure[i].point, m));
 	}
-	if (ev->figure[i].id_figure == 3)
+	if (ev->figure[i].id_figure == CONE)
 	{
 		oc = vector_minus_vector(o, ev->figure[i].centre);
 		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
@@ -40,17 +68,19 @@ static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 
 static void	figure_type(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
 {
-	if (ev->figure[i].id_figure == 0)
+	if (ev->figure[i].id_figure == SPHERE)
 		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
-	if (ev->figure[i].id_figure == 1)
+	if (ev->figure[i].id_figure == PLANE)
 	{
 		if (multy_vec(d, ev->figure[i].point) > 0)
 			ev->n = define_vector(-ev->figure[i].centre.x,
-				-ev->figure[i].centre.y, -ev->figure[i].centre.z);
+			-ev->figure[i].centre.y, -ev->figure[i].centre.z);
 		else
-			ev->n = vector_minus_vector(ev->p, ev->figure[i].point);
+			ev->n = ev->figure[i].centre;
 	}
-	if (ev->figure[i].id_figure == 2 || ev->figure[i].id_figure == 3)
+	if (ev->figure[i].id_figure == ELLIPSOID || ev->figure[i].id_figure == PARABOLOID)
+ 		 figure_type_2(i, ev, closet_t, o, d);
+	if (ev->figure[i].id_figure == CYLINDRE || ev->figure[i].id_figure == CONE)
 		figure_type_1(i, ev, closet_t, o, d);
 }
 
@@ -135,6 +165,9 @@ void		*draw_scene(void *data)
 			ev->d = normalise(ev->d);
 			rot_figure(ev);
 			color = trace_ray(ev, ev->o, ev->d, 5, 1);
+			// (ev->filter == CARTOON) ? make_cartoon(&color) : 0;
+			// (ev->filter == SEPIA) ? make_sepia(&color) : 0;
+			// (ev->filter == BLACK_WHITE) ? make_black_white(&color) : 0;
 			*(unsigned int *)(ev->mlx.str + (((ev->x)
 			+ (ev->y) * SIZE_Y) * 4)) = color.color;
 			ev->y++;

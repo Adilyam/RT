@@ -31,27 +31,33 @@ int         *check_if_3digit_input(char *str, int *i)
 	j = 0;
 	while (str[(*i)] != ',')
 	{
-		if (!(ft_isdigit(str[(*i)++])))
+		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
+			j++;
+		else 
 			error_end("Wrong number1");
-		j++;
+		(*i)++;
 	}
 	res[0] = ft_atoi(str + (*i)++ - j);
 	spaces(str, i);
 	j = 0;
 	while (str[(*i)] != ',')
 	{
-		if (!(ft_isdigit(str[(*i)++])))
+		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
+			j++;
+		else 
 			error_end("Wrong number2");
-		j++;
+		(*i)++;
 	}
 	res[1] = ft_atoi(str + (*i)++ - j);
 	spaces(str, i);
 	j = 0;
 	while (str[(*i)] != ']')
 	{
-		if (!(ft_isdigit(str[(*i)++])))
+		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
+			j++;
+		else 
 			error_end("Wrong number3");
-		j++;
+		(*i)++;
 	}
 	res[2] = ft_atoi(str + (*i)++ - j);
 	return (res);
@@ -87,13 +93,11 @@ float			check_if_input_float(int *i, char *str)
 	char *pend;
 
 	j = 0;
-	while (str[(*i)] > 32)
+	while (str[(*i)] > 32 && str[(*i)] != ',')
 	{
 		if (ft_isdigit(str[(*i)]) || str[(*i)] == '.')
-			(*i)++;
-		else
-			return (0);
-		j++;
+			j++;
+		(*i)++;
 	}
-	return (strtof(str + *i - j, NULL));
+	return (strtof((str + (*i)) - j, NULL));
 }
