@@ -14,8 +14,22 @@
 
 void	allocate_mem(t_all *ev)
 {
+	int i;
+
+	i = -1;
 	ev->figure = (t_figure*)malloc(sizeof(t_figure) * ev->num_f);
 	ev->light = (t_light*)malloc(sizeof(t_light) * ev->num_l);
+
+	while (++i < ev->num_f)
+	{
+		ev->figure[i].centre.x = 0;
+		ev->figure[i].centre.y = 0;
+		ev->figure[i].centre.z = 0;
+		ev->figure[i].color.chanels.r = 0;
+		ev->figure[i].color.chanels.g = 0;
+		ev->figure[i].color.chanels.b = 0;
+		//other stuff
+	}
 }
 
 void	define_sph_cyl(t_figure *figure, double radius, int specular, int id)
