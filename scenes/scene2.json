@@ -1,39 +1,28 @@
 { "scene" : {
     "object_count" : 2,
-    "lights_count" : 4
+    "lights_count" : 1
 },    
 "objects" : [ {
-  "position" : [0, 25, 60],
+  "position" : [0, 0, 2],
   "name" : "sphere",
-  "color" : [5, 3, 3]
+  "size" : 2,
+  "color" : [50, 30, 140]
 },
 {
-  "position" : [0, 25, 60],
+  "position" : [0, 0, 5],
   "name" : "sphere",
-  "color" : [5, 3, 3]
-},
-{
-  "position" : [30, 10, 200],
-  "name" : "sphere",
-  "color" : [323, 123, 22]
-} ],
+  "size" : 1,
+  "color" : [150, 100, 10]
+}],
 
 "lights" : [ {
-		 "position" : [1000, 380, 300] 
-  
-},
-{
-	"position" : [1024, 768, 100] 
-  
-},
-{
-	"position" : [600, 0, 100] },
-{
-"position" : [20, 20, 50]
+		 "position" : [0, 1, 0],
+		 "type" : "point",
+  		 "intensity" : 0.2
 } ],
 
 "camera" : {
-		 "position" : [0, 0, 70],
-		 "direction" : [10, 0, 0] 
+		 "position" : [0, 0, -2],
+		 "direction" : [0, 0, 0] 
 }
 }

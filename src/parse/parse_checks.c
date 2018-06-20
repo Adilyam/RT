@@ -23,11 +23,11 @@ int     match(char a, char b)
 	return ((a == '(' && b == ')') || (a == '{' && b == '}') || (a == '[' && b == ']'));
 }
 
-int         *check_if_3digit_input(char *str, int *i)
+double         *check_if_3digit_input(char *str, int *i)
 {
-	int *res;
+	double *res;
 
-	res = (int *)malloc(sizeof(res) * 3);
+	res = (double *)malloc(sizeof(res) * 3);
 	int j;
 
 	j = 0;
@@ -71,7 +71,7 @@ void        check_symbol(char *str, int *i, char c)
 		error_end("Net :  [] {} ");
 }
 
-int         check_if_input_number(int *i, char *str)
+double         check_if_input_number(int *i, char *str)
 {
 	int j;
 
@@ -86,7 +86,7 @@ int         check_if_input_number(int *i, char *str)
 		else if (str[(*i)] == ',')
 			return (ft_atoi((str + (*i) + 1) - (j + 1)));
 	}
-	return (ft_atoi((str + (*i)++) - j++));
+	return ((double)ft_atoi((str + (*i)++) - j++));
 }
 
 float			check_if_input_float(int *i, char *str)

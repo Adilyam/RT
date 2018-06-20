@@ -29,7 +29,7 @@ static void figure_type_2(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 		ev->n = vector_minus_vector(ev->n,
 		vector_multy_const(ev->figure[i].point, (m + ev->figure[i].k)));
 	}
-	if (ev->figure[i].id_figure == ELLIPSOID)
+	else if (ev->figure[i].id_figure == ELLIPSOID)
 	{
 		ev->figure[i].point = normalise(ev->figure[i].point);
 		oc = vector_minus_vector(o, ev->figure[i].centre);
@@ -54,7 +54,7 @@ static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 		ev->n = vector_minus_vector(ev->n,
 			vector_multy_const(ev->figure[i].point, m));
 	}
-	if (ev->figure[i].id_figure == CONE)
+	else if (ev->figure[i].id_figure == CONE)
 	{
 		oc = vector_minus_vector(o, ev->figure[i].centre);
 		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
@@ -70,7 +70,7 @@ static void	figure_type(int i, t_all *ev, double closet_t, t_vector o, t_vector 
 {
 	if (ev->figure[i].id_figure == SPHERE)
 		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
-	if (ev->figure[i].id_figure == PLANE)
+	else if (ev->figure[i].id_figure == PLANE)
 	{
 		if (multy_vec(d, ev->figure[i].point) > 0)
 			ev->n = define_vector(-ev->figure[i].centre.x,
@@ -78,9 +78,9 @@ static void	figure_type(int i, t_all *ev, double closet_t, t_vector o, t_vector 
 		else
 			ev->n = ev->figure[i].centre;
 	}
-	if (ev->figure[i].id_figure == ELLIPSOID || ev->figure[i].id_figure == PARABOLOID)
+	else if (ev->figure[i].id_figure == ELLIPSOID || ev->figure[i].id_figure == PARABOLOID)
  		 figure_type_2(i, ev, closet_t, o, d);
-	if (ev->figure[i].id_figure == CYLINDRE || ev->figure[i].id_figure == CONE)
+	else if (ev->figure[i].id_figure == CYLINDRE || ev->figure[i].id_figure == CONE)
 		figure_type_1(i, ev, closet_t, o, d);
 }
 
@@ -92,6 +92,7 @@ static t_color	use_light(t_all *ev, double closet_t, int i, t_vector o, t_vector
 	ev->v = define_vector(0 - (d.x), 0 - (d.y), (0 - d.z));
 	ev->v = normalise(ev->v);
 	ev->p = vector_plus_vector(o, (vector_multy_const(d, closet_t)));
+	// ev->p = vector_multy_const(ev->p, 0.00001);
 	figure_type(i, ev, closet_t, o, d);
 	ev->n = normalise(ev->n);
 	j = compute_lighting(ev, i);
@@ -155,9 +156,22 @@ void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
 	ev->mlx.str[++i] = c->chanels.r;
 	ev->mlx.str[++i] = 1;
 
-	ev->screen[(x + y * SIZE_Y) * 3 + 0] = c->chanels.r;
-	ev->screen[(x + y * SIZE_Y) * 3 + 1] = c->chanels.g;
-	ev->screen[(x + y * SIZE_Y) * 3 + 2] = c->chanels.b;
+	// i = ((x) * 4) + ((y) * ev->mlx.size);
+	// i += 4;
+	// ev->mlx.str[i] =  c->chanels.b;
+	// ev->mlx.str[++i] = c->chanels.g;
+	// ev->mlx.str[++i] = c->chanels.r;
+	// ev->mlx.str[++i] = 1;
+
+	// i = (x + y * SIZE_Y) * 3;
+	// ev->screen[i] = c->chanels.r;
+	// ev->screen[++i] = c->chanels.g;
+	// ev->screen[++i] = c->chanels.b;
+
+	// i += 4;
+	// ev->screen[i] = c->chanels.r;
+	// ev->screen[++i] = c->chanels.g;
+	// ev->screen[++i] = c->chanels.b;
 }
 
 void		set_vector_dir(t_all *ev)
@@ -180,6 +194,7 @@ void		*draw_scene(void *data)
 	t_color	color;
 	t_all	*ev;
 	double	tmp;
+	int k = 2;
 
 	ev = data;
 	tmp = ev->y;
@@ -207,6 +222,7 @@ void	thread(t_all *e)
 	t_all		env_arr[20];
 	int i;
 	i = 0;
+
 	while (i < 20)
 	{
 		env_arr[i] = *e;

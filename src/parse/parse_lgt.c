@@ -13,7 +13,7 @@
 
 void		check_exact_lights_helper(char *str, int *i, t_all *ev)
 {
-	int		*res;
+	double		*res;
 
 	if ((ft_strnequ(str + (*i), "\"position\"", 10)))
 	{

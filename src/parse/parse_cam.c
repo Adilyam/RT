@@ -14,7 +14,7 @@
 
 void		check_exact_camera_helper(char *str, int *i, t_all *ev)
 {
-	int		*res;
+	double		*res;
 
 	if (ft_strnequ(str + (*i), "\"direction\"", 11))
 	{

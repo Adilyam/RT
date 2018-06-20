@@ -59,6 +59,9 @@ int			main(int ac, char **av)
 	if (ac != 2)
 		error_end("usage:\t./RT scenes/[-file]");
 	ev.fd = open(av[1], O_RDONLY);
+	ev.vw = 1;
+	ev.vh = 1;
+	ev.d_d = 1;
 	if (!parse_check(&ev))
 		error_end("smth went wrong");
 	// parsing(av[1], &ev);

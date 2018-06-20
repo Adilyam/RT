@@ -12,9 +12,9 @@
 
 #include "rt.h"
 
-int		*parse_3_input(char *str, int *i)
+double		*parse_3_input(char *str, int *i)
 {
-	int		*res;
+	double		*res;
 
 	universal_check(str, i);
 	check_symbol(str, i, '[');
@@ -38,7 +38,7 @@ void		object_string_validate(char *str, int i)
 
 void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 {
-	int		*res;
+	double		*res;
 
 	if ((ft_strnequ(str + (*i), "\"position\"", 10)))
 	{
@@ -58,9 +58,10 @@ void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 	{
 		(*i) += 7;
 		res = parse_3_input(str, i);
-		ev->figure[ev->index].color.chanels.r = res[0];
-		ev->figure[ev->index].color.chanels.g = res[1];
-		ev->figure[ev->index].color.chanels.b = res[2];
+		define_color(&ev->figure[ev->index], res[2], res[1], res[0]);
+		// ev->figure[ev->index].color.chanels.r = res[0];
+		// ev->figure[ev->index].color.chanels.g = res[1];
+		// ev->figure[ev->index].color.chanels.b = res[2];
 	}
 }
 
@@ -70,7 +71,7 @@ void		check_exact_object_helper(char *str, int *i, t_all *ev)
 	{
 		(*i) += 6;
 		universal_check(str, i);
-		ev->figure[ev->index].radius = check_if_input_number(i, str);
+		ev->figure[ev->index].radius = check_if_input_float(i, str);
 	}
 	else if (ft_strnequ(str + (*i), "\"specularity\"", 13))
 	{
