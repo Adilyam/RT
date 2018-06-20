@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int		check_objects_part(char *str, int i, t_all *ev)
 {
@@ -81,10 +81,10 @@ int check_all(char *str, t_all *ev)
 	check_symbol(str, &i, ',');
 	spaces(str, &i);
 	i = check_objects_part(str, i, ev);
-	ft_putendl("All is super duper");
+	ft_putendl("Objects are ok");
 	spaces(str, &i); 
 	i = check_lights_part(str, i, ev);
-	ft_putendl("All is super duper 2");
+	ft_putendl("Lights are ok");
 	spaces(str, &i);
 	i = check_camera_part(str, i, ev);
 	return (1);

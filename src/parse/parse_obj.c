@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int		*parse_3_input(char *str, int *i)
 {
@@ -71,14 +71,12 @@ void		check_exact_object_helper(char *str, int *i, t_all *ev)
 		(*i) += 6;
 		universal_check(str, i);
 		ev->figure[ev->index].radius = check_if_input_number(i, str);
-		printf("%f\n",ev->figure[ev->index].radius );
 	}
 	else if (ft_strnequ(str + (*i), "\"specularity\"", 13))
 	{
 		(*i) += 13;
 		universal_check(str, i);
 		ev->figure[ev->index].specular = check_if_input_float(i, str);
-		printf("%f\n" ,ev->figure[ev->index].specular );
 	}
 }
 

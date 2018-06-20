@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		check_exact_camera_helper(char *str, int *i, t_all *ev)
 {

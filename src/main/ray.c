@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static void figure_type(int i, t_all *ev)
 {
@@ -51,8 +51,6 @@ double		closet_interesection(t_all *ev, double *t, t_vector o, t_vector d)
 			closet_t = ev->x2;
 		}
 	}
-	// if (!(ev->id == -1))
-	// 	printf("%d\n", ev->figure[0].id_figure);
 	return (closet_t);
 }
 

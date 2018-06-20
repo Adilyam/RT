@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	intersect_ray_sphere(t_all *ev, int i, t_vector o, t_vector d)
 {

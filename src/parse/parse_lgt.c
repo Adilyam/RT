@@ -9,7 +9,7 @@
 /*   Updated: 2018/06/19 16:50:36 by atilegen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "rtv1.h"
+#include "rt.h"
 
 void		check_exact_lights_helper(char *str, int *i, t_all *ev)
 {
@@ -52,7 +52,6 @@ int check_exact_light(char *str, int i, t_all *ev)
 
 	spaces(str, &i);
 	lights_string_validate(str, i);
-	// printf("HI");
 	check_exact_lights_helper(str, &i, ev);
 	if (str[i] == ',')
 		i = check_exact_light(str, i + 1, ev);

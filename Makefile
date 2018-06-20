@@ -6,7 +6,7 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/20 12:36:58 by atilegen         ###   ########.fr        #
+#    Updated: 2018/06/20 14:50:07 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror -O3
 
 CFLAGS = -I ./includes/
-HEADERS = 	includes/rtv1.h
+HEADERS = 	includes/rt.h
 SRCS =	src/main/main.c \
 		src/main/ft_key.c				\
 		src/main/transform_coord.c		\

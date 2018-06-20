@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void  define_color(t_figure *figure, unsigned int b,
  					unsigned int g, unsigned int r)

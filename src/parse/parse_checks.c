@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void        spaces(char *str, int *i)
 {
@@ -25,7 +25,9 @@ int     match(char a, char b)
 
 int         *check_if_3digit_input(char *str, int *i)
 {
-	int res[3];
+	int *res;
+
+	res = (int *)malloc(sizeof(res) * 3);
 	int j;
 
 	j = 0;

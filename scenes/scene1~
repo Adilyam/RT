@@ -7,7 +7,7 @@
 	"color" : [200, 100, 100],
 	"specularity" : 1,
 	"name" : "sphere",
-	"position" : [0, 0, 0],
+	"position" : [0, 0, 5],
 	"size" : 1
 }
 ],
@@ -22,7 +22,7 @@
 }],
 
 "camera" : {
-		 "position" : [0, 0, -1],
+		 "position" : [0, 0, 0],
 		 "direction" : [0, 0, 0]
 }
 }

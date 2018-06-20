@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static void figure_type_2(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
 {
