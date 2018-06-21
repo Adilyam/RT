@@ -14,6 +14,7 @@
 # define RTV1_H
 # define SIZE_X 800
 # define SIZE_Y 800
+# define PIOVER180 0.0174532925199
 # define MIN 1
 # define MAX 2147483647
 # define BUF_SIZE	4096
@@ -146,7 +147,6 @@ typedef struct		s_all
 	unsigned char	*screen;
 }					t_all;
 
-void				define_scene6(t_all *ev);
 void				rot_figure(t_all *ev);
 void				thread(t_all *e);
 void				ft_create(t_all *ev);
@@ -176,17 +176,12 @@ void				intersect_ray_cylinder(t_all *ev, int i,
 											t_vector o, t_vector d);
 void				intersect_ray_cone(t_all *ev, int i,
 											t_vector o, t_vector d);
-void				define_scene1(t_all *ev);
-void				define_scene2(t_all *ev);
 void				define_color(t_figure *figure, unsigned int b,
 									unsigned int g, unsigned int r);
 void				allocate_mem(t_all *ev);
 void				define_type_intens(t_light *l, int c, double i);
 void				define_sph_cyl(t_figure *figure, double radius,
 									int specular, int id);
-void				define_scene3(t_all *ev);
-void				define_scene4(t_all *ev);
-void				define_scene5(t_all *ev);
 int					mouse_zoom(int keycode, int x, int y, t_all *ev);
 int					parse_check(t_all *e);
 t_vector 			reflect_ray(t_vector r, t_vector n);
@@ -217,7 +212,6 @@ void 				change_effect(t_all *ev);
 void 				re_draw_effect(t_all *ev, int i);
 void 				thread(t_all *e);
 void 				cut_cylinder(t_all *ev, int i, t_vector d, t_vector oc);
-
 void 				intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d);
 void 				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
 

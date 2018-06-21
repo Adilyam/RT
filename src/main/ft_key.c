@@ -39,12 +39,12 @@ int   ft_key(int keycode, t_all *ev)
 	(keycode == 125) ? changes(ev, &ev->o.y, 0) : 0;
 	(keycode == 124) ? changes(ev, &ev->o.x, 1) : 0;
 	(keycode == 123) ? changes(ev, &ev->o.x, 0) : 0;
-	(keycode == 0) ? changes(ev, &ev->o_rot.y, 0) : 0;
-	(keycode == 2) ? changes(ev, &ev->o_rot.y, 1) : 0;
-	(keycode == 13) ? changes(ev, &ev->o_rot.z, 0) : 0;
-	(keycode == 7) ? changes(ev, &ev->o_rot.z, 1) : 0;
-	(keycode == 1) ? changes(ev, &ev->o_rot.x, 0) : 0;
-	(keycode == 6) ? changes(ev, &ev->o_rot.x, 1) : 0;
+	// (keycode == 0) ? changes(ev, &ev->o_rot.y, 0) : 0;
+	// (keycode == 2) ? changes(ev, &ev->o_rot.y, 1) : 0;
+	// (keycode == 13) ? changes(ev, &ev->o_rot.z, 0) : 0;
+	// (keycode == 7) ? changes(ev, &ev->o_rot.z, 1) : 0;
+	// (keycode == 1) ? changes(ev, &ev->o_rot.x, 0) : 0;
+	// (keycode == 6) ? changes(ev, &ev->o_rot.x, 1) : 0;
 	return (0);
 }
 

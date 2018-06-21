@@ -1,6 +1,6 @@
 { "scene" : {
 	"object_count" : 1,
-	"lights_count" : 4
+	"lights_count" : 3
 },
 
 "objects" : [ {
@@ -23,7 +23,7 @@
 {
   "intensity" : 0.6,
   "position" : [0, 0, 0], 
-	"type" : "ambiant"
+	"type" : "point"
 }],
 
 "camera" : {

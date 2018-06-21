@@ -70,7 +70,7 @@ int check_all(char *str, t_all *ev)
 	spaces(str, &i);
 	if (!ft_strnequ(str + i, "\"scene\"", 7))
 		error_end("Nu kak by tut tochno ne scene");
-	i += 7;
+	i += 7; 
 	universal_check(str, &i);
 	check_symbol(str, &i, '{');
 	spaces(str, &i);
@@ -81,9 +81,13 @@ int check_all(char *str, t_all *ev)
 	check_symbol(str, &i, ',');
 	spaces(str, &i);
 	i = check_objects_part(str, i, ev);
+	if (++ev->index != ev->num_f)
+		error_end("Wrong num of obj");
 	ft_putendl("Objects are ok");
 	spaces(str, &i); 
 	i = check_lights_part(str, i, ev);
+	if (++ev->index != ev->num_l)
+		error_end("Wrong num of lgts");
 	ft_putendl("Lights are ok");
 	spaces(str, &i);
 	i = check_camera_part(str, i, ev);

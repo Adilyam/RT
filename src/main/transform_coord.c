@@ -149,33 +149,83 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
 {
 	int		i;
+	int		j;
+	int k = 4;
 
-	i = (x * 4) + (y * ev->mlx.size);
-	ev->mlx.str[i] =  c->chanels.b;
-	ev->mlx.str[++i] = c->chanels.g;
-	ev->mlx.str[++i] = c->chanels.r;
-	ev->mlx.str[++i] = 1;
+	j = -1;
+	while (++j < 1)
+	{
+		i = (x * 4) + (y * ev->mlx.size);
+		i += (4 * j);
+		ev->mlx.str[i] =  c->chanels.b;
+		ev->mlx.str[++i] = c->chanels.g;
+		ev->mlx.str[++i] = c->chanels.r;
+		ev->mlx.str[++i] = 1;
 
-	// i = ((x) * 4) + ((y) * ev->mlx.size);
-	// i += 4;
-	// ev->mlx.str[i] =  c->chanels.b;
-	// ev->mlx.str[++i] = c->chanels.g;
-	// ev->mlx.str[++i] = c->chanels.r;
-	// ev->mlx.str[++i] = 1;
-
-	// i = (x + y * SIZE_Y) * 3;
-	// ev->screen[i] = c->chanels.r;
-	// ev->screen[++i] = c->chanels.g;
-	// ev->screen[++i] = c->chanels.b;
-
-	// i += 4;
-	// ev->screen[i] = c->chanels.r;
-	// ev->screen[++i] = c->chanels.g;
-	// ev->screen[++i] = c->chanels.b;
+		i = (x + y * SIZE_Y) * 3;
+		i += (3 * j);
+		ev->screen[i] = c->chanels.r;
+		ev->screen[++i] = c->chanels.g;
+		ev->screen[++i] = c->chanels.b;	
+	}
 }
 
-void		set_vector_dir(t_all *ev)
+// t_vector	rotate_vec_y(t_vector *v, t_vector *rot)
+// {
+// 	t_vector	res;
+// 	double		deg;
+
+// 	deg = rot->y * PIOVER180;
+// 	res.x = v->x * cos(deg) + sin(deg) * v->z;
+// 	res.y = v->y;
+// 	res.z = -v->x * sin(deg) + v->z * cos(deg);
+// 	return (res);
+// }
+
+// t_vector	rotate_vec_z(t_vector *v, t_vector *rot)
+// {
+// 	t_vector	res;
+// 	double		deg;
+
+// 	deg = rot->z * PIOVER180;
+// 	res.x = v->x * cos(deg) + sin(deg) * v->y;
+// 	res.y = -v->x * sin(deg) + cos(deg) * v->y;
+// 	res.z = v->z;
+// 	return (res);
+// }
+
+// t_vector	rotate_vec_x(t_vector *v, t_vector *rot)
+// {
+// 	t_vector	res;
+// 	double		deg;
+
+// 	deg = rot->x * PIOVER180;
+// 	res.x = v->x;
+// 	res.y = v->y * cos(deg) + v->z * sin(deg);
+// 	res.z = -v->y * sin(deg) + v->z * cos(deg);
+// 	return (res);
+// }
+
+void	check_cam_rot(t_vector *dir, t_all *e)
 {
+	if (e->o_rot.x != 0)
+		*dir = rotate_vec_x(dir, &e->o_rot);
+	if (e->o_rot.y != 0)
+		*dir = rotate_vec_y(dir, &e->o_rot);
+	if (e->o_rot.z != 0)
+		*dir = rotate_vec_z(dir, &e->o_rot);
+}
+
+void		set_vector_dir(t_all *ev, int x, int y)
+{
+	// ev->d.x = (double)x / SIZE_X;
+	// ev->d.y = (double)y / SIZE_Y;
+	// ev->d.x = (2 * ev->d.x) - 1;
+	// ev->d.y = 1 - (2 * ev->d.y);
+	// ev->d.x *= tan(60);
+	// ev->d.y *= tan(60);
+	// ev->d.z = 1;
+	// check_cam_rot(&ev->d, ev);
 	ev->d.x = ((ev->x - SIZE_X / 2) * (ev->vw / SIZE_X / 2));
 	ev->d.y = (-(ev->y - SIZE_Y / 2) * (ev->vh / SIZE_Y / 2));
 	ev->d.z = ev->d_d;
@@ -194,7 +244,7 @@ void		*draw_scene(void *data)
 	t_color	color;
 	t_all	*ev;
 	double	tmp;
-	int k = 2;
+	int k = 1;
 
 	ev = data;
 	tmp = ev->y;
@@ -204,14 +254,14 @@ void		*draw_scene(void *data)
 		ev->y = tmp;
 		while (ev->y < ev->limit)
 		{
-			set_vector_dir(ev);
+			set_vector_dir(ev, ev->x, ev->y);
 			rot_figure(ev);
 			color = trace_ray(ev, ev->o, ev->d, 5, 1);
 			define_filter(&color, ev);
 			ft_put_pxl(ev, ev->x, ev->y, &color);
 			ev->y++;
 		}
-		ev->x++;
+		ev->x += k;
 	}
 	pthread_exit(0);
 }

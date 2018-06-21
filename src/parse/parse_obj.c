@@ -44,9 +44,13 @@ void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 	{
 		(*i) += 10;
 		res = parse_3_input(str, i);
-		ev->figure[ev->index].centre.x = res[0];
-		ev->figure[ev->index].centre.y = res[1];
-		ev->figure[ev->index].centre.z = res[2];
+		ev->figure[ev->index].centre = define_vector(res[0], res[1], res[2]);
+	}
+	else if ((ft_strnequ(str + (*i), "\"direction\"", 11)))
+	{
+		(*i) += 10;
+		res = parse_3_input(str, i);
+		ev->figure[ev->index].point = define_vector(res[0], res[1], res[2]);
 	}
 	else if ((ft_strnequ(str + (*i), "\"name\"", 6)))
 	{
@@ -59,9 +63,6 @@ void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 		(*i) += 7;
 		res = parse_3_input(str, i);
 		define_color(&ev->figure[ev->index], res[2], res[1], res[0]);
-		// ev->figure[ev->index].color.chanels.r = res[0];
-		// ev->figure[ev->index].color.chanels.g = res[1];
-		// ev->figure[ev->index].color.chanels.b = res[2];
 	}
 }
 
@@ -79,6 +80,8 @@ void		check_exact_object_helper(char *str, int *i, t_all *ev)
 		universal_check(str, i);
 		ev->figure[ev->index].specular = check_if_input_float(i, str);
 	}
+	else
+		check_exact_object_helper2(str, i, ev);
 }
 
 int check_exact_object(char *str, int i, t_all *ev)
@@ -86,7 +89,6 @@ int check_exact_object(char *str, int i, t_all *ev)
 	spaces(str, &i);
 	object_string_validate(str, i);
 	check_exact_object_helper(str, &i, ev);
-	check_exact_object_helper2(str, &i, ev);
 	spaces(str, &i);
 	if (str[i] == ',')
 		i = check_exact_object(str, i + 1, ev);
@@ -97,7 +99,8 @@ int check_exact_object(char *str, int i, t_all *ev)
 		{
 			i++;
 			spaces(str, &i);
-			if (str[i++] == '{' && ev->index <= ev->num_f)
+			ev->index++;
+			if (str[i++] == '{' && ev->index < ev->num_f)
 				i = check_exact_object(str, i, ev);
 		}
 		else if (check_if_end(str, &i))

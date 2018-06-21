@@ -76,20 +76,20 @@ static void	define_cyliders(t_all *ev)
 	define_sph_cyl(&ev->figure[0], 0.6, 50, 2);
 }
 
-// void		define_scene5(t_all *ev)
-// {
-// 	ev->o = define_vector(0, 1, -1);
-// 	ev->o_rot = define_vector(0, 0, 0);
-// 	allocate_mem(ev, 16, 3);
-// 	define_spheres(ev);
-// 	define_planes(ev);
-// 	define_cyliders(ev);
-// 	ev->figure[12].centre = define_vector(0, -0.5, 15);
-// 	define_color(&ev->figure[12], 0, 0, 255);
-// 	define_sph_cyl(&ev->figure[12], 0.4, 50, 0);
-// 	define_type_intens(&ev->light[1], 'p', 0.4);
-// 	ev->light[1].position = define_vector(30, 1, -35);
-// 	define_type_intens(&ev->light[0], 'p', 0.4);
-// 	define_type_intens(&ev->light[2], 'a', 0.2);
-// 	ev->light[0].position = define_vector(-30, 1, -35);
-// }
+void		define_scene5(t_all *ev)
+{
+	ev->o = define_vector(0, 1, -1);
+	ev->o_rot = define_vector(0, 0, 0);
+	allocate_mem(ev, 16, 3);
+	define_spheres(ev);
+	define_planes(ev);
+	define_cyliders(ev);
+	ev->figure[12].centre = define_vector(0, -0.5, 15);
+	define_color(&ev->figure[12], 0, 0, 255);
+	define_sph_cyl(&ev->figure[12], 0.4, 50, 0);
+	define_type_intens(&ev->light[1], 'p', 0.4);
+	ev->light[1].position = define_vector(30, 1, -35);
+	define_type_intens(&ev->light[0], 'p', 0.4);
+	define_type_intens(&ev->light[2], 'a', 0.2);
+	ev->light[0].position = define_vector(-30, 1, -35);
+}
