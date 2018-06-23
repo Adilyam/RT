@@ -45,7 +45,7 @@ static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 	double		m;
 	t_vector	oc;
 
-	if (ev->figure[i].id_figure == CYLINDRE)
+	if (ev->figure[i].id_figure == CYLINDRE || ev->figure[i].id_figure == CYLINDRE_CUT)
 	{
 		oc = vector_minus_vector(o, ev->figure[i].centre);
 		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
@@ -54,7 +54,7 @@ static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 		ev->n = vector_minus_vector(ev->n,
 			vector_multy_const(ev->figure[i].point, m));
 	}
-	else if (ev->figure[i].id_figure == CONE)
+	else if (ev->figure[i].id_figure == CONE || ev->figure[i].id_figure == CONE_CUT)
 	{
 		oc = vector_minus_vector(o, ev->figure[i].centre);
 		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
@@ -80,7 +80,9 @@ static void	figure_type(int i, t_all *ev, double closet_t, t_vector o, t_vector 
 	}
 	else if (ev->figure[i].id_figure == ELLIPSOID || ev->figure[i].id_figure == PARABOLOID)
  		 figure_type_2(i, ev, closet_t, o, d);
-	else if (ev->figure[i].id_figure == CYLINDRE || ev->figure[i].id_figure == CONE)
+	else if (ev->figure[i].id_figure == CYLINDRE || 
+			ev->figure[i].id_figure == CONE ||
+			ev->figure[i].id_figure == CYLINDRE_CUT)
 		figure_type_1(i, ev, closet_t, o, d);
 }
 

@@ -18,9 +18,9 @@ static void figure_type(int i, t_all *ev)
 		ev->inter = &intersect_ray_sphere;
 	if (i == PLANE)
 		ev->inter = &intersect_ray_plane;
-	if (i == CYLINDRE)
+	if (i == CYLINDRE || i == CYLINDRE_CUT)
 		ev->inter = &intersect_ray_cylinder;
-	if (i == CONE)
+	if (i == CONE || i == CONE_CUT)
 		ev->inter = &intersect_ray_cone;
 	if (i == ELLIPSOID)
 		ev->inter = &intersect_ray_elips;

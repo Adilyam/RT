@@ -25,14 +25,14 @@ void	allocate_mem(t_all *ev)
 		ev->figure[j].centre = define_vector(0, 0, 0);
 		define_color(&ev->figure[j], 255 , 0, 0);
 		ev->figure[j].id_figure = 0;
-		ev->figure[j].max = 100;
+		ev->figure[j].max = 2;
 		ev->figure[j].min = 0;
 		ev->figure[j].radius = 1;
 		ev->figure[j].transp = 0;
 		ev->figure[j].reflect = 0;
 		ev->figure[j].point = define_vector(0, 1, 0);
+		ev->figure[j].k = 0.9;
 	}
-	
 	j = -1;
 	while (++j < ev->num_l)
 	{
@@ -40,7 +40,6 @@ void	allocate_mem(t_all *ev)
 		ev->light[j].position = define_vector(0, 0, 0);
 		ev->light[j].type = AMBIANT;
 	}
-
 	ev->filter = NORMAL;
 	ev->o = define_vector(0, 0, 0);
 	ev->o_rot = define_vector(0, 0, 0);

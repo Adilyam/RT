@@ -99,7 +99,7 @@ void	check_objects_string(char *str, int *i, t_figure *obj)
 	else if	(ft_strnequ(str + *i, "\"cutted_cylinder\"", 17))
 	{
 		(*i) += 17;
-		obj->id_figure = CYLINDRE_CUT;
+		obj->id_figure = CYLINDRE;
 	}
 	else if	(ft_strnequ(str + *i, "\"cutted_cone\"", 13))
 	{

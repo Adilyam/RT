@@ -106,5 +106,6 @@ void	intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d)
 	}
 	ev->x1 = (-k2 + sqrt(discriminant)) / (2 * k1);
 	ev->x2 = (-k2 - sqrt(discriminant)) / (2 * k1);
-	cut_cylinder(ev, i, d, oc);
+	if (ev->figure[i].max != -1)
+		cut_cylinder(ev, i, d, oc);
 }

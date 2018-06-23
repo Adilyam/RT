@@ -4,12 +4,14 @@
 },
  
 "objects" : [ {
-  "position" : [0, 1, 0],
-  "direction" : [0, -1, 0],
-  "name" : "ellipsoid",
+  "position" : [0, -2, 10],
+  "direction" : [0, 1, 0],
+  "name" : "cutted_cylinder",
   "specularity" : 500,
-  "size" : 1,
-  "color" : [255, 30, 0]
+  "size" : 0.9,
+  "color" : [100, 30, 10],
+  "max" : 1,
+  "min" : 0
 }],
 
 "lights" : [ {

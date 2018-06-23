@@ -33,8 +33,10 @@ void		object_string_validate(char *str, int i)
 			ft_strnequ(str + i, "\"tan\"", 5) || 
 			ft_strnequ(str + i, "\"direction\"", 11) ||
 			ft_strnequ(str + i, "\"transparency\"", 14) ||
+			ft_strnequ(str + i, "\"max\"", 5) ||
+			ft_strnequ(str + i, "\"min\"", 5) ||
 			ft_strnequ(str + i, "\"reflection\"", 12)))
-		error_end("The lights part defined wrongly");
+		error_end("The objects part defined wrongly");
 }
 
 
@@ -75,6 +77,18 @@ void		check_exact_object_helper(char *str, int *i, t_all *ev)
 		(*i) += 6;
 		universal_check(str, i);
 		ev->figure[ev->index].radius = check_if_input_float(i, str);
+	}
+	else if ((ft_strnequ(str + (*i), "\"max\"", 5)))
+	{
+		(*i) += 5;
+		universal_check(str, i);
+		ev->figure[ev->index].max = check_if_input_float(i, str);
+	}
+	else if ((ft_strnequ(str + (*i), "\"min\"", 5)))
+	{
+		(*i) += 5;
+		universal_check(str, i);
+		ev->figure[ev->index].min = check_if_input_float(i, str);
 	}
 	else if (ft_strnequ(str + (*i), "\"specularity\"", 13))
 	{

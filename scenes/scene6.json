@@ -15,12 +15,12 @@
 "lights" : [ {
 		 "position" : [0, 1, 0],
 		 "type" : "point",
-  		 "intensity" : 0.6
+  		"intensity" : 0.3
 },
 {
-         "position" : [0, 1, 0],
+         "position" : [0, 0, 0],
          "type" : "directional",
-         "intensity" : 0.6
+         "intensity" : 0
 },
 {
 	"position" : [0, 1, 0],

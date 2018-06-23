@@ -1,129 +1,35 @@
-Scene:
-	objects = 16
-	lights = 5
-	FOV = 60.0
-	filter = cartoon
-objects {
-#id = 0
-	type = cylinder
-	position = -100, 0, 200
-	size = 20
-	direction = 0, 1, 0
-	color = 0.855, 0.123, 0.255
-	spec = 0.9
+{ "scene" : {
+    "object_count" : 1,
+    "lights_count" : 3
+},
+ 
+"objects" : [ {
+  "position" : [0, 1, 0],
+  "direction" : [0, -1, 0],
+  "name" : "parabolloid",
+  "specularity" : 500,
+  "size" : 1,
+  "color" : [255, 30, 0]
+}],
 
-#id = 1
-	type = cylinder
-	position = 100, 0, 200
-	size = 20
-	direction = 0, 1, 0
-	color = 0.855, 0.123, 0.255
-	spec = 0.9
+"lights" : [ {
+		 "position" : [0, 1, 0],
+		 "type" : "point",
+  		"intensity" : 0.3
+},
+{
+         "position" : [0, 0, 0],
+         "type" : "directional",
+         "intensity" : 0
+},
+{
+	"position" : [0, 1, 0],
+	"type" : "ambiant",
+	"intensity" : 0.6
+}],
 
-#id = 2
-    type = sphere
-    position = 0, -20, 150
-    size = 1000
-    color = 0.112, 0.412, 0.52
-	 spec = 0.9
-
-#id = 3
-	type = plane
-	position = 0, 1, 0
-	size = 50
-	color = 1, 1.2, 1
-	spec = 0
-#id = 4
-	type = plane
-	position = 0, 0, -1
-	size = 600
-	color = 0.112, 0.412, 0.52
-	spec = 0
-#id = 5
-	type = plane
-	position = 0, -1, 0
-	size = 200
-	color = 1, 1.2, 1
-	spec = 0
-#id = 6
-	type = cylinder
-	position = -100, 0, -50
-	size = 20
-	direction = 0, 1, 0
-	color = 0.855, 0.123, 0.255
-	spec = 0.9
-#id = 7
-	type = cylinder
-	position = 100, 0, -50
-	size = 20
-	direction = 0, 1, 0
-	color = 0.855, 0.123, 0.255
-	spec = 0.9
-#id = 8
-    type = sphere
-    position = -100, 200, 200
-    size = 1000
-    color = 0.855, 0.123, 0.255
-#id = 9
-    type = sphere
-    position = 100, 200, 200
-    size = 1000
-    color = 0.855, 0.123, 0.255
-
-#id = 10
-    type = sphere
-    position = -100, -50, 200
-    size = 1000
-    color = 0.855, 0.123, 0.255
-#id = 11
-    type = sphere
-    position = 100, -50, 200
-    size = 1000
-    color = 0.855, 0.123, 0.255
-#id = 12
-    type = sphere
-    position = -100, 200, -50
-    size = 1000
-    color = 0.855, 0.123, 0.255
-#id = 13
-    type = sphere
-    position = 100, 200, -50
-    size = 1000
-    color = 0.855, 0.123, 0.255
-
-#id = 14
-    type = sphere
-    position = -100, -50, -50
-    size = 1000
-    color = 0.855, 0.123, 0.255
-#id = 15
-    type = sphere
-    position = 100, -50, -50
-    size = 1000
-    color = 0.855, 0.123, 0.255
-
+"camera" : {
+		 "position" : [0, 0, 0],
+		 "direction" : [0, 0, 0]
 }
-lights {
-#id = 0
-Light:
-	position = -100.0,0.0, 0.0
-
-#id = 1
-Light:
-	position = 102.0,768.0, -100.0
-
-#id = 2
-Light:
-	position = 200, 0, 100
-
-#id = 3
-Light:
-	position = -50, 100, 400
-#id = 4
-Light:
-	position = -50, 100, 100
-
 }
-Camera {
-	position = 0, 100, -600
-	rotation = -5, 0, 0
