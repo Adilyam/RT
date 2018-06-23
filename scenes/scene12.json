@@ -16,6 +16,7 @@
     "direction" : [0, -1, 0],
     "name" : "sphere",
     "specularity" : 500,
+
     "size" : 0.6,
     "color" : [100, 130, 255]
   },
@@ -24,6 +25,7 @@
     "direction" : [0, 1, 0],
     "name" : "sphere",
     "specularity" : 500,
+    "reflection" : 1,
     "size" : 0.6,
     "color" : [255, 130, 100]
   }],

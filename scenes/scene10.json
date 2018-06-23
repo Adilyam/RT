@@ -1,0 +1,46 @@
+{ "scene" : {
+    "object_count" : 3,
+    "lights_count" : 2
+},
+ 
+"objects" : [ {
+  "position" : [0, 0, 7],
+  "direction" : [0, 1, 0],
+  "name" : "sphere",
+  "specularity" : 500,
+  "size" : 1,
+  "color" : [255, 30, 0]
+},
+{
+    "position" : [1, 0, 7],
+    "direction" : [0, 1, 0],
+    "name" : "sphere",
+    "specularity" : 500,
+    "size" : 1,
+    "color" : [100, 130, 255]
+  },
+  {
+    "position" : [-1, 0, 7],
+    "direction" : [0, 1, 0],
+    "name" : "sphere",
+    "specularity" : 500,
+    "size" : 1,
+    "color" : [255, 130, 100]
+  }],
+
+"lights" : [ {
+		 "position" : [0, 1, 0],
+		 "type" : "point",
+  		 "intensity" : 0.2
+},
+{
+         "position" : [0, 1, 0],
+         "type" : "directional",
+         "intensity" : 0.2
+}],
+
+"camera" : {
+		 "position" : [0, 0, -2],
+		 "direction" : [0, 0, 0]
+}
+}

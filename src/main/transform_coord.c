@@ -170,12 +170,12 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 	if (depth == 0)
 		return (local_color);
 	rr =  reflect_ray(vector_multy_const(d, -1), ev->n);
-	// if (ev->figure[ev->id].reflect > 0.0)
+	if (ev->figure[ev->id].reflect > 0.0)
 	// 	// printf("u");
-	// 	reflected_color = trace_ray(ev, ev->p, rr, depth - 1, 0);
+		reflected_color = trace_ray(ev, ev->p, rr, depth - 1, 0);
 	// if (ev->figure[ev->id].transp > 0)
 	// 	transparency_color = trace_ray(ev, ev->p, ev->d, 1, 0);
-	return (color_ret(local_color, reflected_color, transparency_color, 0, 1));
+	return (color_ret(local_color, reflected_color, transparency_color, 0, 0.8));
 }
 
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
@@ -232,7 +232,7 @@ void		*draw_scene(void *data)
 		{
 			set_vector_dir(ev, ev->x, ev->y);
 			rot_figure(ev);
-			color = trace_ray(ev, ev->o, ev->d, 1, 1);
+			color = trace_ray(ev, ev->o, ev->d, 5, 1);
 			// color = sum_col(color, trace_reflection(ev, ev->o, ev->d));
 			define_filter(&color, ev);
 			ft_put_pxl(ev, ev->x, ev->y, &color);
