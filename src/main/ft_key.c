@@ -28,7 +28,6 @@ static void changes(t_all *ev, double *o, int m)
 		*o += 0.08;
 	else
 		*o -= 0.08;
-	thread(ev);
 }
 
 int   ft_key(int keycode, t_all *ev)
@@ -39,6 +38,11 @@ int   ft_key(int keycode, t_all *ev)
 	(keycode == 125) ? changes(ev, &ev->o.y, 0) : 0;
 	(keycode == 124) ? changes(ev, &ev->o.x, 1) : 0;
 	(keycode == 123) ? changes(ev, &ev->o.x, 0) : 0;
+	if (keycode == 69 && ev->k_iter < 5)
+		ev->k_iter += 1;
+	if (keycode == 78 && ev->k_iter > 1)
+		ev->k_iter -= 1;
+	thread(ev);
 	// (keycode == 0) ? changes(ev, &ev->o_rot.y, 0) : 0;
 	// (keycode == 2) ? changes(ev, &ev->o_rot.y, 1) : 0;
 	// (keycode == 13) ? changes(ev, &ev->o_rot.z, 0) : 0;

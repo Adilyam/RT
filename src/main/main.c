@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <sys/types.h>
+#include <sys/stat.h>
 
 static int	exit_x(void)
 {
@@ -24,33 +26,30 @@ int		error_end(char *str)
 	return (0);
 }
 
-// static void	parsing(char *str, t_all *ev)
-// {
-// 	ev->vw = 1;
-// 	ev->vh = 1;
-// 	ev->d_d = 1;
-// 	ev->func1 = NULL;
-// 	if (!(ft_strcmp(str, "scene1")))
-// 		ev->func1 = &define_scene1;
-// 	if (!(ft_strcmp(str, "scene2")))
-// 		ev->func1 = &define_scene2;
-// 	if (!(ft_strcmp(str, "scene3")))
-// 		ev->func1 = &define_scene3;
-// 	if (!(ft_strcmp(str, "scene4")))
-// 		ev->func1 = &define_scene4;
-// 	if (!(ft_strcmp(str, "scene5")))
-// 		ev->func1 = &define_scene5;
-// 	if (!(ft_strcmp(str, "scene6")))
-// 		ev->func1 = &define_scene6;
-// 	if (!ev->func1)
-// 	{
-// 		ft_putstr_fd("usage:\t./RTv1 scene1\n", 2);
-// 		ft_putstr_fd("\t./RTv1 scene2\n", 2);
-// 		ft_putstr_fd("\t./RTv1 scene3\n\t./RTv1 scene4\n", 2);
-// 		ft_putstr_fd("\t./RTv1 scene5\n\t./RTv1 scene6\n", 2);
-// 		exit(1);
-// 	}
-// }
+void		start(t_all *ev, char **av)
+{
+	ev->fd = open(av[1], O_RDONLY);
+	struct stat buf;
+    stat(av[1],&buf);
+	if(S_ISDIR(buf.st_mode))
+  		error_end("Seems to check for directory input");
+	if (ev->fd <= 0)
+		error_end("Such file doesn't exist");
+	ev->vw = 1;
+	ev->vh = 1;
+	ev->d_d = 1;
+	ev->k_iter = 1;
+	if (!parse_check(ev))
+		error_end("The scene is not JSON formatted");
+	normalise_obj(ev);
+	ft_create(ev);
+	make_screenshot(ev);
+	thread(ev);
+	mlx_hook(ev->mlx.win, 4, 1L << 2, mouse_zoom, ev);
+	mlx_hook(ev->mlx.win, 2, 5, ft_key, ev);
+	mlx_hook(ev->mlx.win, 17, 1L << 17, exit_x, ev);
+	mlx_loop(ev->mlx.mlx);
+}
 
 int			main(int ac, char **av)
 {
@@ -58,20 +57,6 @@ int			main(int ac, char **av)
 
 	if (ac != 2)
 		error_end("usage:\t./RT scenes/[-file]");
-	ev.fd = open(av[1], O_RDONLY);
-	ev.vw = 1;
-	ev.vh = 1;
-	ev.d_d = 1;
-	if (!parse_check(&ev))
-		error_end("smth went wrong");
-	// parsing(av[1], &ev);
-	ft_create(&ev);
-	make_screenshot(&ev);
-	// (ev.func1)(&ev);
-	thread(&ev);
-	mlx_hook(ev.mlx.win, 4, 1L << 2, mouse_zoom, &ev);
-	mlx_hook(ev.mlx.win, 2, 5, ft_key, &ev);
-	mlx_hook(ev.mlx.win, 17, 1L << 17, exit_x, &ev);
-	mlx_loop(ev.mlx.mlx);
+	start(&ev, av);
 	return (0);
 }

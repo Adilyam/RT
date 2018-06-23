@@ -115,18 +115,47 @@ t_vector reflect_ray(t_vector r, t_vector n)
 
 #include <stdio.h>
 
+// static t_color	trace_reflection(t_all *e, t_vector o, t_vector d)
+// {
+// 	t_color		color;
+// 	double		closet_t;
+// 	double		t[2];
+
+// 	color.color = 0x000000;
+// 	t[0] = 0.001f;
+// 	t[1] = MAX;
+// 	closet_t = closet_interesection(e, t, o, d);
+// 	if (e->depth < 5)
+// 	{
+// 		e->depth++;
+// 		d = reflect_ray(vector_multy_const(d, -1), e->n);
+// 		color = sum_col(color, trace_ray(e, o, d));
+// 		color = multy_col(color, 0.9);
+// 	}
+// 	return (color);
+// }
+
+
 static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 {
 	double		closet_t;
 	double		t[2];
 	t_color		local_color;
 	t_color		reflected_color;
+	t_color		transparency_color;
 	double		r;
 	t_vector	rr;
 
-	t[0] = 0.001f;
 	if (i)
 		t[0] = 1;
+	else
+		t[0] = 0.001f;
+	transparency_color.chanels.r = 0;
+	transparency_color.chanels.b = 0;
+	transparency_color.chanels.g = 0;
+	reflected_color.chanels.r = 0;
+	reflected_color.chanels.b = 0;
+	reflected_color.chanels.g = 0;
 	t[1] = MAX;
 	closet_t = closet_interesection(ev, t, o, d);
 	if (ev->id == -1)
@@ -136,24 +165,24 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 	}
 	local_color = use_light(ev, closet_t, ev->id, o, d);
 	r = ev->figure[ev->id].reflect;
-	if (depth <= 0 || r <= 0)
-	{
-		ev->color = local_color.color;
+	if (depth == 0)
 		return (local_color);
-	}
 	rr =  reflect_ray(vector_multy_const(d, -1), ev->n);
-	reflected_color = trace_ray(ev, ev->p, ev->r, depth - 1, 0);
-	return (color_ret(local_color, reflected_color, r));
+	// if (ev->figure[ev->id].reflect > 0.0)
+	// 	// printf("u");
+	// 	reflected_color = trace_ray(ev, ev->p, rr, depth - 1, 0);
+	// if (ev->figure[ev->id].transp > 0)
+	// 	transparency_color = trace_ray(ev, ev->p, ev->d, 1, 0);
+	return (color_ret(local_color, reflected_color, transparency_color, 0, 1));
 }
 
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
 {
 	int		i;
 	int		j;
-	int k = 4;
 
 	j = -1;
-	while (++j < 1)
+	while (++j < ev->k_iter)
 	{
 		i = (x * 4) + (y * ev->mlx.size);
 		i += (4 * j);
@@ -170,62 +199,8 @@ void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
 	}
 }
 
-// t_vector	rotate_vec_y(t_vector *v, t_vector *rot)
-// {
-// 	t_vector	res;
-// 	double		deg;
-
-// 	deg = rot->y * PIOVER180;
-// 	res.x = v->x * cos(deg) + sin(deg) * v->z;
-// 	res.y = v->y;
-// 	res.z = -v->x * sin(deg) + v->z * cos(deg);
-// 	return (res);
-// }
-
-// t_vector	rotate_vec_z(t_vector *v, t_vector *rot)
-// {
-// 	t_vector	res;
-// 	double		deg;
-
-// 	deg = rot->z * PIOVER180;
-// 	res.x = v->x * cos(deg) + sin(deg) * v->y;
-// 	res.y = -v->x * sin(deg) + cos(deg) * v->y;
-// 	res.z = v->z;
-// 	return (res);
-// }
-
-// t_vector	rotate_vec_x(t_vector *v, t_vector *rot)
-// {
-// 	t_vector	res;
-// 	double		deg;
-
-// 	deg = rot->x * PIOVER180;
-// 	res.x = v->x;
-// 	res.y = v->y * cos(deg) + v->z * sin(deg);
-// 	res.z = -v->y * sin(deg) + v->z * cos(deg);
-// 	return (res);
-// }
-
-void	check_cam_rot(t_vector *dir, t_all *e)
-{
-	if (e->o_rot.x != 0)
-		*dir = rotate_vec_x(dir, &e->o_rot);
-	if (e->o_rot.y != 0)
-		*dir = rotate_vec_y(dir, &e->o_rot);
-	if (e->o_rot.z != 0)
-		*dir = rotate_vec_z(dir, &e->o_rot);
-}
-
 void		set_vector_dir(t_all *ev, int x, int y)
 {
-	// ev->d.x = (double)x / SIZE_X;
-	// ev->d.y = (double)y / SIZE_Y;
-	// ev->d.x = (2 * ev->d.x) - 1;
-	// ev->d.y = 1 - (2 * ev->d.y);
-	// ev->d.x *= tan(60);
-	// ev->d.y *= tan(60);
-	// ev->d.z = 1;
-	// check_cam_rot(&ev->d, ev);
 	ev->d.x = ((ev->x - SIZE_X / 2) * (ev->vw / SIZE_X / 2));
 	ev->d.y = (-(ev->y - SIZE_Y / 2) * (ev->vh / SIZE_Y / 2));
 	ev->d.z = ev->d_d;
@@ -244,7 +219,6 @@ void		*draw_scene(void *data)
 	t_color	color;
 	t_all	*ev;
 	double	tmp;
-	int k = 1;
 
 	ev = data;
 	tmp = ev->y;
@@ -256,12 +230,13 @@ void		*draw_scene(void *data)
 		{
 			set_vector_dir(ev, ev->x, ev->y);
 			rot_figure(ev);
-			color = trace_ray(ev, ev->o, ev->d, 5, 1);
+			color = trace_ray(ev, ev->o, ev->d, 1, 1);
+			// color = sum_col(color, trace_reflection(ev, ev->o, ev->d));
 			define_filter(&color, ev);
 			ft_put_pxl(ev, ev->x, ev->y, &color);
 			ev->y++;
 		}
-		ev->x += k;
+		ev->x += ev->k_iter;
 	}
 	pthread_exit(0);
 }
@@ -273,6 +248,7 @@ void	thread(t_all *e)
 	int i;
 	i = 0;
 
+	e->depth = 0;
 	while (i < 20)
 	{
 		env_arr[i] = *e;

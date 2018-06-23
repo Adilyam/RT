@@ -1,14 +1,24 @@
 { "scene" : {
-	"object_count" : 1,
-	"lights_count" : 4
+	"object_count" : 2,
+	"lights_count" : 3
 },
 
 "objects" : [ {
 	"color" : [100, 100, 250],
 	"specularity" : 500,
 	"name" : "sphere",
-	"position" : [2, 0, 4],
-	"size" : 2
+	"position" : [2, 0, 3],
+	"size" : 1,
+	"reflection" : 0.9,
+	"transparency" : 0.9
+},
+{
+    "color" : [250, 100, 250],
+    "specularity" : 500,
+    "name" : "sphere",
+    "position" : [0, -1, 4],
+    "size" : 1,
+    "reflection" : 0.9
 }
 ],
 "lights" : [ {

@@ -6,7 +6,7 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/20 14:50:07 by atilegen         ###   ########.fr        #
+#    Updated: 2018/06/22 19:12:57 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -55,7 +55,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(HEADERS)
 	@make -C $(LFT_DIR)
 	@$(CC) -o $(NAME) $(FLAGS) $(CFLAGS) $(LFT_LNK) $(OBJ) $(MLXFLAGS)
-	@echo "\033[31mRT \033[33mCOMPILED\033[0m"
+	@echo "\033[34mRT \033[33mCOMPILED\033[0m"
 
 clean:
 	@make -C $(LFT_DIR) clean

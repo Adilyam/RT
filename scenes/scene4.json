@@ -1,47 +1,30 @@
-Scene:
-	objects = 4
-	lights = 1
-	FOV = 60.0
-	filter = cartoon
-objects {
-#id = 0
-	type = cone
-	min = 1
-	max = 100
-	position = 0, 20, -90
-	size = 0.6
-	color = 112, 42, 100
-	direction = 0, 1, 0
-	spec = 0.9
-#id = 1
-	type = cylinder
-	position = -120, 0, -90
-	size = 30
-	max = 200
-	min = 0
-	direction = 0, 1, 0
-	color = 30, 10, 60
-	spec = 0.4
+{ "scene" : {
+    "object_count" : 1,
+    "lights_count" : 2
+},
+ 
+"objects" : [ {
+  "position" : [0, 0, 1],
+  "direction" : [0, 1, 0],
+  "name" : "cone",
+  "specularity" : 500,
+  "size" : 0.6,
+  "color" : [150, 30, 150]
+}],
 
-#id = 2
-    type = sphere
-    position = 90, 0, 150
-    size = 500
-    color = 112, 0, 52
-	 spec = 0.9
-#id = 3
-	type = plane
-	position = 0, 1, 0
-	size = 50
-	color = 255, 255, 255
-	spec = 0.9
+"lights" : [ {
+		 "position" : [0, 1, 0],
+		 "type" : "point",
+  		 "intensity" : 0.6
+},
+{
+         "position" : [0, 1, 0],
+         "type" : "directional",
+         "intensity" : 0.6
+}],
+
+"camera" : {
+		 "position" : [0, 0, -10],
+		 "direction" : [0, 0, 0]
 }
-lights {
-#id = 0
-Light:
-	position = 0, 100, -400
-	type = 1
-
-Camera {
-	position = 0, 0, -1000
-	rotation = 0, 0, 0
+}

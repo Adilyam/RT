@@ -31,8 +31,10 @@ void		object_string_validate(char *str, int i)
 			ft_strnequ(str + i, "\"color\"", 7) || 
 			ft_strnequ(str + i, "\"specularity\"", 13) || 
 			ft_strnequ(str + i, "\"tan\"", 5) || 
-			ft_strnequ(str + i, "\"direction\"", 11)))
-		error_end("Wrong object input");
+			ft_strnequ(str + i, "\"direction\"", 11) ||
+			ft_strnequ(str + i, "\"transparency\"", 14) ||
+			ft_strnequ(str + i, "\"reflection\"", 12)))
+		error_end("The lights part defined wrongly");
 }
 
 
@@ -48,7 +50,7 @@ void		check_exact_object_helper2(char *str, int *i, t_all *ev)
 	}
 	else if ((ft_strnequ(str + (*i), "\"direction\"", 11)))
 	{
-		(*i) += 10;
+		(*i) += 11;
 		res = parse_3_input(str, i);
 		ev->figure[ev->index].point = define_vector(res[0], res[1], res[2]);
 	}
@@ -80,6 +82,18 @@ void		check_exact_object_helper(char *str, int *i, t_all *ev)
 		universal_check(str, i);
 		ev->figure[ev->index].specular = check_if_input_float(i, str);
 	}
+	else if (ft_strnequ(str + (*i), "\"reflection\"", 12))
+	{
+		(*i) += 12;
+		universal_check(str, i);
+		ev->figure[ev->index].reflect = check_if_input_float(i, str);
+	}
+	else if (ft_strnequ(str + (*i), "\"transparency\"", 14))
+	{
+		(*i) += 14;
+		universal_check(str, i);
+		ev->figure[ev->index].reflect = check_if_input_float(i, str);
+	}
 	else
 		check_exact_object_helper2(str, i, ev);
 }
@@ -107,6 +121,6 @@ int check_exact_object(char *str, int i, t_all *ev)
 			error_end("Seems to be no lights in your scene");
 	}
 	else
-		error_end("Chto-to levoe posle objects");
+		error_end("Something extra after objects definition");
 	return (i);
 }

@@ -36,7 +36,7 @@ double         *check_if_3digit_input(char *str, int *i)
 		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
 			j++;
 		else 
-			error_end("Wrong number1");
+			error_end("Wrong number 1");
 		(*i)++;
 	}
 	res[0] = ft_atoi(str + (*i)++ - j);
@@ -47,7 +47,7 @@ double         *check_if_3digit_input(char *str, int *i)
 		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
 			j++;
 		else 
-			error_end("Wrong number2");
+			error_end("Wrong number 2");
 		(*i)++;
 	}
 	res[1] = ft_atoi(str + (*i)++ - j);
@@ -58,7 +58,7 @@ double         *check_if_3digit_input(char *str, int *i)
 		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
 			j++;
 		else 
-			error_end("Wrong number3");
+			error_end("Wrong number 3");
 		(*i)++;
 	}
 	res[2] = ft_atoi(str + (*i)++ - j);
@@ -68,7 +68,7 @@ double         *check_if_3digit_input(char *str, int *i)
 void        check_symbol(char *str, int *i, char c)
 {
 	if ((str[(*i)++] != c))
-		error_end("Net :  [] {} ");
+		error_end("Check your symbols again ([] {}) ");
 }
 
 double         check_if_input_number(int *i, char *str)

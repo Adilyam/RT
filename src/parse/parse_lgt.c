@@ -43,7 +43,7 @@ void		lights_string_validate(char *str, int i)
 	if (!(ft_strnequ(str + i, "\"intensity\"", 11) || 
 		ft_strnequ(str + i, "\"position\"", 10) || 
 		ft_strnequ(str + i, "\"type\"", 6)))
-		error_end("Wrong input");
+		error_end("The lights part defined wrongly");
 }
 
 int check_exact_light(char *str, int i, t_all *ev)
@@ -67,9 +67,9 @@ int check_exact_light(char *str, int i, t_all *ev)
 				i = check_exact_light(str, i, ev);
 		}
 		else if (check_if_end(str, &i))
-			error_end("seems to be no camera in your scene");
+			error_end("Seems to be no camera in your scene");
 	}
 	else
-		error_end("Chto-to levoe posle lights");
+		error_end("Something extra after lights definition");
 	return (i);
 }

@@ -35,7 +35,7 @@ void		camera_string_validate(char *str, int i)
 {
 	if (!(ft_strnequ(str + i, "\"direction\"", 11) || 
 		ft_strnequ(str + i, "\"position\"", 10)))
-		error_end("Wrong input");
+		error_end("The camera part defined wrongly");
 }
 
 int check_exact_camera(char *str, int i, t_all *ev)
@@ -59,6 +59,6 @@ int check_exact_camera(char *str, int i, t_all *ev)
 		}
 	}
 	else
-		error_end("Chto-to levoe posle cams");
+		error_end("Something extra after camera definition");
 	return (i);
 }

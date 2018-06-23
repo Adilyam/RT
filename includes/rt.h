@@ -22,8 +22,8 @@
 # define PLANE			1
 # define CYLINDRE		2
 # define CONE			3
-// # define CYLINDRE_CUT	6
-// # define CONE_CUT		7
+# define CYLINDRE_CUT	6
+# define CONE_CUT		7
 
 # define ELLIPSOID		4
 # define PARABOLOID		5
@@ -145,9 +145,12 @@ typedef struct		s_all
 	double			a;
  	double			b;
 	unsigned char	*screen;
+	int				k_iter;
+	int				depth;
 }					t_all;
 
 void				rot_figure(t_all *ev);
+void				normalise_obj(t_all *ev);
 void				thread(t_all *e);
 void				ft_create(t_all *ev);
 t_vector			vector_plus_vector(t_vector a, t_vector b);
@@ -165,9 +168,9 @@ t_vector			vector_plus_const(t_vector a, double b);
 t_vector			vector_minus_const(t_vector a, double b);
 double				closet_interesection(t_all *ev, double *t,
 					t_vector o, t_vector d);
-// uint32_t			multy_col(t_color col, double j);
 t_color				multy_col(t_color col, double j);
-t_color				color_ret(t_color local_color, t_color reflected_color, double r);
+t_color				color_ret(t_color local_color, t_color reflected_color, 
+					t_color transp, double t, double r);
 void				intersect_ray_plane(t_all *ev, int i,
 											t_vector o, t_vector d);
 void				intersect_ray_sphere(t_all *ev, int i,
@@ -202,7 +205,6 @@ double				*parse_3_input(char *str, int *i);
 int					match(char a, char b);
 int					check_scene(char *str, int i, t_all *ev);
 int					check2(char *str);
-t_color				color_ret(t_color local_color, t_color reflected_color, double r);
 t_vector			reflect_ray(t_vector r, t_vector n);
 void 				make_screenshot(t_all *ev);
 void 				make_sepia(t_color *color);
@@ -214,5 +216,6 @@ void 				thread(t_all *e);
 void 				cut_cylinder(t_all *ev, int i, t_vector d, t_vector oc);
 void 				intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d);
 void 				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
+t_color  			sum_col(t_color col, t_color col_1);
 
 #endif

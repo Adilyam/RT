@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse4.c                                           :+:      :+:    :+:   */
+/*   parse_names.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atilegen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/19 15:27:05 by atilegen          #+#    #+#             */
-/*   Updated: 2018/06/19 15:27:07 by atilegen         ###   ########.fr       */
+/*   Created: 2018/06/23 21:07:17 by atilegen          #+#    #+#             */
+/*   Updated: 2018/06/23 21:07:21 by atilegen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		check_light_string(char *str, int *i, t_light *lgt)
 		lgt->type = POINT;
 	}
 	else
-		error_end("Wrong object");
+		error_end("The lights part defined wrongly");
 }
 
 void	check_objects_string(char *str, int *i, t_figure *obj)
@@ -86,8 +86,28 @@ void	check_objects_string(char *str, int *i, t_figure *obj)
 		(*i) += 10;
 		obj->id_figure = CYLINDRE;
 	}
+	else if	(ft_strnequ(str + *i, "\"ellipsoid\"", 11))
+	{
+		(*i) += 11;
+		obj->id_figure = ELLIPSOID;
+	}
+	else if	(ft_strnequ(str + *i, "\"parabolloid\"", 13))
+	{
+		(*i) += 13;
+		obj->id_figure = PARABOLOID;
+	}
+	else if	(ft_strnequ(str + *i, "\"cutted_cylinder\"", 17))
+	{
+		(*i) += 17;
+		obj->id_figure = CYLINDRE_CUT;
+	}
+	else if	(ft_strnequ(str + *i, "\"cutted_cone\"", 13))
+	{
+		(*i) += 13;
+		obj->id_figure = CONE_CUT;
+	}
 	else
-		error_end("Wrong object");
+		error_end("The objects part defined wrongly");
 }
 
 void	universal_check(char *str, int *i)

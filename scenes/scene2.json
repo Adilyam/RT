@@ -5,12 +5,14 @@
 "objects" : [ {
   "position" : [-1, 0, 2],
   "name" : "sphere",
+  "specularity" : 500,
   "size" : 1,
   "color" : [255, 30, 0]
 },
 {
   "position" : [0, 0, 5],
   "name" : "sphere",
+  "specularity" : 500,
   "size" : 1,
   "color" : [150, 100, 10]
 }],
