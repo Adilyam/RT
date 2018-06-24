@@ -152,6 +152,7 @@ typedef struct		s_all
 }					t_all;
 
 void				rot_figure(t_all *ev);
+int					*set_array(int a, int b, int c, int d);
 void				normalise_obj(t_all *ev);
 void				thread(t_all *e);
 void				ft_create(t_all *ev);

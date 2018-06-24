@@ -38,6 +38,9 @@ void		start(t_all *ev, char **av)
 	ev->vh = 1;
 	ev->d_d = 1;
 	ev->k_iter = 1;
+	ev->filter = NORMAL;
+	ev->o = define_vector(0, 0, 0);
+	ev->o_rot = define_vector(0, 0, 0);
 	if (!parse_check(ev))
 		error_end("The scene is not JSON formatted");
 	normalise_obj(ev);

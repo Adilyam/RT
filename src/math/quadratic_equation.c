@@ -25,15 +25,9 @@ t_vector		define_vector(double x, double y, double z)
 static double	specular(t_all *ev, int j, int c, double i)
 {
 	double		r_dot_v;
-	// t_vector	d_n;
-	// double		n_l;
 
 	ev->r = reflect_ray(ev->l, ev->n);
 	r_dot_v = multy_vec(ev->r, ev->v);
-	// n_l = multy_vec(ev->n, ev->l);
-	// d_n = vector_multy_const(ev->n, (2 * n_l));
-	// ev->r = vector_minus_vector(d_n, ev->l);
-	// ev->r = normalise(ev->r);
 	if (r_dot_v > 0)
 		i += (ev->light[j].intensity *
 			(pow((r_dot_v / (find_len(ev->r) *
@@ -81,11 +75,11 @@ double			compute_lighting(t_all *ev, int c)
 		if (n_l > 0)
 			i += (ev->light[j].intensity * n_l
 			/ (find_len(ev->n) * find_len(ev->l)));
-		// (n_l > 0) ? i += (ev->light[j].intensity * n_l
-		// 	/ (find_len(ev->n) * find_len(ev->l))) : 0;
+		(n_l > 0) ? i += (ev->light[j].intensity * n_l
+			/ (find_len(ev->n) * find_len(ev->l))) : 0;
 		(ev->figure[c].specular >= 0) ? i = specular(ev, j, c, i) : 0;
-		// if (ev->figure[c].specular >= 0)
-		// 	i = specular(ev, j, c, i);
+		if (ev->figure[c].specular >= 0)
+			i = specular(ev, j, c, i);
 		
 	}
 	return (i);

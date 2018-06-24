@@ -29,7 +29,7 @@ void	make_cartoon(t_color *color)
 
 	i = -1;
 	temp = (color->chanels.r);
-	while(++i < 3)
+	while (++i < 3)
 	{
 		if (temp >= 0 && temp <= 50)
 			temp = 25;
@@ -54,9 +54,12 @@ void	make_sepia(t_color *color)
 	double	tg;
 	double	tb;
 
-	tr = 0.393 * color->chanels.r + 0.769 * color->chanels.g + 0.189 * color->chanels.b;
-	tg = 0.349 * color->chanels.r + 0.686 * color->chanels.g + 0.168 * color->chanels.b;
-	tb = 0.272 * color->chanels.r + 0.534 * color->chanels.g + 0.131 * color->chanels.b;
+	tr = 0.393 * color->chanels.r + 0.769 * color->chanels.g +
+		0.189 * color->chanels.b;
+	tg = 0.349 * color->chanels.r + 0.686 * color->chanels.g +
+		0.168 * color->chanels.b;
+	tb = 0.272 * color->chanels.r + 0.534 * color->chanels.g +
+		0.131 * color->chanels.b;
 	tr = (tr > 255) ? 255 : tr;
 	tg = (tg > 255) ? 255 : tg;
 	tb = (tb > 255) ? 255 : tb;

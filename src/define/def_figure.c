@@ -12,18 +12,16 @@
 
 #include "rt.h"
 
-void	allocate_mem(t_all *ev)
+void		init(t_all *ev)
 {
 	int j;
 
 	j = -1;
-	ev->figure = (t_figure*)malloc(sizeof(t_figure) * ev->num_f);
-	ev->light = (t_light*)malloc(sizeof(t_light) * ev->num_l);
 	while (++j < ev->num_f)
 	{
 		ev->figure[j].specular = 500;
 		ev->figure[j].centre = define_vector(0, 0, 0);
-		define_color(&ev->figure[j], 255 , 0, 0);
+		define_color(&ev->figure[j], 255, 0, 0);
 		ev->figure[j].id_figure = 0;
 		ev->figure[j].max = 2;
 		ev->figure[j].min = 0;
@@ -40,12 +38,16 @@ void	allocate_mem(t_all *ev)
 		ev->light[j].position = define_vector(0, 0, 0);
 		ev->light[j].type = AMBIANT;
 	}
-	ev->filter = NORMAL;
-	ev->o = define_vector(0, 0, 0);
-	ev->o_rot = define_vector(0, 0, 0);
 }
 
-void	normalise_obj(t_all *ev)
+void		allocate_mem(t_all *ev)
+{
+	ev->figure = (t_figure*)malloc(sizeof(t_figure) * ev->num_f);
+	ev->light = (t_light*)malloc(sizeof(t_light) * ev->num_l);
+	init(ev);
+}
+
+void		normalise_obj(t_all *ev)
 {
 	int i;
 
@@ -55,10 +57,9 @@ void	normalise_obj(t_all *ev)
 		if (ev->figure[i].id_figure == PLANE)
 			ev->figure[i].centre = normalise(ev->figure[i].centre);
 		else if (ev->figure[i].id_figure == CYLINDRE ||
-				ev->figure[i].id_figure == CONE || 
+				ev->figure[i].id_figure == CONE ||
 				ev->figure[i].id_figure == CYLINDRE_CUT ||
 				ev->figure[i].id_figure == CONE_CUT)
 			ev->figure[i].point = normalise(ev->figure[i].point);
 	}
 }
-

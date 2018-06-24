@@ -12,8 +12,8 @@
 
 #include "rt.h"
 
-void  define_color(t_figure *figure, unsigned int b,
- 					unsigned int g, unsigned int r)
+void			define_color(t_figure *figure, unsigned int b,
+						unsigned int g, unsigned int r)
 {
 	figure->color.chanels.b = b;
 	figure->color.chanels.g = g;
@@ -21,7 +21,7 @@ void  define_color(t_figure *figure, unsigned int b,
 	figure->color.chanels.a = 0;
 }
 
-t_color  multy_col(t_color col, double j)
+t_color			multy_col(t_color col, double j)
 {
 	double temp;
 
@@ -46,7 +46,7 @@ t_color  multy_col(t_color col, double j)
 	return (col);
 }
 
-t_color  sum_col(t_color col, t_color col_1)
+t_color			sum_col(t_color col, t_color col_1)
 {
 	double temp;
 
@@ -71,7 +71,7 @@ t_color  sum_col(t_color col, t_color col_1)
 	return (col);
 }
 
-t_color	color_ret(t_color local_color, t_color reflected_color, t_color transp, double t, double r)
+t_color			color_ret(t_color local_color, t_color reflected_color, t_color transp, double t, double r)
 {
 	t_color	color_1;
 	t_color	color_2;
