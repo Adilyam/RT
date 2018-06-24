@@ -75,12 +75,7 @@ double			compute_lighting(t_all *ev, int c)
 		if (n_l > 0)
 			i += (ev->light[j].intensity * n_l
 			/ (find_len(ev->n) * find_len(ev->l)));
-		(n_l > 0) ? i += (ev->light[j].intensity * n_l
-			/ (find_len(ev->n) * find_len(ev->l))) : 0;
 		(ev->figure[c].specular >= 0) ? i = specular(ev, j, c, i) : 0;
-		if (ev->figure[c].specular >= 0)
-			i = specular(ev, j, c, i);
-		
 	}
 	return (i);
 }

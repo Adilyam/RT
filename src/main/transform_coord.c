@@ -12,80 +12,6 @@
 
 #include "rt.h"
 
-static void figure_type_2(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
-{
-	double  m;
-	t_vector oc;
-	t_vector	cmid;
-	t_vector	r;
-
-	if (ev->figure[i].id_figure == PARABOLOID)
-	{
-		oc = vector_minus_vector(o, ev->figure[i].centre);
-		m = multy_vec(vector_minus_vector(ev->p, ev->figure[i].centre), ev->figure[i].point);
-		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
-		m += multy_vec(oc, ev->figure[i].point);
-		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
-		ev->n = vector_minus_vector(ev->n,
-		vector_multy_const(ev->figure[i].point, (m + ev->figure[i].k)));
-	}
-	else if (ev->figure[i].id_figure == ELLIPSOID)
-	{
-		ev->figure[i].point = normalise(ev->figure[i].point);
-		oc = vector_minus_vector(o, ev->figure[i].centre);
-		cmid = vector_plus_vector(ev->figure[i].centre, vector_multy_const(ev->figure[i].point, ev->figure[i].k / 2));
-		r = vector_minus_vector(ev->p, cmid);
-		ev->n = vector_minus_vector(r, vector_multy_const(ev->figure[i].point, (1 - (pow(ev->a, 2) / pow(ev->b, 2))) * multy_vec(r, ev->figure[i].point)));
-		ev->n = normalise(ev->n);
-	}
-}
-
-static void	figure_type_1(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
-{
-	double		m;
-	t_vector	oc;
-
-	if (ev->figure[i].id_figure == CYLINDRE || ev->figure[i].id_figure == CYLINDRE_CUT)
-	{
-		oc = vector_minus_vector(o, ev->figure[i].centre);
-		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
-		m += multy_vec(oc, ev->figure[i].point);
-		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
-		ev->n = vector_minus_vector(ev->n,
-			vector_multy_const(ev->figure[i].point, m));
-	}
-	else if (ev->figure[i].id_figure == CONE || ev->figure[i].id_figure == CONE_CUT)
-	{
-		oc = vector_minus_vector(o, ev->figure[i].centre);
-		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
-		m += multy_vec(oc, ev->figure[i].point);
-		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
-		ev->n = vector_minus_vector(ev->n,
-			vector_multy_const(ev->figure[i].point,
-				(m * (1 + pow(ev->figure[i].radius, 2)))));
-	}
-}
-
-static void	figure_type(int i, t_all *ev, double closet_t, t_vector o, t_vector d)
-{
-	if (ev->figure[i].id_figure == SPHERE)
-		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
-	else if (ev->figure[i].id_figure == PLANE)
-	{
-		if (multy_vec(d, ev->figure[i].point) > 0)
-			ev->n = define_vector(-ev->figure[i].centre.x,
-			-ev->figure[i].centre.y, -ev->figure[i].centre.z);
-		else
-			ev->n = ev->figure[i].centre;
-	}
-	else if (ev->figure[i].id_figure == ELLIPSOID || ev->figure[i].id_figure == PARABOLOID)
- 		 figure_type_2(i, ev, closet_t, o, d);
-	else if (ev->figure[i].id_figure == CYLINDRE || 
-			ev->figure[i].id_figure == CONE ||
-			ev->figure[i].id_figure == CYLINDRE_CUT)
-		figure_type_1(i, ev, closet_t, o, d);
-}
-
 static t_color	use_light(t_all *ev, double closet_t, int i, t_vector o, t_vector d)
 {
 	double	j;
@@ -95,7 +21,7 @@ static t_color	use_light(t_all *ev, double closet_t, int i, t_vector o, t_vector
 	ev->v = normalise(ev->v);
 	ev->p = vector_plus_vector(o, (vector_multy_const(d, closet_t)));
 	// ev->p = vector_multy_const(ev->p, 0.00001);
-	figure_type(i, ev, closet_t, o, d);
+	figure_type_other(i, ev, closet_t, o, d);
 	ev->n = normalise(ev->n);
 	j = compute_lighting(ev, i);
 	color = multy_col(ev->figure[i].color, j);
@@ -114,29 +40,6 @@ t_vector reflect_ray(t_vector r, t_vector n)
 	k = normalise(k);
 	return (k);
 }
-
-#include <stdio.h>
-
-// static t_color	trace_reflection(t_all *e, t_vector o, t_vector d)
-// {
-// 	t_color		color;
-// 	double		closet_t;
-// 	double		t[2];
-
-// 	color.color = 0x000000;
-// 	t[0] = 0.001f;
-// 	t[1] = MAX;
-// 	closet_t = closet_interesection(e, t, o, d);
-// 	if (e->depth < 5)
-// 	{
-// 		e->depth++;
-// 		d = reflect_ray(vector_multy_const(d, -1), e->n);
-// 		color = sum_col(color, trace_ray(e, o, d));
-// 		color = multy_col(color, 0.9);
-// 	}
-// 	return (color);
-// }
-
 
 static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 {
@@ -173,9 +76,9 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int depth, int i)
 	if (ev->figure[ev->id].reflect > 0.0)
 	// 	// printf("u");
 		reflected_color = trace_ray(ev, ev->p, rr, depth - 1, 0);
-	// if (ev->figure[ev->id].transp > 0)
-	// 	transparency_color = trace_ray(ev, ev->p, ev->d, 1, 0);
-	return (color_ret(local_color, reflected_color, transparency_color, 0, 0.8));
+	if (ev->figure[ev->id].transp > 0)
+		transparency_color = trace_ray(ev, ev->p, ev->d, 1, 0);
+	return (color_ret(local_color, reflected_color, transparency_color, 0.9, 0.8));
 }
 
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
@@ -232,7 +135,7 @@ void		*draw_scene(void *data)
 		{
 			set_vector_dir(ev);
 			rot_figure(ev);
-			color = trace_ray(ev, ev->o, ev->d, 5, 1);
+			color = trace_ray(ev, ev->o, ev->d, 10, 1);
 			// color = sum_col(color, trace_reflection(ev, ev->o, ev->d));
 			define_filter(&color, ev);
 			ft_put_pxl(ev, ev->x, ev->y, &color);

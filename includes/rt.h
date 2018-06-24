@@ -152,6 +152,7 @@ typedef struct		s_all
 }					t_all;
 
 void				rot_figure(t_all *ev);
+void				discr(t_all *ev, double k[3]);
 int					*set_array(int a, int b, int c, int d);
 void				normalise_obj(t_all *ev);
 void				thread(t_all *e);
@@ -221,5 +222,6 @@ void 				intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d);
 void 				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
 t_color  			sum_col(t_color col, t_color col_1);
 void				object_string_validate(char *str, int i);
+void				figure_type_other(int i, t_all *ev, double closet_t, t_vector o, t_vector d);
 
 #endif
