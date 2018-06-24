@@ -12,6 +12,36 @@
 
 #include "rt.h"
 
+int			check2(char *str)
+{
+	int i;
+	int j;
+	int array[BUF_SIZE];
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '(' || str[i] == '{' || str[i] == '[')
+			array[++j] = str[i];
+		if (str[i] == ')' || str[i] == '}' || str[i] == ']')
+			if (!match(array[j--], str[i]))
+				return (0);
+		i++;
+	}
+	return (!j);
+}
+
+int			check_if_end(char *str, int *i)
+{
+	spaces(str, i);
+	check_symbol(str, i, ']');
+	if (str[(*i)++] != ',')
+		return (1);
+	else
+		return (0);
+}
+
 int			check_scene2(char *str, int *i)
 {
 	int num;
@@ -26,7 +56,7 @@ int			check_scene2(char *str, int *i)
 	return (num);
 }
 
-int		check_scene(char *str, int i, t_all *ev)
+int			check_scene(char *str, int i, t_all *ev)
 {
 	int check_o;
 	int check_l;

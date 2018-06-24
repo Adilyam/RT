@@ -9,7 +9,36 @@
 /*   Updated: 2018/06/19 16:50:36 by atilegen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "rt.h"
+
+void		object_string_validate(char *str, int i)
+{
+	if (!(ft_strnequ(str + i, "\"position\"", 10) ||
+			ft_strnequ(str + i, "\"size\"", 6) ||
+			ft_strnequ(str + i, "\"name\"", 6) ||
+			ft_strnequ(str + i, "\"color\"", 7) ||
+			ft_strnequ(str + i, "\"specularity\"", 13) ||
+			ft_strnequ(str + i, "\"tan\"", 5) ||
+			ft_strnequ(str + i, "\"direction\"", 11) ||
+			ft_strnequ(str + i, "\"transparency\"", 14) ||
+			ft_strnequ(str + i, "\"max\"", 5) ||
+			ft_strnequ(str + i, "\"min\"", 5) ||
+			ft_strnequ(str + i, "\"k\"", 3) ||
+			ft_strnequ(str + i, "\"reflection\"", 12)))
+		error_end("The objects part defined wrongly");
+}
+
+double		*parse_3_input(char *str, int *i)
+{
+	double		*res;
+
+	universal_check(str, i);
+	check_symbol(str, i, '[');
+	spaces(str, i);
+	res = check_if_3digit_input(str, i);
+	return (res);
+}
 
 void		check_exact_lights_helper(char *str, int *i, t_all *ev)
 {
@@ -40,16 +69,14 @@ void		check_exact_lights_helper(char *str, int *i, t_all *ev)
 
 void		lights_string_validate(char *str, int i)
 {
-	if (!(ft_strnequ(str + i, "\"intensity\"", 11) || 
-		ft_strnequ(str + i, "\"position\"", 10) || 
+	if (!(ft_strnequ(str + i, "\"intensity\"", 11) ||
+		ft_strnequ(str + i, "\"position\"", 10) ||
 		ft_strnequ(str + i, "\"type\"", 6)))
 		error_end("The lights part defined wrongly");
 }
 
-int check_exact_light(char *str, int i, t_all *ev)
+int			check_exact_light(char *str, int i, t_all *ev)
 {
-	int check[7];
-
 	spaces(str, &i);
 	lights_string_validate(str, i);
 	check_exact_lights_helper(str, &i, ev);
@@ -58,7 +85,7 @@ int check_exact_light(char *str, int i, t_all *ev)
 	else if (str[i++] == '}')
 	{
 		spaces(str, &i);
-		if (str[i] == ',') //все обнулять типа или обджект ++
+		if (str[i] == ',')
 		{
 			i++;
 			ev->index++;

@@ -85,7 +85,7 @@ void	intersect_ray_cylinder(t_all *ev, int i, t_vector o, t_vector d)
 	}
 	ev->x1 = (-k2 + sqrt(discriminant)) / (2 * k1);
 	ev->x2 = (-k2 - sqrt(discriminant)) / (2 * k1);
-	if (ev->figure[i].max != -1)
+	if (ev->figure[i].id_figure == CYLINDRE_CUT)
 		cut_cylinder(ev, i, d, oc);
 }
 
@@ -116,6 +116,6 @@ void	intersect_ray_cone(t_all *ev, int i, t_vector o, t_vector d)
 	}
 	ev->x1 = (-k2 + sqrt(discriminant)) / (2 * k1);
 	ev->x2 = (-k2 - sqrt(discriminant)) / (2 * k1);
-	if (ev->figure[i].max != -1)
+	if (ev->figure[i].id_figure == CONE_CUT)
 		cut_cylinder(ev, i, d, oc);
 }

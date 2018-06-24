@@ -12,37 +12,6 @@
 
 #include "rt.h"
 
-int     check2(char *str)
-{
-	int i;
-	int j;
-	int array[BUF_SIZE];
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == '(' || str[i] == '{' || str[i] == '[')
-			array[++j] = str[i];
-		if (str[i] == ')' || str[i] == '}' || str[i] == ']')
-			if (!match(array[j--], str[i]))
-				return (0);
-		i++;
-	}
-	return (!j);
-}
-
-int		check_if_end(char *str, int *i)
-{
-	spaces(str, i);
-	check_symbol(str, i, ']');
-	spaces(str, i);
-	if (str[(*i)++] != ',')
-		return (1);
-	else
-		return (0);
-}
-
 void		check_light_string(char *str, int *i, t_light *lgt)
 {
 	if (ft_strnequ(str + *i, "\"ambiant\"", 9))
@@ -64,7 +33,49 @@ void		check_light_string(char *str, int *i, t_light *lgt)
 		error_end("The lights part defined wrongly");
 }
 
-void	check_objects_string(char *str, int *i, t_figure *obj)
+void		check_objects_string_help_2(char *str, int *i, t_figure *obj)
+{
+	if (ft_strnequ(str + *i, "\"cylinder\"", 10))
+	{
+		(*i) += 10;
+		obj->id_figure = CYLINDRE;
+	}
+	else if (ft_strnequ(str + *i, "\"ellipsoid\"", 11))
+	{
+		(*i) += 11;
+		obj->id_figure = ELLIPSOID;
+	}
+	else
+		error_end("The objects part defined wrongly");
+}
+
+void		check_objects_string_help(char *str, int *i, t_figure *obj)
+{
+	if (ft_strnequ(str + *i, "\"parabolloid\"", 13))
+	{
+		(*i) += 13;
+		obj->id_figure = PARABOLOID;
+	}
+	else if (ft_strnequ(str + *i, "\"cutted_cylinder\"", 17))
+	{
+		(*i) += 17;
+		obj->id_figure = CYLINDRE_CUT;
+	}
+	else if (ft_strnequ(str + *i, "\"cutted_cone\"", 13))
+	{
+		(*i) += 13;
+		obj->id_figure = CONE_CUT;
+	}
+	else if (ft_strnequ(str + *i, "\"cutted_parabolloid\"", 13))
+	{
+		(*i) += 13;
+		obj->id_figure = PARABOLOID_CUT;
+	}
+	else
+		check_objects_string_help_2(str, i, obj);
+}
+
+void		check_objects_string(char *str, int *i, t_figure *obj)
 {
 	if (ft_strnequ(str + *i, "\"sphere\"", 8))
 	{
@@ -81,38 +92,12 @@ void	check_objects_string(char *str, int *i, t_figure *obj)
 		(*i) += 6;
 		obj->id_figure = CONE;
 	}
-	else if	(ft_strnequ(str + *i, "\"cylinder\"", 10))
-	{
-		(*i) += 10;
-		obj->id_figure = CYLINDRE;
-	}
-	else if	(ft_strnequ(str + *i, "\"ellipsoid\"", 11))
-	{
-		(*i) += 11;
-		obj->id_figure = ELLIPSOID;
-	}
-	else if	(ft_strnequ(str + *i, "\"parabolloid\"", 13))
-	{
-		(*i) += 13;
-		obj->id_figure = PARABOLOID;
-	}
-	else if	(ft_strnequ(str + *i, "\"cutted_cylinder\"", 17))
-	{
-		(*i) += 17;
-		obj->id_figure = CYLINDRE;
-	}
-	else if	(ft_strnequ(str + *i, "\"cutted_cone\"", 13))
-	{
-		(*i) += 13;
-		obj->id_figure = CONE_CUT;
-	}
 	else
-		error_end("The objects part defined wrongly");
+		check_objects_string_help(str, i, obj);
 }
 
-void	universal_check(char *str, int *i)
+void		universal_check(char *str, int *i)
 {
 	spaces(str, i);
 	check_symbol(str, i, ':');
-	spaces(str, i);
 }

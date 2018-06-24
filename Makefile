@@ -6,14 +6,14 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/23 21:21:52 by atilegen         ###   ########.fr        #
+#    Updated: 2018/06/24 16:33:04 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 
 NAME = RT
 MLXFLAGS = -lpthread -lmlx -framework OpenGL -framework AppKit
-CC = gcc
+CC = gcc -Wall -Wextra -Werror
 FLAGS = -Wall -Wextra -Werror -O3
 
 CFLAGS = -I ./includes/
@@ -27,10 +27,8 @@ SRCS =	src/main/main.c \
 		src/math/intersect.c			\
 		src/define/def_figure.c			\
 		src/define/create_win_img.c 	\
-		src/define/scene_5.c			\
 		src/vectors/vector_1.c			\
 		src/vectors/vector.c			\
-		src/parse/parsing.c 			\
 		src/parse/parse5.c				\
 		src/parse/parse_names.c			\
 		src/parse/parse_checks.c        \

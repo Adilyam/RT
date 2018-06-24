@@ -12,31 +12,31 @@
 
 #include "rt.h"
 
-void        spaces(char *str, int *i)
+void		check_if_3digit_input_help(char *str, int *i, double *res)
 {
-	while (str[*i] <= 32 && str[*i])
-		(*i)++;
-}
-
-int     match(char a, char b)
-{
-	return ((a == '(' && b == ')') || (a == '{' && b == '}') || (a == '[' && b == ']'));
-}
-
-double         *check_if_3digit_input(char *str, int *i)
-{
-	double *res;
-
-	res = (double *)malloc(sizeof(res) * 3);
 	int j;
+
+	spaces(str, i);
+	j = 0;
+	while (str[(*i)] != ']')
+	{
+		j = ((ft_isdigit(str[(*i)])) || str[(*i)] == '-') ? j + 1 :
+														error_end("3");
+		(*i)++;
+	}
+	*res = ft_atoi(str + (*i)++ - j);
+}
+
+double		*check_if_3digit_input(char *str, int *i)
+{
+	static double	res[3];
+	int				j;
 
 	j = 0;
 	while (str[(*i)] != ',')
 	{
-		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
-			j++;
-		else 
-			error_end("Wrong number 1");
+		j = ((ft_isdigit(str[(*i)])) || str[(*i)] == '-') ? j + 1 :
+														error_end("1");
 		(*i)++;
 	}
 	res[0] = ft_atoi(str + (*i)++ - j);
@@ -44,34 +44,23 @@ double         *check_if_3digit_input(char *str, int *i)
 	j = 0;
 	while (str[(*i)] != ',')
 	{
-		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
-			j++;
-		else 
-			error_end("Wrong number 2");
+		j = ((ft_isdigit(str[(*i)])) || str[(*i)] == '-') ? j + 1 :
+														error_end("2");
 		(*i)++;
 	}
 	res[1] = ft_atoi(str + (*i)++ - j);
-	spaces(str, i);
-	j = 0;
-	while (str[(*i)] != ']')
-	{
-		if ((ft_isdigit(str[(*i)])) || str[(*i)] == '-')
-			j++;
-		else 
-			error_end("Wrong number 3");
-		(*i)++;
-	}
-	res[2] = ft_atoi(str + (*i)++ - j);
+	check_if_3digit_input_help(str, i, &res[2]);
 	return (res);
 }
 
-void        check_symbol(char *str, int *i, char c)
+void		check_symbol(char *str, int *i, char c)
 {
 	if ((str[(*i)++] != c))
 		error_end("Check your symbols again ([] {}) ");
+	spaces(str, i);
 }
 
-double         check_if_input_number(int *i, char *str)
+double		check_if_input_number(int *i, char *str)
 {
 	int j;
 
@@ -89,10 +78,9 @@ double         check_if_input_number(int *i, char *str)
 	return ((double)ft_atoi((str + (*i)++) - j++));
 }
 
-float			check_if_input_float(int *i, char *str)
+float		check_if_input_float(int *i, char *str)
 {
 	int j;
-	char *pend;
 
 	j = 0;
 	while (str[(*i)] > 32 && str[(*i)] != ',')

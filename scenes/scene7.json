@@ -4,11 +4,12 @@
 },
  
 "objects" : [ {
-  "position" : [0, 1, 0],
-  "direction" : [0, -1, 0],
+  "position" : [0, -2, 0],
+  "direction" : [0, 1, 0],
   "name" : "parabolloid",
   "specularity" : 500,
-  "size" : 1,
+  "k" : 0.1,
+  "size" : 0.1,
   "color" : [255, 30, 0]
 }],
 
@@ -29,7 +30,7 @@
 }],
 
 "camera" : {
-		 "position" : [0, 0, 0],
+		 "position" : [0, 0, -5],
 		 "direction" : [0, 0, 0]
 }
 }

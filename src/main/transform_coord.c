@@ -23,8 +23,8 @@ static void figure_type_2(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 	{
 		oc = vector_minus_vector(o, ev->figure[i].centre);
 		m = multy_vec(vector_minus_vector(ev->p, ev->figure[i].centre), ev->figure[i].point);
-		// m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
-		// m += multy_vec(oc, ev->figure[i].point);
+		m = multy_vec(d, vector_multy_const(ev->figure[i].point, closet_t));
+		m += multy_vec(oc, ev->figure[i].point);
 		ev->n = vector_minus_vector(ev->p, ev->figure[i].centre);
 		ev->n = vector_minus_vector(ev->n,
 		vector_multy_const(ev->figure[i].point, (m + ev->figure[i].k)));
@@ -201,7 +201,7 @@ void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
 	}
 }
 
-void		set_vector_dir(t_all *ev, int x, int y)
+void		set_vector_dir(t_all *ev)
 {
 	ev->d.x = ((ev->x - SIZE_X / 2) * (ev->vw / SIZE_X / 2));
 	ev->d.y = (-(ev->y - SIZE_Y / 2) * (ev->vh / SIZE_Y / 2));
@@ -230,7 +230,7 @@ void		*draw_scene(void *data)
 		ev->y = tmp;
 		while (ev->y < ev->limit)
 		{
-			set_vector_dir(ev, ev->x, ev->y);
+			set_vector_dir(ev);
 			rot_figure(ev);
 			color = trace_ray(ev, ev->o, ev->d, 5, 1);
 			// color = sum_col(color, trace_reflection(ev, ev->o, ev->d));

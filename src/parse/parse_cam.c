@@ -12,6 +12,18 @@
 
 #include "rt.h"
 
+void		spaces(char *str, int *i)
+{
+	while (str[*i] <= 32 && str[*i])
+		(*i)++;
+}
+
+int			match(char a, char b)
+{
+	return ((a == '(' && b == ')') || (a == '{' && b == '}')
+				|| (a == '[' && b == ']'));
+}
+
 void		check_exact_camera_helper(char *str, int *i, t_all *ev)
 {
 	double		*res;
@@ -33,15 +45,13 @@ void		check_exact_camera_helper(char *str, int *i, t_all *ev)
 
 void		camera_string_validate(char *str, int i)
 {
-	if (!(ft_strnequ(str + i, "\"direction\"", 11) || 
+	if (!(ft_strnequ(str + i, "\"direction\"", 11) ||
 		ft_strnequ(str + i, "\"position\"", 10)))
 		error_end("The camera part defined wrongly");
 }
 
-int check_exact_camera(char *str, int i, t_all *ev)
+int			check_exact_camera(char *str, int i, t_all *ev)
 {
-	int check[7];
-
 	spaces(str, &i);
 	camera_string_validate(str, i);
 	check_exact_camera_helper(str, &i, ev);
@@ -50,7 +60,7 @@ int check_exact_camera(char *str, int i, t_all *ev)
 	else if (str[i++] == '}')
 	{
 		spaces(str, &i);
-		if (str[i] == '}') //все обнулять типа или обджект ++
+		if (str[i] == '}')
 		{
 			i++;
 			spaces(str, &i);

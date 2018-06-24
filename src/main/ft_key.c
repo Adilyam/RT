@@ -22,7 +22,7 @@ void saveppm(char *filename, unsigned char *img, int width, int height){
 	fclose(f);
 }
 
-static void changes(t_all *ev, double *o, int m)
+static void changes(double *o, int m)
 {
 	if (m)
 		*o += 0.08;
@@ -34,10 +34,10 @@ int   ft_key(int keycode, t_all *ev)
 {
 	if (keycode == 53)
 		exit(0);
-	(keycode == 126) ? changes(ev, &ev->o.y, 1) : 0;
-	(keycode == 125) ? changes(ev, &ev->o.y, 0) : 0;
-	(keycode == 124) ? changes(ev, &ev->o.x, 1) : 0;
-	(keycode == 123) ? changes(ev, &ev->o.x, 0) : 0;
+	(keycode == 126) ? changes(&ev->o.y, 1) : 0;
+	(keycode == 125) ? changes(&ev->o.y, 0) : 0;
+	(keycode == 124) ? changes(&ev->o.x, 1) : 0;
+	(keycode == 123) ? changes(&ev->o.x, 0) : 0;
 	if (keycode == 69 && ev->k_iter < 5)
 		ev->k_iter += 1;
 	if (keycode == 78 && ev->k_iter > 1)

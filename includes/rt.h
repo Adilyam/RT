@@ -12,19 +12,20 @@
 
 #ifndef RTV1_H
 # define RTV1_H
-# define SIZE_X 800
-# define SIZE_Y 800
-# define PIOVER180 0.0174532925199
-# define MIN 1
-# define MAX 2147483647
-# define BUF_SIZE	4096
+
+# define SIZE_X			800
+# define SIZE_Y			800
+# define PIOVER180		0.0174532925199
+# define MIN			1
+# define MAX			2147483647
+# define BUF_SIZE		4096
 # define SPHERE			0
 # define PLANE			1
 # define CYLINDRE		2
 # define CONE			3
 # define CYLINDRE_CUT	6
 # define CONE_CUT		7
-
+# define PARABOLOID_CUT 8
 # define ELLIPSOID		4
 # define PARABOLOID		5
 
@@ -36,6 +37,7 @@
 # define CARTOON 		1
 # define SEPIA 			2
 # define BLACK_WHITE 	3
+
 # define SIZE_Y_WIN 	1000
 
 
@@ -217,5 +219,6 @@ void 				cut_cylinder(t_all *ev, int i, t_vector d, t_vector oc);
 void 				intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d);
 void 				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
 t_color  			sum_col(t_color col, t_color col_1);
+void				object_string_validate(char *str, int i);
 
 #endif

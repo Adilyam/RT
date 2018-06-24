@@ -16,15 +16,15 @@ static void figure_type(int i, t_all *ev)
 {
 	if (i == SPHERE)
 		ev->inter = &intersect_ray_sphere;
-	if (i == PLANE)
+	else if (i == PLANE)
 		ev->inter = &intersect_ray_plane;
-	if (i == CYLINDRE || i == CYLINDRE_CUT)
+	else if (i == CYLINDRE || i == CYLINDRE_CUT)
 		ev->inter = &intersect_ray_cylinder;
-	if (i == CONE || i == CONE_CUT)
+	else if (i == CONE || i == CONE_CUT)
 		ev->inter = &intersect_ray_cone;
-	if (i == ELLIPSOID)
+	else if (i == ELLIPSOID)
 		ev->inter = &intersect_ray_elips;
-	if (i == PARABOLOID)
+	else if (i == PARABOLOID || i == PARABOLOID_CUT)
 		ev->inter = &intersect_ray_par;
 }
 

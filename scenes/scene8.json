@@ -4,11 +4,12 @@
 },
  
 "objects" : [ {
-  "position" : [0, 1, 0],
-  "direction" : [0, -1, 0],
+  "position" : [0, 0, 0],
+  "direction" : [0, 1, 0],
   "name" : "ellipsoid",
   "specularity" : 500,
   "size" : 1,
+  "k" : 0.8,
   "color" : [255, 30, 0]
 }],
 
@@ -20,7 +21,7 @@
 {
 	"position" : [0, 0, 0],
 	"type" : "directional",
-	"intensity" : 0
+	"intensity" : 0.9
 },
 {
 	"position" : [0, 1, 0],
@@ -29,7 +30,7 @@
 }],
 
 "camera" : {
-		 "position" : [0, 0, 0],
+		 "position" : [0, 0, -5],
 		 "direction" : [0, 0, 0]
 }
 }

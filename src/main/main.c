@@ -23,7 +23,6 @@ int		error_end(char *str)
 {
 	ft_putendl(str);
 	exit(0);
-	return (0);
 }
 
 void		start(t_all *ev, char **av)
@@ -32,7 +31,7 @@ void		start(t_all *ev, char **av)
 	struct stat buf;
     stat(av[1],&buf);
 	if(S_ISDIR(buf.st_mode))
-  		error_end("Seems to check for directory input");
+  		error_end("This is a directory");
 	if (ev->fd <= 0)
 		error_end("Such file doesn't exist");
 	ev->vw = 1;

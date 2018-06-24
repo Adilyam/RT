@@ -71,32 +71,6 @@ t_color  sum_col(t_color col, t_color col_1)
 	return (col);
 }
 
-
-t_color  multy_col2(t_color col, t_color col2)
-{
-	double temp;
-
-	temp = (col.chanels.g) * (col.chanels.g);
-	if (temp > 255)
-		temp = 255;
-	if (temp < 0)
-		temp = 0;
-	col.chanels.g = temp;
-	temp = (col.chanels.r) * (col.chanels.r);
-	if (temp > 255)
-		temp = 255;
-	if (temp < 0)
-		temp = 0;
-	col.chanels.r = temp;
-	temp = (col.chanels.b) * (col.chanels.b);
-	if (temp > 255)
-		temp = 255;
-	if (temp < 0)
-		temp = 0;
-	col.chanels.b = temp;
-	return (col);
-}
-
 t_color	color_ret(t_color local_color, t_color reflected_color, t_color transp, double t, double r)
 {
 	t_color	color_1;
