@@ -4,24 +4,24 @@
 },
  
 "objects" : [ {
-  "position" : [0, -2, 0],
+  "position" : [0, 0, 0],
   "direction" : [0, 1, 0],
-  "name" : "parabolloid",
+  "name" : "ellipsoid",
   "specularity" : 500,
-  "k" : 0.1,
-  "size" : 0.1,
+  "size" : 1,
+  "k" : 0.8,
   "color" : [255, 30, 0]
 }],
 
 "lights" : [ {
-		 "position" : [0, 1, -10],
-		 "type" : "point",
-  		"intensity" : 0.3
+	"position" : [0, 1, 0],
+	"type" : "point",
+	"intensity" : 0.3
 },
 {
-         "position" : [0, 0, 0],
-         "type" : "directional",
-         "intensity" : 0
+	"position" : [0, 0, 0],
+	"type" : "directional",
+	"intensity" : 0.9
 },
 {
 	"position" : [0, 1, 0],

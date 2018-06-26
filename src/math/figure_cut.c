@@ -86,6 +86,8 @@ void			intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d)
 	k[1] *= 2;
 	k[2] = multy_vec(vector_multy_const(oc, 4 *
 			pow(ev->figure[i].radius, 2)), oc) - pow(a[1], 2);
+	ev->a = k[0];
+	ev->b = k[1];
 	discr(ev, k);
 }
 

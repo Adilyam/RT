@@ -149,6 +149,7 @@ typedef struct		s_all
 	unsigned char	*screen;
 	int				k_iter;
 	int				depth;
+	int				depth_trans;
 }					t_all;
 
 void				rot_figure(t_all *ev);

@@ -5,28 +5,28 @@
  
 "objects" : [ {
   "position" : [0, 0, 0],
-  "direction" : [0, 1, 0],
+  "direction" : [1, 0, 0],
   "name" : "ellipsoid",
   "specularity" : 500,
   "size" : 1,
-  "k" : 0.8,
+  "k" : 0.9,
   "color" : [255, 30, 0]
 }],
 
 "lights" : [ {
-	"position" : [0, 1, 0],
+	"position" : [0, 0, -100],
 	"type" : "point",
-	"intensity" : 0.3
+	"intensity" : 0.8
 },
 {
-	"position" : [0, 0, 0],
+	"position" : [0, 0, -100],
 	"type" : "directional",
-	"intensity" : 0.9
+	"intensity" : 0.2
 },
 {
-	"position" : [0, 1, 0],
+	"position" : [0, 0, -100],
 	"type" : "ambiant",
-	"intensity" : 0.6
+	"intensity" : 0.2
 }],
 
 "camera" : {

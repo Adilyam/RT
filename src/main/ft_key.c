@@ -42,13 +42,13 @@ int   ft_key(int keycode, t_all *ev)
 		ev->k_iter += 1;
 	if (keycode == 78 && ev->k_iter > 1)
 		ev->k_iter -= 1;
+	(keycode == 0) ? changes(&ev->o_rot.y, 0) : 0;
+	(keycode == 2) ? changes(&ev->o_rot.y, 1) : 0;
+	(keycode == 13) ? changes(&ev->o_rot.z, 0) : 0;
+	(keycode == 7) ? changes(&ev->o_rot.z, 1) : 0;
+	(keycode == 1) ? changes(&ev->o_rot.x, 0) : 0;
+	(keycode == 6) ? changes(&ev->o_rot.x, 1) : 0;
 	thread(ev);
-	// (keycode == 0) ? changes(ev, &ev->o_rot.y, 0) : 0;
-	// (keycode == 2) ? changes(ev, &ev->o_rot.y, 1) : 0;
-	// (keycode == 13) ? changes(ev, &ev->o_rot.z, 0) : 0;
-	// (keycode == 7) ? changes(ev, &ev->o_rot.z, 1) : 0;
-	// (keycode == 1) ? changes(ev, &ev->o_rot.x, 0) : 0;
-	// (keycode == 6) ? changes(ev, &ev->o_rot.x, 1) : 0;
 	return (0);
 }
 

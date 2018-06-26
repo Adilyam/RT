@@ -59,6 +59,8 @@ void		normalise_obj(t_all *ev)
 		else if (ev->figure[i].id_figure == CYLINDRE ||
 				ev->figure[i].id_figure == CONE ||
 				ev->figure[i].id_figure == CYLINDRE_CUT ||
+				ev->figure[i].id_figure == ELLIPSOID ||
+				ev->figure[i].id_figure == PARABOLOID ||
 				ev->figure[i].id_figure == CONE_CUT)
 			ev->figure[i].point = normalise(ev->figure[i].point);
 	}

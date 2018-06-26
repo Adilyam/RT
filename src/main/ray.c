@@ -37,6 +37,7 @@ static void figure_type_2(int i, t_all *ev, double closet_t, t_vector o, t_vecto
 		r = vector_minus_vector(ev->p, cmid);
 		ev->n = vector_minus_vector(r, vector_multy_const(ev->figure[i].point, (1 - (pow(ev->a, 2) / pow(ev->b, 2))) * multy_vec(r, ev->figure[i].point)));
 		ev->n = normalise(ev->n);
+		// printf("why");
 	}
 }
 
