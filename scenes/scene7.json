@@ -1,36 +1,44 @@
 { "scene" : {
-    "object_count" : 1,
-    "lights_count" : 3
+  "object_count" : 2,
+  "lights_count" : 3
 },
- 
+
 "objects" : [ {
-  "position" : [0, -2, 0],
-  "direction" : [0, 1, 0],
-  "name" : "parabolloid",
-  "specularity" : 500,
-  "k" : 0.1,
-  "size" : 0.1,
-  "color" : [255, 30, 0]
+"position" : [0, -2, 0],
+"direction" : [0, 1, 0],
+"name" : "parabolloid",
+"specularity" : 500,
+"k" : 0.1,
+"size" : 0.1,
+"color" : [255, 30, 0]
+},
+{
+"position" : [0, -2, 5],
+"direction" : [0, 1, 0],
+"name" : "sphere",
+"specularity" : 500,
+"size" : 1,
+"color" : [100, 130, 110]
 }],
 
 "lights" : [ {
-		 "position" : [0, 1, -10],
-		 "type" : "point",
-  		"intensity" : 0.3
+   "position" : [0, 1, -10],
+   "type" : "point",
+    "intensity" : 0.3
 },
 {
-         "position" : [0, 0, 0],
-         "type" : "directional",
-         "intensity" : 0
+       "position" : [0, 0, 0],
+       "type" : "directional",
+       "intensity" : 0
 },
 {
-	"position" : [0, 1, 0],
-	"type" : "ambiant",
-	"intensity" : 0.6
+"position" : [0, 1, 0],
+"type" : "ambiant",
+"intensity" : 0.6
 }],
 
 "camera" : {
-		 "position" : [0, 0, -5],
-		 "direction" : [0, 0, 0]
+   "position" : [0, 0, -5],
+   "direction" : [0, 0, 0]
 }
 }
