@@ -86,11 +86,11 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int i)
 		// reflected_color.chanels.b = 0;
 		// reflected_color.chanels.g = 0;
 		transparency_color = trace_ray(ev, ev->p, ev->d, 0);
-		if (ev->id == SPHERE)
-		{
-			ev->depth_trans = 2;
-			transparency_color = trace_ray(ev, ev->p, ev->d, 0);
-		}
+		// if (ev->id == SPHERE)
+		// {
+		// 	ev->depth_trans = 2;
+		// 	transparency_color = trace_ray(ev, ev->p, ev->d, 0);
+		// }
 	}
 	// if 
 	return (color_ret(local_color, reflected_color, transparency_color, 1, 0));
