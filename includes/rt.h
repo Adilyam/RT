@@ -174,8 +174,7 @@ t_vector			vector_minus_const(t_vector a, double b);
 double				closet_interesection(t_all *ev, double *t,
 					t_vector o, t_vector d);
 t_color				multy_col(t_color col, double j);
-t_color				color_ret(t_color local_color, t_color reflected_color, 
-					t_color transp, double t, double r);
+t_color			color_ret(t_color local_color, t_color reflected_color, double r);
 void				intersect_ray_plane(t_all *ev, int i,
 											t_vector o, t_vector d);
 void				intersect_ray_sphere(t_all *ev, int i,

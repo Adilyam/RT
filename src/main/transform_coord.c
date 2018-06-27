@@ -46,20 +46,20 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int i, int j)
 	double		t[2];
 	t_color		local_color;
 	t_color		reflected_color;
-	t_color		transparency_color;
-	double		r;
+	// t_color		transparency_color;
+	// double		r;
 	t_vector	rr;
 
 	if (i)
 		t[0] = 1;
 	else
 		t[0] = 0.001f;
-	transparency_color.chanels.r = 0;
-	transparency_color.chanels.b = 0;
-	transparency_color.chanels.g = 0;
+	// transparency_color.chanels.r = 0;
+	// transparency_color.chanels.b = 0;
+	// transparency_color.chanels.g = 0;
 	reflected_color.chanels.r = 0;
 	reflected_color.chanels.b = 0;
-	reflected_color.chanels.g = 0;
+	reflected_color.chanels.g = 0; 
 	t[1] = MAX;
 	closet_t = closet_interesection(ev, t, o, d);
 	if (ev->id == -1)
@@ -68,27 +68,27 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int i, int j)
 		return (local_color);
 	}
 	local_color = use_light(ev, closet_t, ev->id, o, d);
-	r = ev->figure[ev->id].reflect;
+	// r = ev->figure[ev->id].reflect;
 	// if (depth == 0)
 	// 	return (local_color);
 	// printf("%d", ev->depth);
 	rr =  reflect_ray(vector_multy_const(d, -1), ev->n);
 	if (--ev->depth >= 0 && j == 0)
 	{
-		transparency_color.chanels.r = 0;
-		transparency_color.chanels.b = 0;
-		transparency_color.chanels.g = 0;
+		// reflected_color.chanels.r = 0;
+		// reflected_color.chanels.b = 0;
+		// reflected_color.chanels.g = 0;
 		reflected_color = trace_ray(ev, ev->p, rr, 0, 0);
 	}
 	else if (--ev->depth_trans >= 0 && j == 1)
 	{
-		reflected_color.chanels.r = 0;
-		reflected_color.chanels.b = 0;
-		reflected_color.chanels.g = 0;
-		transparency_color = trace_ray(ev, ev->p, ev->d, 0, 1);
+		// reflected_color.chanels.r = 0;
+		// reflected_color.chanels.b = 0;
+		// reflected_color.chanels.g = 0;
+		reflected_color = trace_ray(ev, ev->p, ev->d, 0, 1);
 	}
  
-	return (color_ret(local_color, reflected_color, transparency_color, 0.9, 0));
+	return (color_ret(local_color, reflected_color, 0.4));
 }
 
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
@@ -146,7 +146,7 @@ void		*draw_scene(void *data)
 		{
 			set_vector_dir(ev);
 			rot_figure(ev);
-			ev->depth = 0;
+			ev->depth = 10;
 			ev->depth_trans = 2;
 			color = trace_ray(ev, ev->o, ev->d, 1, 1);
 			// ev->depth = 2;

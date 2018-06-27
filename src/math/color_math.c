@@ -71,21 +71,17 @@ t_color			sum_col(t_color col, t_color col_1)
 	return (col);
 }
 
-t_color			color_ret(t_color local_color, t_color reflected_color, t_color transp, double t, double r)
+t_color			color_ret(t_color local_color, t_color reflected_color, double r)
 {
 	t_color	color_1;
 	t_color	color_2;
-	t_color	color_3;
-	t_color	color_4;
+	// t_color	color_3;
+	// t_color	color_4;
 	t_color	color;
-	t_color	colorr;
+	// t_color	colorr;
 
 	color_1 = multy_col(local_color, (1 - r));
 	color_2 = multy_col(reflected_color, r);
-	color_3 = multy_col(local_color, (1 - t));
-	color_4 = multy_col(transp, t);
 	color = sum_col(color_1, color_2);
-	colorr = sum_col(color_3, color_4);
-	color = sum_col(colorr, color);
 	return (color);
 }

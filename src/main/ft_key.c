@@ -25,9 +25,9 @@ void saveppm(char *filename, unsigned char *img, int width, int height){
 static void changes(double *o, int m)
 {
 	if (m)
-		*o += 0.08;
+		*o += 1;
 	else
-		*o -= 0.08;
+		*o -= 1;
 }
 
 int   ft_key(int keycode, t_all *ev)

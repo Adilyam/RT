@@ -129,30 +129,49 @@ double		closet_interesection(t_all *ev, double *t, t_vector o, t_vector d)
 	return (closet_t);
 }
 
+t_vector	rotate_vec_y(t_vector *v, t_vector *rot)
+{
+	t_vector	res;
+	double		deg;
+
+	deg = rot->y * PIOVER180;
+	res.x = v->x * cos(deg) + sin(deg) * v->z;
+	res.y = v->y;
+	res.z = -v->x * sin(deg) + v->z * cos(deg);
+	return (res);
+}
+
+t_vector	rotate_vec_z(t_vector *v, t_vector *rot)
+{
+	t_vector	res;
+	double		deg;
+
+	deg = rot->z * PIOVER180;
+	res.x = v->x * cos(deg) + sin(deg) * v->y;
+	res.y = -v->x * sin(deg) + cos(deg) * v->y;
+	res.z = v->z;
+	return (res);
+}
+
+t_vector	rotate_vec_x(t_vector *v, t_vector *rot)
+{
+	t_vector	res;
+	double		deg;
+
+	deg = rot->x * PIOVER180;
+	res.x = v->x;
+	res.y = v->y * cos(deg) + v->z * sin(deg);
+	res.z = -v->y * sin(deg) + v->z * cos(deg);
+	return (res);
+}
+
 void		rot_figure(t_all *ev)
 {
-	double			mat[3][3];
-	t_vector		ret;
-
-	mat[0][0] = cos(ev->o_rot.z) * cos(ev->o_rot.z);
-	mat[1][0] = cos(ev->o_rot.z) * sin(ev->o_rot.x) *
-	sin(ev->o_rot.y) - cos(ev->o_rot.x) * sin(ev->o_rot.z);
-	mat[2][0] = cos(ev->o_rot.x) * cos(ev->o_rot.z) *
-	sin(ev->o_rot.y) + sin(ev->o_rot.x) * sin(ev->o_rot.z);
-	mat[0][1] = cos(ev->o_rot.y) * sin(ev->o_rot.z);
-	mat[1][1] = cos(ev->o_rot.x) * cos(ev->o_rot.z) +
-	sin(ev->o_rot.x) * sin(ev->o_rot.y) * sin(ev->o_rot.z);
-	mat[2][1] = -cos(ev->o_rot.z) * sin(ev->o_rot.x) +
-	cos(ev->o_rot.x) * sin(ev->o_rot.y) * sin(ev->o_rot.z);
-	mat[0][2] = -sin(ev->o_rot.y);
-	mat[1][2] = cos(ev->o_rot.y) * sin(ev->o_rot.x);
-	mat[2][2] = cos(ev->o_rot.x) * cos(ev->o_rot.y);
-	ret.x = (mat[0][0] * ev->d.x) + (mat[1][0] * ev->d.y)
-	+ (mat[2][0] * ev->d.z);
-	ret.y = (mat[0][1] * ev->d.x) + (mat[1][1] * ev->d.y)
-	+ (mat[2][1] * ev->d.z);
-	ret.z = (mat[0][2] * ev->d.x) + (mat[1][2] * ev->d.y)
-	+ (mat[2][2] * ev->d.z);
-	ev->d = ret;
+	if (ev->o_rot.x != 0)
+		ev->d = rotate_vec_x(&ev->d, &ev->o_rot);
+	if (ev->o_rot.y != 0)
+		ev->d = rotate_vec_y(&ev->d, &ev->o_rot);
+	if (ev->o_rot.z != 0)
+		ev->d = rotate_vec_z(&ev->d, &ev->o_rot);
 }
 
