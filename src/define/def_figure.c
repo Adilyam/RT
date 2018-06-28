@@ -26,8 +26,8 @@ void		init(t_all *ev)
 		ev->figure[j].max = 2;
 		ev->figure[j].min = 0;
 		ev->figure[j].radius = 1;
-		ev->figure[j].transp = 1;
-		ev->figure[j].reflect = 0.1;
+		ev->figure[j].transp = 0;
+		ev->figure[j].reflect = 0;
 		ev->figure[j].point = define_vector(0, 1, 0);
 		ev->figure[j].k = 0.9;
 	}

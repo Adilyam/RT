@@ -13,7 +13,7 @@
 #ifndef RTV1_H
 # define RTV1_H
 
-# define SIZE_X			800
+# define SIZE_X			1000
 # define SIZE_Y			800
 # define PIOVER180		0.0174532925199
 # define MIN			1
@@ -38,7 +38,7 @@
 # define SEPIA 			2
 # define BLACK_WHITE 	3
 
-# define SIZE_Y_WIN 	1000
+# define SIZE_Y_WIN 	850
 
 
 # include "mlx.h"

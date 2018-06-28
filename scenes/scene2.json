@@ -20,12 +20,12 @@
 "lights" : [ {
 		 "position" : [0, 1, 0],
 		 "type" : "point",
-  		 "intensity" : 0.2
+  		 "intensity" : 0.4
 },
 {
          "position" : [0, 1, 0],
          "type" : "directional",
-         "intensity" : 0.2
+         "intensity" : 0.4
 }],
 
 "camera" : {
