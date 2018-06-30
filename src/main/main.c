@@ -41,6 +41,7 @@ void		start(t_all *ev, char **av)
 	ev->filter = NORMAL;
 	ev->transp = 0;
 	ev->reflect = 0;
+	ev->coef = 0.0;
 	ev->o = define_vector(0, 0, 0);
 	ev->o_rot = define_vector(0, 0, 0);
 	if (!parse_check(ev))

@@ -38,6 +38,14 @@ static void changes(double *o, int m)
 		*o -= 1;
 }
 
+static void changes3(t_all *ev, int m)
+{
+	if (m && ev->coef < 1.0)
+		ev->coef += 0.1;
+	else if (ev->coef > 0.0 && m == 0)
+		ev->coef -= 0.1;
+}
+
 int   ft_key(int keycode, t_all *ev)
 {
 	if (keycode == 53)
@@ -56,6 +64,8 @@ int   ft_key(int keycode, t_all *ev)
 	(keycode == 7) ? changes(&ev->o_rot.z, 1) : 0;
 	(keycode == 1) ? changes(&ev->o_rot.x, 0) : 0;
 	(keycode == 6) ? changes(&ev->o_rot.x, 1) : 0;
+	(keycode == 27) ? changes3(ev, 0) : 0;
+	(keycode == 24) ? changes3(ev, 1) : 0;
 	thread(ev);
 	return (0);
 }

@@ -40,13 +40,13 @@ void		check_exact_object_helper3(char *str, int *i, t_all *ev)
 	{
 		(*i) += 12;
 		universal_check(str, i);
-		ev->figure[ev->index].reflect = check_if_input_float(i, str);
+		// ev->figure[ev->index].reflect = check_if_input_float(i, str);
 	}
 	else if (ft_strnequ(str + (*i), "\"transparency\"", 14))
 	{
 		(*i) += 14;
 		universal_check(str, i);
-		ev->figure[ev->index].transp = check_if_input_float(i, str);
+		// ev->figure[ev->index].transp = check_if_input_float(i, str);
 	}
 	else if ((ft_strnequ(str + (*i), "\"k\"", 3)))
 	{

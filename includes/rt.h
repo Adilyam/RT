@@ -105,8 +105,6 @@ typedef struct		s_figure
 	t_vector		point;
 	double			specular;
 	t_color			color;
-	double			reflect;
-	double			transp; 
 	double			k;
 	int				max;
 	int				min;
@@ -152,6 +150,7 @@ typedef struct		s_all
 	int				depth_trans;
 	int				transp;
 	int				reflect;
+	double			coef;
 }					t_all;
 
 void				rot_figure(t_all *ev);

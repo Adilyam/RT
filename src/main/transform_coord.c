@@ -66,8 +66,7 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int i)
 		t_r_color = trace_ray(ev, ev->p, ev->d, 0);
 	else
 		return (local_color);
-		// t_r_color = local_color;
-	return (color_ret(local_color, t_r_color, 0.5));
+	return (color_ret(local_color, t_r_color, ev->coef));
 }
 
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
@@ -127,7 +126,7 @@ void		*draw_scene(void *data)
 		{
 			set_vector_dir(ev, ev->x, ev->y);
 			rot_figure(ev);
-			ev->depth = 5;
+			ev->depth = 10;
 			ev->depth_trans = 2;
 			color = trace_ray(ev, ev->o, ev->d, 0);
 			define_filter(&color, ev);
