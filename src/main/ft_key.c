@@ -83,6 +83,10 @@ int   mouse_zoom(int keycode, int x, int y, t_all *ev)
 		re_draw_effect(ev, 2);
 	if (x > 190 && x < 230 && y > 811 && y < 841)
 		re_draw_effect(ev, 3);
+	if (x > 700 && x < 750 && y > 811 && y < 841)
+		re_draw_effect(ev, 4);
+	if (x > 770 && x < 820 && y > 811 && y < 841)
+		re_draw_effect(ev, 5);
 	return (0);
 }
  

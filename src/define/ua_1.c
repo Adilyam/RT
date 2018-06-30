@@ -36,6 +36,16 @@ void			re_draw_effect(t_all *ev, int i)
 		ev->filter = BLACK_WHITE;
 	if (i == 3)
 		ev->filter = NORMAL;
+	if (i == 4)
+	{
+		ev->transp = 1;
+		ev->reflect = 0;
+	}
+	if (i == 5)
+	{
+		ev->reflect = 1;
+		ev->transp = 0;
+	}
 	thread(ev);
 }
 
@@ -56,9 +66,15 @@ void			change_effect(t_all *ev)
 	yellow(ev, set_array(130, 170, 811, 841));
 	yellow(ev, set_array(70, 110, 811, 841));
 	yellow(ev, set_array(190, 230, 811, 841));
+
+	yellow(ev, set_array(700, 750, 811, 841));
+	yellow(ev, set_array(770, 820, 811, 841));
 	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 28, 815, 0x000000, "c");
 	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 148, 815, 0x000000, "s");
 	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 88, 815, 0x000000,
 											"b");
 	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 208, 815, 0x000000, "n");
+	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 700, 815, 0x000000,
+											"trans");
+	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 770, 815, 0x000000, "refl");
 }

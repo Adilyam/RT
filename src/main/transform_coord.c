@@ -50,24 +50,24 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int i)
 	if (i)
 		t[0] = 1;
 	else
-		t[0] = 0.001f;
+		t[0] = 0.00000001f;
 	t_r_color.color = 0x000000;
 	t[1] = MAX;
 	closet_t = closet_interesection(ev, t, o, d);
 	if (ev->id == -1)
-	{
-		local_color.color = 0x000000;
-		return (local_color);
-	}
+		return (t_r_color);
 	local_color = use_light(ev, closet_t, ev->id, o, d);
-	rr =  reflect_ray(vector_multy_const(d, -1), ev->n);
-	if (ev->figure[ev->id].transp  > 0.0)
-		ev->depth = 0;
-	if (--ev->depth >= 0)
+	if (--ev->depth >= 0 && ev->reflect == 1)
+	{
+		rr =  reflect_ray(vector_multy_const(d, -1), ev->n);
 		t_r_color = trace_ray(ev, ev->p, rr, 0);
-	else if (--ev->depth_trans >= 0)
+	}
+	else if (--ev->depth_trans >= 0 && ev->transp == 1)
 		t_r_color = trace_ray(ev, ev->p, ev->d, 0);
-	return (color_ret(local_color, t_r_color, 0.4));
+	else
+		return (local_color);
+		// t_r_color = local_color;
+	return (color_ret(local_color, t_r_color, 0.5));
 }
 
 void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
@@ -89,7 +89,7 @@ void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
 		i += (3 * j);
 		ev->screen[i] = c->chanels.r;
 		ev->screen[++i] = c->chanels.g;
-		ev->screen[++i] = c->chanels.b;	
+		ev->screen[++i] = c->chanels.b;
 	}
 }
 
@@ -102,11 +102,6 @@ void		set_vector_dir(t_all *ev, int x, int y)
 	ev->d.x *= tan(60);
 	ev->d.y *= tan(60);
 	ev->d.z = 1;
-
-	// ev->d.x = ((ev->x - SIZE_X / 2) * (ev->vw / SIZE_X / 2));
-	// ev->d.y = (-(ev->y - SIZE_Y / 2) * (ev->vh / SIZE_Y / 2));
-	// ev->d.z = ev->d_d;
-	// ev->d = normalise(ev->d);
 }
 
 void		define_filter(t_color *color, t_all *ev)
@@ -132,15 +127,16 @@ void		*draw_scene(void *data)
 		{
 			set_vector_dir(ev, ev->x, ev->y);
 			rot_figure(ev);
-			ev->depth = 10;
+			ev->depth = 5;
 			ev->depth_trans = 2;
-			color = trace_ray(ev, ev->o, ev->d, 1);
+			color = trace_ray(ev, ev->o, ev->d, 0);
 			define_filter(&color, ev);
 			ft_put_pxl(ev, ev->x, ev->y, &color);
 			ev->y++;
 		}
 		ev->x += ev->k_iter;
 	}
+	// printf("%d\n", ev->lol);
 	pthread_exit(0);
 }
 

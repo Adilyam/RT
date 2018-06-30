@@ -8,17 +8,16 @@
 	"specularity" : 500,
 	"name" : "sphere",
 	"position" : [2, 0, 3],
-	"size" : 1,
-	"reflection" : 0.9,
-	"transparency" : 0.9
+	"transparency" : 1,
+	"size" : 1
 },
 {
     "color" : [250, 100, 250],
     "specularity" : 500,
     "name" : "sphere",
-    "position" : [0, -1, 4],
-    "size" : 1,
-    "reflection" : 0.9
+		"position" : [0, -1, 4],
+		"size" : 1,
+		"transparency" : 1
 }
 ],
 "lights" : [ {
@@ -31,13 +30,12 @@
 	"type" : "directional"
 },
 {
-  "intensity" : 0.6,
-  "position" : [0, 0, 0], 
+  "intensity" : 0.6, 
 	"type" : "ambiant"
 }],
 
 "camera" : {
-		 "position" : [0, 0, -10],
+		 "position" : [5, 0, -10],
 		 "direction" : [0, 0, 0]
 }
 }

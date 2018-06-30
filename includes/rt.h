@@ -150,6 +150,8 @@ typedef struct		s_all
 	int				k_iter;
 	int				depth;
 	int				depth_trans;
+	int				transp;
+	int				reflect;
 }					t_all;
 
 void				rot_figure(t_all *ev);
