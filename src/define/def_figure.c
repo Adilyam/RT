@@ -12,11 +12,34 @@
 
 #include "rt.h"
 
+void		set_vector_dir(t_all *ev, int x, int y)
+{
+	ev->d.x = (double)(x - 90) / 800;
+	ev->d.y = (double)y / SIZE_Y;
+	ev->d.x = (2 * ev->d.x) - 1;
+	ev->d.y = 1 - (2 * ev->d.y);
+	ev->d.x *= tan(60);
+	ev->d.y *= tan(60);
+	ev->d.z = 1;
+}
+
+void		init2(t_all *ev)
+{
+	ev->k_iter = 1;
+	ev->filter = NORMAL;
+	ev->transp = 0;
+	ev->reflect = 0;
+	ev->coef = 0.0;
+	ev->cam.o = define_vector(0, 0, 0);
+	ev->cam.o_rot = define_vector(0, 0, 0);
+}
+
 void		init(t_all *ev)
 {
 	int j;
-	
+
 	j = -1;
+	init2(ev);
 	while (++j < ev->num_f)
 	{
 		ev->figure[j].specular = 500;

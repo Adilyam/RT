@@ -29,3 +29,25 @@ void		ft_create(t_all *ev)
 	ev->screen = malloc(sizeof(unsigned char) * 3 * SIZE_X * SIZE_Y);
 	ft_create_img(ev);
 }
+
+void		ft_put_pxl(t_all *ev, int x, int y, t_color *c)
+{
+	int		i;
+	int		j;
+
+	j = -1;
+	while (++j < ev->k_iter)
+	{
+		i = (x * 4) + (y * ev->mlx.size);
+		i += (4 * j);
+		ev->mlx.str[i] = c->chanels.b;
+		ev->mlx.str[++i] = c->chanels.g;
+		ev->mlx.str[++i] = c->chanels.r;
+		ev->mlx.str[++i] = 1;
+		i = (x + y * SIZE_X) * 3;
+		i += (3 * j);
+		ev->screen[i] = c->chanels.r;
+		ev->screen[++i] = c->chanels.g;
+		ev->screen[++i] = c->chanels.b;
+	}
+}

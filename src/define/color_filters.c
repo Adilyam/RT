@@ -67,3 +67,10 @@ void	make_sepia(t_color *color)
 	color->chanels.g = tg;
 	color->chanels.b = tb;
 }
+
+void	define_filter(t_color *color, t_all *ev)
+{
+	(ev->filter == CARTOON) ? make_cartoon(color) : 0;
+	(ev->filter == SEPIA) ? make_sepia(color) : 0;
+	(ev->filter == BLACK_WHITE) ? make_black_white(color) : 0;
+}

@@ -19,13 +19,10 @@ void		object_string_validate(char *str, int i)
 			ft_strnequ(str + i, "\"name\"", 6) ||
 			ft_strnequ(str + i, "\"color\"", 7) ||
 			ft_strnequ(str + i, "\"specularity\"", 13) ||
-			ft_strnequ(str + i, "\"tan\"", 5) ||
 			ft_strnequ(str + i, "\"direction\"", 11) ||
-			ft_strnequ(str + i, "\"transparency\"", 14) ||
 			ft_strnequ(str + i, "\"max\"", 5) ||
 			ft_strnequ(str + i, "\"min\"", 5) ||
-			ft_strnequ(str + i, "\"k\"", 3) ||
-			ft_strnequ(str + i, "\"reflection\"", 12)))
+			ft_strnequ(str + i, "\"k\"", 3)))
 		error_end("The objects part defined wrongly");
 }
 

@@ -36,19 +36,7 @@ void		check_exact_object_helper4(char *str, int *i, t_all *ev)
 
 void		check_exact_object_helper3(char *str, int *i, t_all *ev)
 {
-	if (ft_strnequ(str + (*i), "\"reflection\"", 12))
-	{
-		(*i) += 12;
-		universal_check(str, i);
-		// ev->figure[ev->index].reflect = check_if_input_float(i, str);
-	}
-	else if (ft_strnequ(str + (*i), "\"transparency\"", 14))
-	{
-		(*i) += 14;
-		universal_check(str, i);
-		// ev->figure[ev->index].transp = check_if_input_float(i, str);
-	}
-	else if ((ft_strnequ(str + (*i), "\"k\"", 3)))
+	if ((ft_strnequ(str + (*i), "\"k\"", 3)))
 	{
 		(*i) += 3;
 		universal_check(str, i);

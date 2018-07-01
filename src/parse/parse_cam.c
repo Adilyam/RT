@@ -32,13 +32,13 @@ void		check_exact_camera_helper(char *str, int *i, t_all *ev)
 	{
 		(*i) += 11;
 		res = parse_3_input(str, i);
-		ev->o_rot = define_vector(res[0], res[1], res[2]);
+		ev->cam.o_rot = define_vector(res[0], res[1], res[2]);
 	}
 	else if ((ft_strnequ(str + (*i), "\"position\"", 10)))
 	{
 		(*i) += 10;
 		res = parse_3_input(str, i);
-		ev->o = define_vector(res[0], res[1], res[2]);
+		ev->cam.o = define_vector(res[0], res[1], res[2]);
 	}
 	spaces(str, i);
 }

@@ -12,6 +12,17 @@
 
 #include "rt.h"
 
+void			saveppm(char *filename, unsigned char *img,
+						int width, int height)
+{
+	FILE *f;
+
+	f = fopen(filename, "wb");
+	fprintf(f, "P6 %d %d %d\n", width, height, 255);
+	fwrite(img, 3, width * height, f);
+	fclose(f);
+}
+
 static void		yellow(t_all *ev, int xy[4])
 {
 	int		x;
@@ -66,7 +77,6 @@ void			change_effect(t_all *ev)
 	yellow(ev, set_array(130, 170, 811, 841));
 	yellow(ev, set_array(70, 110, 811, 841));
 	yellow(ev, set_array(190, 230, 811, 841));
-
 	yellow(ev, set_array(700, 750, 811, 841));
 	yellow(ev, set_array(770, 820, 811, 841));
 	mlx_string_put(ev->mlx.mlx, ev->mlx.win, 28, 815, 0x000000, "c");

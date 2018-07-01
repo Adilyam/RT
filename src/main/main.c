@@ -11,39 +11,28 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <sys/types.h>
-#include <sys/stat.h>
 
-static int	exit_x(void)
+static int		exit_x(void)
 {
 	exit(0);
 }
 
-int		error_end(char *str)
+int				error_end(char *str)
 {
 	ft_putendl(str);
 	exit(0);
 }
 
-void		start(t_all *ev, char **av)
+void			start(t_all *ev, char **av)
 {
-	ev->fd = open(av[1], O_RDONLY);
 	struct stat buf;
-    stat(av[1],&buf);
-	if(S_ISDIR(buf.st_mode))
-  		error_end("This is a directory");
+
+	ev->fd = open(av[1], O_RDONLY);
+	stat(av[1], &buf);
+	if (S_ISDIR(buf.st_mode))
+		error_end("This is a directory");
 	if (ev->fd <= 0)
 		error_end("Such file doesn't exist");
-	ev->vw = 1;
-	ev->vh = 1;
-	ev->d_d = 1;
-	ev->k_iter = 1;
-	ev->filter = NORMAL;
-	ev->transp = 0;
-	ev->reflect = 0;
-	ev->coef = 0.0;
-	ev->o = define_vector(0, 0, 0);
-	ev->o_rot = define_vector(0, 0, 0);
 	if (!parse_check(ev))
 		error_end("The scene is not JSON formatted");
 	normalise_obj(ev);
@@ -56,7 +45,7 @@ void		start(t_all *ev, char **av)
 	mlx_loop(ev->mlx.mlx);
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_all		ev;
 

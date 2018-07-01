@@ -10,8 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
+
+# include "mlx.h"
+# include "../libft/libft.h"
+# include <math.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define SIZE_X			1000
 # define SIZE_Y			800
@@ -40,16 +51,6 @@
 
 # define SIZE_Y_WIN 	850
 
-
-# include "mlx.h"
-# include "../libft/libft.h"
-# include <math.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
-# include <fcntl.h>
-# include <stdio.h>
- 
 typedef struct		s_mlx
 {
 	void			*mlx;
@@ -110,14 +111,19 @@ typedef struct		s_figure
 	int				min;
 }					t_figure;
 
+typedef struct		s_cam
+{
+	t_vector		o;
+	t_vector		o_rot;
+}					t_cam;
+
 typedef struct		s_all
 {
 	t_mlx			mlx;
 	int				id;
 	double			x1;
 	double			x2;
-	t_vector		o;
-	t_vector		o_rot;
+	t_cam			cam;
 	t_vector		c;
 	t_vector		d;
 	t_vector		l;
@@ -127,10 +133,6 @@ typedef struct		s_all
 	t_vector		v;
 	t_light			*light;
 	t_figure		*figure;
-	double			vw;
-	double			vh;
-	int				d_d;
-	uint32_t		color;
 	t_color			color_f;
 	int				num_f;
 	int				num_l;
@@ -143,7 +145,7 @@ typedef struct		s_all
 	int				index;
 	int				filter;
 	double			a;
- 	double			b;
+	double			b;
 	unsigned char	*screen;
 	int				k_iter;
 	int				depth;
@@ -151,6 +153,7 @@ typedef struct		s_all
 	int				transp;
 	int				reflect;
 	double			coef;
+	double			closet_t;
 }					t_all;
 
 void				rot_figure(t_all *ev);
@@ -175,7 +178,8 @@ t_vector			vector_minus_const(t_vector a, double b);
 double				closet_interesection(t_all *ev, double *t,
 					t_vector o, t_vector d);
 t_color				multy_col(t_color col, double j);
-t_color			color_ret(t_color local_color, t_color reflected_color, double r);
+t_color				color_ret(t_color local_color,
+								t_color reflected_color, double r);
 void				intersect_ray_plane(t_all *ev, int i,
 											t_vector o, t_vector d);
 void				intersect_ray_sphere(t_all *ev, int i,
@@ -192,37 +196,44 @@ void				define_sph_cyl(t_figure *figure, double radius,
 									int specular, int id);
 int					mouse_zoom(int keycode, int x, int y, t_all *ev);
 int					parse_check(t_all *e);
-t_vector 			reflect_ray(t_vector r, t_vector n);
+t_vector			reflect_ray(t_vector r, t_vector n);
 int					error_end(char *str);
 void				spaces(char *str, int *i);
 void				universal_check(char *str, int *i);
-double         		check_if_input_number(int *i, char *str);
-double         		*check_if_3digit_input(char *str, int *i);
+double				check_if_input_number(int *i, char *str);
+double				*check_if_3digit_input(char *str, int *i);
 int					check_if_end(char *str, int *i);
-float         		check_if_input_float(int *i, char *str);
-void				check_objects_string(char *str, int *i,  t_figure *obj);
-void        		check_symbol(char *str, int *i, char c);
+float				check_if_input_float(int *i, char *str);
+void				check_objects_string(char *str, int *i, t_figure *obj);
+void				check_symbol(char *str, int *i, char c);
 void				check_light_string(char *str, int *i, t_light *lgt);
-int 				check_exact_object(char *str, int i, t_all *ev);
-int 				check_exact_camera(char *str, int i, t_all *ev);
-int 				check_exact_light(char *str, int i, t_all *ev);
+int					check_exact_object(char *str, int i, t_all *ev);
+int					check_exact_camera(char *str, int i, t_all *ev);
+int					check_exact_light(char *str, int i, t_all *ev);
 double				*parse_3_input(char *str, int *i);
 int					match(char a, char b);
 int					check_scene(char *str, int i, t_all *ev);
 int					check2(char *str);
 t_vector			reflect_ray(t_vector r, t_vector n);
-void 				make_screenshot(t_all *ev);
-void 				make_sepia(t_color *color);
-void 				make_cartoon(t_color *color);
-void 				make_black_white(t_color *color);
-void 				change_effect(t_all *ev);
-void 				re_draw_effect(t_all *ev, int i);
-void 				thread(t_all *e);
-void 				cut_cylinder(t_all *ev, int i, t_vector d, t_vector oc);
-void 				intersect_ray_elips(t_all *ev, int i, t_vector o, t_vector d);
-void 				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
-t_color  			sum_col(t_color col, t_color col_1);
+void				make_screenshot(t_all *ev);
+void				make_sepia(t_color *color);
+void				make_cartoon(t_color *color);
+void				make_black_white(t_color *color);
+void				change_effect(t_all *ev);
+void				re_draw_effect(t_all *ev, int i);
+void				thread(t_all *e);
+void				cut_cylinder(t_all *ev, int i, t_vector d, t_vector oc);
+void				intersect_ray_elips(t_all *ev, int i, t_vector o,
+										t_vector d);
+void				intersect_ray_par(t_all *ev, int i, t_vector o, t_vector d);
+t_color				sum_col(t_color col, t_color col_1);
 void				object_string_validate(char *str, int i);
-void				figure_type_other(int i, t_all *ev, double closet_t, t_vector o, t_vector d);
+void				figure_type_other(int i, t_all *ev, t_vector o, t_vector d);
+void				saveppm(char *filename, unsigned char *img,
+						int width, int height);
+void				rot_figure(t_all *ev);
+void				set_vector_dir(t_all *ev, int x, int y);
+void				ft_put_pxl(t_all *ev, int x, int y, t_color *c);
+void				define_filter(t_color *color, t_all *ev);
 
 #endif

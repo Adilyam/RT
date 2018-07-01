@@ -71,7 +71,8 @@ t_color			sum_col(t_color col, t_color col_1)
 	return (col);
 }
 
-t_color			color_ret(t_color local_color, t_color reflected_color, double r)
+t_color			color_ret(t_color local_color,
+							t_color reflected_color, double r)
 {
 	t_color	color_2;
 	t_color	color;
