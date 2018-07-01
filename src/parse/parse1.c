@@ -87,7 +87,7 @@ int		parse_check(t_all *ev)
 	int		j;
 
 	j = 0;
-	if (ev->fd >= 0)
+	if (ev->fd > 0)
 	{
 		while (read(ev->fd, buf, 1) > 0 && j < BUF_SIZE)
 			str[j++] = buf[0];
