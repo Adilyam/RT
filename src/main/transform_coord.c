@@ -64,8 +64,6 @@ static t_color	trace_ray(t_all *ev, t_vector o, t_vector d, int i)
 	}
 	else if (--ev->depth_trans >= 0 && ev->transp == 1)
 		t_r_color = trace_ray(ev, ev->p, ev->d, 0);
-	else
-		return (local_color);
 	return (color_ret(local_color, t_r_color, ev->coef));
 }
 
@@ -135,7 +133,6 @@ void		*draw_scene(void *data)
 		}
 		ev->x += ev->k_iter;
 	}
-	// printf("%d\n", ev->lol);
 	pthread_exit(0);
 }
 

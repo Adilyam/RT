@@ -40,28 +40,6 @@ static void		white_m(t_all *ev, int xy[4])
 	}
 }
 
-static void		square(t_all *ev, int xy[4])
-{
-	int	x;
-	int	y;
-
-	y = xy[2];
-	x = xy[0] - 1;
-	while (++x < xy[1])
-		mlx_pixel_put(ev->mlx.mlx, ev->mlx.win, x, y, 0x000000);
-	y = xy[3];
-	x = xy[0] - 1;
-	while (++x < xy[1])
-		mlx_pixel_put(ev->mlx.mlx, ev->mlx.win, x, y, 0x000000);
-	y = xy[2] - 1;
-	while (++y < xy[3])
-		mlx_pixel_put(ev->mlx.mlx, ev->mlx.win, x, y, 0x000000);
-	y = xy[2] - 1;
-	x = xy[0];
-	while (++y < xy[3])
-		mlx_pixel_put(ev->mlx.mlx, ev->mlx.win, x, y, 0x000000);
-}
-
 static void		black(t_all *ev, int xy[4])
 {
 	int		x;

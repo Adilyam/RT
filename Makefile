@@ -6,14 +6,14 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/06/28 14:31:38 by atilegen         ###   ########.fr        #
+#    Updated: 2018/07/01 13:20:55 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 
 NAME = RT
 MLXFLAGS = -lpthread -lmlx -framework OpenGL -framework AppKit
-CC = gcc
+CC = gcc -Wall -Wextra -Werror
 FLAGS = -Wall -Wextra -Werror -O3
 
 CFLAGS = -I ./includes/
