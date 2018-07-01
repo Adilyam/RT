@@ -6,14 +6,15 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/07/01 13:40:15 by atilegen         ###   ########.fr        #
+#    Updated: 2018/07/01 13:37:09 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 
 NAME = RT
 MLXFLAGS = -lpthread -lmlx -framework OpenGL -framework AppKit
-CC = gcc -Wall -Wextra -Werror -O3
+CC = gcc
+FLAGS = -Wall -Wextra -Werror -O3
 
 CFLAGS = -I ./includes/
 HEADERS = 	includes/rt.h
@@ -50,7 +51,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADERS)
 	@make -C $(LFT_DIR)
-	@$(CC) -o $(NAME) $(CFLAGS) $(LFT_LNK) $(OBJ) $(MLXFLAGS)
+	@$(CC) $(FLAGS) -o $(NAME) $(CFLAGS) $(LFT_LNK) $(OBJ) $(MLXFLAGS)
 	@echo "\033[34mRT \033[33mCOMPILED\033[0m"
 
 clean:

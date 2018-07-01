@@ -15,7 +15,7 @@
 void		init(t_all *ev)
 {
 	int j;
-
+	
 	j = -1;
 	while (++j < ev->num_f)
 	{
