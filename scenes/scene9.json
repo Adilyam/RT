@@ -1,10 +1,10 @@
 { "scene" : {
-    "object_count" : 1,
+    "object_count" : 3,
     "lights_count" : 3
 },
  
 "objects" : [ {
-  "position" : [0, -2, 10],
+  "position" : [-6, 0, 10],
   "direction" : [0, 1, 0],
   "name" : "cutted_cylinder",
   "specularity" : 100,
@@ -12,26 +12,47 @@
   "color" : [100, 30, 10],
   "max" : 1,
   "min" : 0
-}],
+},
+{
+	"position" : [-2, 0, 10],
+	"direction" : [0, 1, 0],
+	"name" : "cutted_cone",
+	"specularity" : 100,
+	"size" : 0.9,
+	"color" : [255, 250, 0],
+	"max" : 1,
+	"min" : 0
+},
+{
+	"position" : [2, 0, 10],
+	"direction" : [0, 1, 0],
+	"name" : "cutted_parabolloid",
+	"specularity" : 100,
+	"size" : 0.4,
+	"color" : [0, 204, 204],
+	"max" : 1,
+	"min" : 0
+}
+],
 
 "lights" : [ {
 	"position" : [0, 1, 0],
 	"type" : "point",
-	"intensity" : 0.3
+	"intensity" : 0.8
 },
 {
-	"position" : [0, 0, 0],
+	"position" : [0, 2, -10],
 	"type" : "directional",
 	"intensity" : 0
 },
 {
 	"position" : [0, 1, 0],
 	"type" : "ambiant",
-	"intensity" : 0.6
+	"intensity" : 0.2
 }],
 
 "camera" : {
-		 "position" : [0, 0, 0],
+		 "position" : [0, 4, -10],
 		 "direction" : [0, 0, 0]
 }
 }

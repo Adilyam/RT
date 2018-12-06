@@ -1,41 +1,49 @@
 { "scene" : {
-	"object_count" : 2,
-	"lights_count" : 3
-},
-
+	"object_count" : 4,
+	"lights_count" : 2
+},    
 "objects" : [ {
-	"color" : [100, 100, 250],
-	"specularity" : 500,
-	"name" : "sphere",
-	"position" : [2, 0, 3],
-	"transparency" : 1,
-	"size" : 1
+"position" : [-3, 0, 2],
+"name" : "sphere",
+"specularity" : 500,
+"size" : 1,
+"color" : [0, 0, 255]
 },
 {
-    "color" : [250, 100, 250],
-    "specularity" : 500,
-    "name" : "sphere",
-		"position" : [0, -1, 4],
-		"size" : 1,
-		"transparency" : 1
-}
-],
+"position" : [-1, 0, 2],
+"name" : "sphere",
+"specularity" : 500,
+"size" : 1,
+"color" : [0, 250, 245]
+},
+{
+"position" : [1, 0, 2],
+"name" : "sphere",
+"specularity" : 500,
+"size" : 1,
+"color" : [0, 250, 0]
+},
+{
+"position" : [3, 0, 2],
+"name" : "sphere",
+"specularity" : 500,
+"size" : 1,
+"color" : [236, 256, 0]
+}],
+
 "lights" : [ {
-  "intensity" : 0.2,
-	"type" : "ambiant"
+	 "position" : [0, 1, -10],
+	 "type" : "point",
+		 "intensity" : 0.4
 },
 {
-  "intensity" : 0.2,
-	"position" : [1, 4, 4],
-	"type" : "directional"
-},
-{
-  "intensity" : 0.6, 
-	"type" : "ambiant"
+			 "position" : [0, 1, 0],
+			 "type" : "directional",
+			 "intensity" : 0.4
 }],
 
 "camera" : {
-		 "position" : [5, 0, -10],
-		 "direction" : [0, 0, 0]
+	 "position" : [0, 0, -10],
+	 "direction" : [0, 0, 0] 
 }
 }

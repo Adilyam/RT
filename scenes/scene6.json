@@ -1,35 +1,51 @@
 { "scene" : {
-    "object_count" : 1,
+    "object_count" : 3,
     "lights_count" : 3
 },
  
-"objects" : [ {
-  "position" : [0, 1, 0],
+"objects" : [
+  {
+    "position" : [0, 0, 0],
+    "direction" : [0, 1, 0],
+    "name" : "cylinder",
+    "specularity" : 500,
+    "size" : 1,
+    "color" : [250, 255, 0]
+  },
+{
+  "position" : [3, 0, 2],
+  "name" : "sphere",
+  "specularity" : 500,
+  "size" : 1,
+  "color" : [236, 256, 0]
+},
+{
+  "position" : [0, -1, 0],
   "direction" : [0, -1, 0],
   "name" : "plane",
   "specularity" : 500,
   "size" : 1,
-  "color" : [255, 30, 0]
+  "color" : [139, 139, 139]
 }],
 
 "lights" : [ {
-		 "position" : [0, 1, 0],
+		 "position" : [0, 1, -10],
 		 "type" : "point",
-  		"intensity" : 0.3
-},
-{
-         "position" : [0, 0, 0],
-         "type" : "directional",
-         "intensity" : 0
+      "intensity" : 0.1
 },
 {
 	"position" : [0, 1, 0],
 	"type" : "ambiant",
-	"intensity" : 0.6
+	"intensity" : 0.2
+},
+{
+  "position" : [0, 1, -10],
+  "type" : "directional",
+  "intensity" : 0.3
 }],
 
 "camera" : {
-		 "position" : [0, 0, 0],
+		 "position" : [0, 0, -20],
 		 "direction" : [0, 0, 0]
 }
 }

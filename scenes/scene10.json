@@ -41,7 +41,7 @@
 {
          "position" : [0, 1, 0],
          "type" : "ambiant",
-         "intensity" : 0.8
+         "intensity" : 0.2
 }],
 
 "camera" : {
