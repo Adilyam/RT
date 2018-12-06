@@ -6,7 +6,7 @@
 #    By: atilegen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/18 19:59:37 by atilegen          #+#    #+#              #
-#    Updated: 2018/07/01 14:06:49 by atilegen         ###   ########.fr        #
+#    Updated: 2018/12/06 15:28:34 by atilegen         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -47,6 +47,7 @@ OBJ = $(SRCS:.c=.o)
 LFT_DIR = ./libft/
 LFT_LNK = -L $(LFT_DIR) -lft
 
+.PHONY: re clean fclean all
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADERS)
@@ -67,5 +68,3 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: re clean fclean all
