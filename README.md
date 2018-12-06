@@ -40,7 +40,7 @@ make && make clean
 ```sh
 ./RT scenes/[any file]
 ```
-![](YO1.png)
+![](YO1.jpg)
 
 ## Meta
 
