@@ -3,6 +3,9 @@
 
 Implementing the Ray-Tracing method to create a computer generated image.
 ![](YO1.png)
+
+![](123.png)
+
 Bonuses:
 
 • Multi-spots
