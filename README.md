@@ -2,7 +2,7 @@
 > Ray Tracer
 
 Implementing the Ray-Tracing method to create a computer generated image.
-
+![](YO1.png)
 Bonuses:
 
 • Multi-spots
