@@ -6,15 +6,25 @@ Implementing the Ray-Tracing method to create a computer generated image.
 Bonuses:
 
 • Multi-spots
-• Shine effect
+
+• Shine effects
+
 • Making screenshot
+
 • Regulating transparency and reflection
+
 • Composed elements
+
 • External files for scene description
+
 • Limited objects
+
 • Ambiance light
+
 • Direct light
+
 • More native elements
+
 • Filters
 
 ## Installation
@@ -30,7 +40,7 @@ make && make clean
 ```sh
 ./RT scenes/[any file]
 ```
-![](YO1.jpg)
+![](YO1.png)
 
 ## Meta
 
