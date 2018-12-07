@@ -33,7 +33,7 @@ Bonuses:
 
 ## Installation
 
-OS X & Linux & Windows::
+OS X & Linux:
 
 ```sh
 make && make clean
